@@ -1,0 +1,474 @@
+
+.div-welcomeEmail {
+
+  .star {
+    // margin-left:5px;
+    color: red;
+  }
+
+  .form-control-feedback {
+    color: red;
+    font-family: Gellix;
+    font-style: normal;
+    font-weight: 300;
+  }
+
+
+  .div-WelcomeEmailDesc {
+    margin-top: 2%;
+    margin-left: 1rem;
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .div-email {
+    margin-top: 1rem;
+    //height: 48.72094rem;
+    border-top-width: 0.0625rem;
+    border-top-style: ridge;
+    border-top-color: #E8E8E6;
+    border-bottom-color: #E8E8E6;
+    border-bottom-width: 0.0625rem;
+    border-bottom-style: ridge;
+    margin-left: 1rem;
+    width: 78.5625rem;
+
+
+    .div-emailContent {
+      width: 38.61425rem;
+      background-color: white;
+
+      .div-emailInfo {
+        padding: 0.625rem;
+        margin-top: 3.53rem;
+        color: #2F78C4;
+        font-family: Gellix;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        background-color: #F7FAFD;
+        border-color: #2F78C4;
+        border-width: 0.5px;
+        border-style: ridge;
+        border-radius: 0.313rem;
+      }
+
+      .div-emailsubject {
+        margin-top: 2rem;
+
+        .subject {
+          color: #53565A;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        .p-inputtext {
+          margin: 0;
+          width: 38.5rem;
+          background-color: #F2F2F2;
+          color: #000048;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+
+      .div-emailmessage {
+        margin-top: 2rem;
+
+        .message {
+          color: #53565A;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        .txtmessagearea {
+          margin: 0;
+          width: 38.5rem;
+          height: 10.375rem;
+          background-color: #F2F2F2;
+          color: #000048;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1.21875rem;
+          border-radius: 6px;
+          border: 1px solid #ced4da;
+          resize: none;
+          padding: 0.625rem;
+        }
+
+        .p-inputtext {
+          margin: 0;
+          width: 38.5rem;
+          background-color: #F2F2F2;
+          color: #000048;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+
+      .div-emailcontact {
+        margin-top: 2rem;
+
+        .contact {
+          color: #53565A;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        .div-mails {
+          margin-top: 1rem;
+
+          .locicon {
+              margin-top:5px;
+          }
+
+
+          .mail {
+            margin-left: 0.5rem;
+
+            .anc {
+              font-family: Gellix;
+              font-size: 15px;
+              font-weight: 400;
+              line-height: 19.5px;
+              text-align: left;
+              text-decoration: underline;
+              color: #2F78C4;
+            }
+
+            .zone {
+              font-family: Gellix;
+              font-size: 12px;
+              font-weight: 600;
+              line-height: 15.6px;
+              text-align: left;
+
+              .location {
+                font-family: Gellix;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 15.6px;
+                text-align: left;
+              }
+            }
+          }
+        }
+
+        .p-inputtext {
+          margin: 0;
+          width: 38.5rem;
+          background-color: #F2F2F2;
+          color: #000048;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+
+      .div-emailsave {
+        margin-top: 2rem;
+
+        .btnsaveChanges {
+          width: 8.6875rem;
+          height: 2.5rem;
+          border-radius: 3.125rem;
+          border-width: 0px;
+          background: #92BBE6;
+          color: #000048;
+          font-family: Gellix;
+          font-size: 0.875rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .div-emailPreview {
+      width: 38.61425rem;
+      background-color: #F7F7F5;
+
+      .div-previewheader {
+        height: 3.47rem;
+
+        .preview-text {
+          margin-top: 1.59rem;
+          margin-left: 2.5rem;
+          color: #000048;
+          font-family: Gellix;
+          font-size: 0.75rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+
+        .preview-zoom {
+          margin-top: 1.59rem;
+          margin-right: 2.5rem;
+        }
+
+        .zoomImg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+
+        .zoompercentage {
+          margin-top: 0.2rem;
+          color: #000048;
+          text-align: right;
+          font-family: Gellix;
+          font-size: 0.75rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+      }
+
+      .div-contentpreview {
+        width: 25.3125rem;
+        //height: 39rem;
+        //height: auto;
+        background-color: white;
+        margin-top: 0.64rem;
+        margin-left: 6.62rem;
+        margin-bottom: 4.25rem;
+
+
+        .content-images {
+          height: 5.5rem;
+
+          .cogprim {
+            width: 7.4375rem;
+            height: 1.3125rem;
+            margin-top: 2.73rem;
+            margin-left: 1.09rem;
+          }
+
+          .rectimg1 {
+            height: 5.5rem;
+            position: absolute;
+          }
+
+          .rectimg2 {
+            height: 5.5rem;
+            width: 12.5rem;
+          }
+
+          .lblTeam {
+            margin-top: 2.71rem;
+            margin-left: 2.98rem;
+            position: absolute;
+            color: #FFF;
+            // color: red;;
+            font-family: Gellix;
+            font-size: 0.75rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+        }
+
+        .div-previewsubject {
+          margin-top: 1.85rem;
+          margin-left: 2.09rem;
+          color: #000048;
+          font-family: Arial;
+          font-size: 1.25rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 1.21875rem;
+        }
+
+        .div-prviewmailmessage {
+          margin-left: 2.09rem;
+
+          .associate {
+            margin-top: 1.37rem;
+            color: #2F78C4;
+            font-family: Arial;
+            font-size: 0.625rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+          }
+
+          .mailmessage {
+            margin-top: 1.08rem;
+            color: #000048;
+            font-family: Arial;
+            font-size: 0.625rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 0.975rem;
+            overflow-wrap: anywhere;
+          }
+
+          .div-accessportal {
+            margin-top: 1.37rem;
+
+            .lblaccessportal {
+              color: #000048;
+              font-family: Arial;
+              font-size: 0.625rem;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 0.875rem;
+            }
+
+            .btnaccessportal {
+              margin-top: 0.5rem;
+              width: 21.375rem;
+              height: 2.0625rem;
+              color: #2F78C4;
+              font-family: Gellix;
+              font-size: 0.875rem;
+              font-style: normal;
+              font-weight: 600;
+              line-height: normal;
+              border-radius: 3.125rem;
+              border: 1px solid #2F78C4;
+            }
+          }
+
+
+          .div-query {
+            color: #000048;
+            font-family: Arial;
+            font-size: 0.625rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 0.875rem;
+
+            .div-mails {
+              margin-top: 10px;
+
+              .locicon {
+                margin-top: 7px;
+              }
+
+              .mail {
+                margin-left: 0.5rem;
+
+                .anc {
+                  font-family: Gellix;
+                  font-size: 15px;
+                  font-weight: 400;
+                  line-height: 19.5px;
+                  text-align: left;
+                  text-decoration: underline;
+                  color: #2F78C4;
+                }
+
+                .zone {
+                  font-family: Gellix;
+                  font-size: 12px;
+                  font-weight: 600;
+                  line-height: 15.6px;
+                  text-align: left;
+
+                  .location {
+                    font-family: Gellix;
+                    font-size: 10px;
+                    font-weight: 400;
+                    line-height: 15.6px;
+                    text-align: left;
+                  }
+                }
+              }
+            }
+          }
+
+          .div-thank {
+            margin-top: 1.85rem;
+
+            .lbl-thank {
+              color: #000;
+              font-family: Arial;
+              font-size: 0.625rem;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+
+            .lbl-adminteam {
+              color: #00004A;
+              font-family: Arial;
+              font-size: 0.625rem;
+              font-style: normal;
+              font-weight: 700;
+              line-height: normal;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .div-next {
+    width: 78.5625rem;
+    height: 5rem;
+    background-color: white;
+
+    .ancprev {
+      color: #2F78C4;
+      font-family: Gellix;
+      font-size: 0.8125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1875rem;
+      text-decoration: none;
+      margin-right: 1.6rem;
+    }
+
+    .lblbar {
+      color: #2F78C4;
+      font-family: Gellix;
+      font-size: 0.8125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1875rem;
+    }
+
+    .ancnext {
+      color: #2F78C4;
+      font-family: Gellix;
+      font-size: 0.8125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1875rem;
+      text-decoration: none;
+      margin-left: 1.2rem;
+      margin-right: 10px;
+    }
+  }
+
+  .div-footer {
+    height: 11.44rem;
+    background-color: #F7F7F5;
+  }
+}

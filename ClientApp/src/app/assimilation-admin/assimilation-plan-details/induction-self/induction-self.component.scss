@@ -1,0 +1,171 @@
+.div-inductionself {
+
+  .div-inductionselfDesc {
+    margin-top: 2.32rem;
+    margin-left: 1rem;
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    .showing {
+      margin-right: 2rem;
+      color: #000048;
+      text-align: right;
+      font-family: Gellix;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+
+  .div-contents {
+
+    .content {
+      margin-top: 0.98rem;
+      margin-left: 1rem;
+      width: 78.5625rem;
+      //height: 10.1875rem;
+      border: 1px solid #2F78C4;
+      background: #FFF;
+
+      .contenttexts {
+        margin-top: 1.5rem;
+        margin-left: 1.52rem;
+
+        .lbl-contentname {
+          color: #00004A;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+      }
+
+      .dev-contectdesc {
+        margin-left: 1.52rem;
+        margin-top: 0.35rem;
+        color: #000;
+        font-family: Gellix;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      .div-fileinfo {
+        margin-top: 1.12rem;
+        margin-left: 1.52rem;
+        margin-bottom: 1rem;
+        width: 75.5rem;
+        height: auto;
+        padding: 1rem;
+        align-items: center;
+        border: 1px solid #D0D0CE;
+        border-bottom-width: 2px;
+        border-bottom-color: #2F78C4;
+        border-bottom-style: ridge;
+        color: #000048;
+        font-family: Gellix;
+        font-size: 0.9375rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.125rem;
+      }
+    }
+
+    .content:hover {
+      background-color: #2E308E;
+
+      .contenttexts {
+        .lbl-contentname {
+          color: white;
+        }
+
+        .div-editdelete {
+          background-color: white;
+        }
+      }
+
+      .dev-contectdesc {
+        color: white;
+      }
+
+      .div-fileinfo {
+        background-color: white;
+        color: black;
+      }
+    }
+
+    .div-addcontent {
+      .btnaddcontent {
+        margin-top: 1.5rem;
+        margin-left: 1rem;
+        width: 9.438rem;
+        height: 2.5rem;
+        border-radius: 3.125rem;
+        background: #92BBE6;
+        border-width: 0px;
+        cursor:pointer;
+      }
+    }
+
+    .div-line {
+      margin-left: 1rem;
+      margin-top: 1.5rem;
+      width: 78.57394rem;
+      height: 0.0625rem;
+      border-color: #E8E8E6;
+      border-style: solid;
+      border-width: 1px;
+    }
+  }
+
+  .div-next {
+    width: 78.5625rem;
+    height: 3rem;
+    background-color: white;
+    margin-bottom: 1.75rem;
+
+    .ancprev {
+      color: #2F78C4;
+      font-family: Gellix;
+      font-size: 0.8125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1875rem;
+      text-decoration: none;
+      margin-right: 1.6rem;
+    }
+
+    .lblbar {
+      color: #2F78C4;
+      font-family: Gellix;
+      font-size: 0.8125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1875rem;
+    }
+
+    .ancnext {
+      color: #2F78C4;
+      font-family: Gellix;
+      font-size: 0.8125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1875rem;
+      text-decoration: none;
+      margin-left: 1.2rem;
+      margin-right: 10px;
+    }
+  }
+
+  .div-footer {
+    height: 2.44rem;
+    background-color: #F7F7F5;
+  }
+}

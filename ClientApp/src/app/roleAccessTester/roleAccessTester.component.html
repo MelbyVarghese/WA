@@ -1,0 +1,15 @@
+<div
+  style="border: 1px dashed #000048; margin: auto auto; width: 14rem; text-align: center; margin-top: 5rem; padding: 1rem">
+  <p style="text-decoration: underline;">Role Access Tester page!</p>
+  <p></p>
+  <p>Enter Proxy User ID...</p>
+  <!-- <p>Navigate to...</p> -->
+  <p></p>
+  <!-- <a style="display: block;" [routerLink]="['/admin']" routerLinkActive="router-link-active">Admin</a>
+  <a style="display: block;" (click)="redirectTo('newhire')" routerLinkActive="router-link-active">New
+    Hire</a>
+  <a style="display: block;" (click)="redirectTo('manager')" routerLinkActive="router-link-active">Manager</a> -->
+  <!-- <input type="text" (mod) -->
+  <input pInputText pKeyFilter="int" [(ngModel)]="proxyUser" style="text-align: center;" />
+  <button class="mt-3 round-btn" (click)="getProxiedUserDetails()">Submit</button>
+</div>

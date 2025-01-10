@@ -1,0 +1,106 @@
+<div class="div-managerTasks">
+
+  <div class="div-managerTasksDesc">
+    Set tasks for associates’ managers to complete during assimilation
+  </div>
+
+  <div class="div-tasks flex flex-column flex-wrap">
+    <ng-container *ngFor="let tsk of tasks;let taskIndex=index;">
+
+      <div class="task flex flex-column" >
+        <div class="taskname" (click)="selectedtask=tsk;showAddTaskSidePopup('view')"> {{tsk.taskName}}</div>
+        <div class="flex flex">
+          <div class="taskdescription" (click)="selectedtask=tsk;showAddTaskSidePopup('view')">
+            {{tsk.taskDesc}}
+          </div>
+          <div class="taskreminders flex flex-row justify-content-end">
+            <div class="flex flex-row" (click)="selectedtask=tsk;showAddTaskSidePopup('view')">
+              <img src="./assets/images/bell_ringing.svg" style="width: 1.25rem; height: 1.3125rem;">
+              <label class="tasktype">{{tsk.reminderDesc}} </label>
+            </div>
+            <div class=" flex flex-row" (click)="selectedtask=tsk;showAddTaskSidePopup('view')">
+              <img src="./assets/images/repeat.svg" style="margin-left: 1rem; width: 1.25rem; height: 1.3125rem;">
+              <label class="tasktype">{{tsk.repeatDesc}}</label>
+            </div>
+            <div  class="flex flex-row">
+
+              <img src="./assets/images/edit.svg" (click)="selectedtask=tsk;showAddTaskSidePopup('edit')" *ngIf="IsSaveButton"
+               style="margin-left: 1rem;margin-right: 1.56rem;height:23px;background-color: white;cursor:pointer;height:20px;width:20px;">
+
+              <label>&nbsp;&nbsp; | &nbsp;&nbsp;Active</label>
+              <p-inputSwitch [(ngModel)]="tsk.activestatus" id="switch1" [disabled]="!IsSaveButton"
+                             (onChange)="disableTask(tsk.taskId,tsk.selectedTaskId,tsk.activestatus,taskIndex)"></p-inputSwitch>            
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div *ngIf="IsSaveButton" class="div-addtask">
+      <button class="btnaddtask" (click)="showAddTaskSidePopup('add')">+ Add Task</button>
+    </div>
+
+  </div>
+
+
+  <div class="div-next flex flex-row justify-content-end">
+    <div style="margin-top: 10px;">
+      <img src="./assets/images/left-arrow.svg" (click)="prevStep($event)"
+           style="margin-right: 10px;margin-top: 3px; cursor: pointer;height:0.6875rem;">
+      <a href="javascript:void(0)" class="ancprev" (click)="prevStep($event)">Previous</a>
+    </div>
+  </div>
+
+</div>
+
+<p-dialog header="Header" [(visible)]="showDisableTaskPopup" (onHide)="CancelDisableTask()" styleClass="disableTaskPopup"
+          [draggable]="false" [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <span class="title">Confirmation : ""Task name" disable</span>
+  </ng-template>
+
+  <div class="div-disablecontent">
+    <div class="div-quest">
+      "Task Name" will not be visible in the new employee portal, do you want to <br /> disable "Task Name"?
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="CancelDisableTask();">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="deleteTask(deletetaskId,deleteselectedTaskId,0);showDisableTaskPopup=false">
+      Disable now
+    </button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog header="Header" [(visible)]="showActivationTaskPopup" styleClass="activationTaskPopup"
+          [draggable]="false" [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <span class="title">Confirmation : “Task name” activation</span>
+  </ng-template>
+
+  <div class="div-activationncontent">
+    <div class="div-quest">
+      "Task Name" will be visible in the new employee portal, do you want to active "Task Name"?
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="CancelActiveTask()">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="deleteTask(deletetaskId,deleteselectedTaskId,1);showActivationTaskPopup=false">
+      Active now
+    </button>
+  </ng-template>
+</p-dialog>
+
+
+
+<div *ngIf="showAddManagerTaskPopup">
+  <app-add-manager-task [displayAddManagerTaskPopup]="showAddManagerTaskPopup" [formtype]="formtype" [planId]="planId"
+                        [addTasksInfo]="addTasks" [taskInfo]="selectedtask" [viewType]="view" (closeAddTaskPopup)="closeAddTaskSidePopup()">
+  </app-add-manager-task>
+</div>

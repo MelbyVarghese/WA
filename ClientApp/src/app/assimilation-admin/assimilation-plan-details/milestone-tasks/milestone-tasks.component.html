@@ -1,0 +1,221 @@
+<div class="div-milestonetasks">
+
+  <div class="div-milestonetasksDesc">
+    Set milestone & tasks for assimilation plan:
+  </div>
+
+  <div class="div-milestones flex flex-column flex-wrap">
+
+    <p-accordion [activeIndex]="0">
+      <ng-container *ngFor="let mile of lstmilestones;let mileIndex=index;">
+
+        <div class="milestone" id="milestone">
+          <p-accordionTab [iconPos]="'end'">
+            <ng-template pTemplate="header">
+              <div class="milestone-header flex flex-row justify-content-between" style="width:100%;">
+                <div class="flex flex-column">
+                  <label class="lbl-milestoneName"> {{mile.msName}}</label>
+                  <label class="lbl-milestoneDescription">Day {{mile.startDay}} to Day {{mile.endDay}}</label>
+                </div>
+                <div class="flex flex-row">
+                  <div>
+                    <label class="lbltaskcount">{{mile.tasks.length}} tasks included</label>
+                  </div>
+                  <div *ngIf="IsSaveButton">
+                    <img src="./assets/images/edit.svg" style="margin-right: 1.56rem;"
+                         (click)="selectedMilestone=mile;showMilestonePopup=true;">
+                    <img src="./assets/images/delete.svg" style="margin-right: 1.54rem;" (click)="deleteMilestone(mile.msId)">
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-container *ngFor="let task of mile.tasks;let taskIndex=index;">
+              <div class="milestone-maincontent">
+              <div class="milestone-content flex flex" [ngStyle]="setTasksBorderColor(taskIndex)">
+                <div class="task-info" (click)="selectedtask=task;showAddTaskSidePopup(mile.msId,'view')">
+                  <div class="flex flex-column" (click)="selectedtask=task;showAddTaskSidePopup(mile.msId,'view')">
+                    <label class="lbl-taskname">{{task.taskName}}</label>
+                    <label class="lbl-taskdescription">{{task.taskDesc}}</label>
+                  </div>
+                </div>
+                <div class="task-editdelete flex flex-row justify-content-end">
+                  <div class="flex flex-row" (click)="selectedtask=task;showAddTaskSidePopup(mile.msId,'view')">
+                    <img src="./assets/images/bell_ringing.svg" style="width: 1.25rem; height: 1.3125rem;">
+                    <label class="tasktype">{{task.reminderDesc}}</label>
+                  </div>
+                  <div class="flex flex-row" style="margin-right: 1rem;" (click)="selectedtask=task;showAddTaskSidePopup(mile.msId,'view')">
+                    <img src="./assets/images/repeat.svg" style="margin-left: 1rem; width: 1.25rem; height: 1.3125rem;">
+                    <label class="tasktype">{{task.repeatDesc}}</label>
+                  </div>
+                  <div class="flex flex-row">
+                    <img src="./assets/images/edit.svg" style="margin-right: 1.56rem;cursor:pointer;height:20px;width:20px;" *ngIf="IsSaveButton"
+                         (click)="selectedtask=task;showAddTaskSidePopup(mile.msId,'edit')">
+                    <!--<img src="./assets/images/delete.svg" style="margin-right: 1.54rem;cursor:pointer;"
+    (click)="deleteTask(task.taskId,task.selectedTaskId)">-->
+
+                    <label class="tasktype">{{task.activeStatus == true ? 'Active' : 'Disabled'}}</label>
+
+                    <p-inputSwitch [(ngModel)]="task.activeStatus" styleClass="switcher" id="switch1" [disabled]="!IsSaveButton"
+                                   (onChange)="disableTask(task.taskId,task.selectedTaskId,task.activeStatus,task.reminderId,task.repeatId,mileIndex,taskIndex)"></p-inputSwitch>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </ng-container>
+            <div *ngIf="IsSaveButton">
+              <button class="addTask" (click)="selectedtask=mile.tasks;showAddTaskSidePopup(mile.msId,'add')">Add Task</button>
+            </div>
+          </p-accordionTab>
+        </div>
+      </ng-container>
+
+      <div *ngIf="IsSaveButton && isAddMilestone" class="div-milestone">
+        <div class="milestone-header">
+          <label class="lbl-addmilestone">Add milestone details</label>
+        </div>
+        <div class="milestone-body">
+          <div class="milestone-duration flex flex-row">
+            <div class="flex flex-column">
+              <label class="lbl-milestoneduration">Milestone duration<span class="star">*</span></label>
+              <div class="div-ddldurations flex flex-row">
+                <p-dropdown [options]="durations" id="ddldurations"
+                            [style]="{'width':'10.9375rem','height': '2.625rem','background-color':'#F7F7F5','color':'#000048','border-radius':'0px',
+                'font-family': 'Gellix','font-size': '0.9375rem','font-style': 'normal','font-weight': '400'}"
+                            (onChange)="setMilestoneName()" [(ngModel)]="selected_duration"
+                            optionLabel="durationDesc" placeholder="Select"></p-dropdown>
+
+                <p-dropdown [options]="durationPeriods" id="ddldurationsub"
+                            [style]="{'width':'7.9375rem','height': '2.625rem','background-color':'#F7F7F5','color':'#000048','border-radius':'0px',
+                'font-family': 'Gellix','font-size': '0.9375rem','font-style': 'normal','font-weight': '400'}"
+                            (onChange)="setMilestoneName()" [(ngModel)]="selected_durationPeriod"
+                            optionLabel="durationCalDesc" placeholder="Select"></p-dropdown>
+                <label class="lbl-period">{{period}}</label>
+              </div>
+            </div>
+            <div class="div-milestonename flex flex-column">
+              <label class="lbl-milestonename">
+                Milestone name
+                <span class="star">*</span>
+              </label>
+              <input type="text" class="txtmilestonename" pInputText [(ngModel)]="milestonename" (keyup)="milestonenameValidation()" [readonly]="true" />
+            </div>
+          </div>
+          <div class="div-milestonebanner flex flex-column">
+            <label class="lbl-banner">
+              Greeting text for the milestone on banner <span style="font-style:italic">(Maximum limit 170 characters) </span>
+              <span class="star">*</span>
+            </label>
+            <textarea class="txtbanner" rows="5" cols="30" maxlength="170"
+                      pInputTextarea [(ngModel)]="milestonebanner" (keyup)="milestonebannerValidation()"
+                      placeholder="Type here the text to be displayed to the newly hired associates on their portal on reaching this milestone.">
+          </textarea>
+          </div>
+
+          <div *ngIf="showbannervalidation">
+            <label style="color:red;margin-left:1rem;">Please provide milestone description</label>
+          </div>
+
+          <div class="div-canceladdnow flex flex-row justify-content-end">
+            <button class="btncancel" (click)="isAddMilestone=false">Cancel</button>
+            <button class="btnaddnow" (click)="addMilestone()">Add now</button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="IsSaveButton" class="addmilestone">
+        <button class="btnaddmilestone" (click)="showMilestone()">+ Add milestone</button>
+      </div>
+
+
+      <div *ngIf="IsSaveButton" class="div-line"></div>
+
+    </p-accordion>
+  </div>
+
+  <div class="div-next flex flex-row justify-content-end">
+    <div style="margin-top: 10px;" class="flex flex-row">
+      <div>
+        <img src="./assets/images/left-arrow.svg" (click)="prevStep($event)"
+             style="margin-right: 10px;margin-top: 3px; cursor: pointer;height:0.6875rem;">
+      </div>
+      <div>
+        <a href="javascript:void(0)" class="ancprev" (click)="prevStep($event)">Previous</a>
+      </div>
+      <div>
+        <label class="lblbar">|</label>
+      </div>
+      <div>
+        <a href="javascript:void(0)" class="ancnext" (click)="nextStep($event)">Next</a>
+      </div>
+      <div>
+        <img src="./assets/images/right-arrow.svg" (click)="nextStep($event)"
+             style="margin-top: 5px;cursor: pointer;height:0.6875rem;">
+      </div>
+    </div>
+  </div>
+
+  <div class="div-footer"></div>
+
+</div>
+
+<p-dialog header="Header" [(visible)]="showDisableTaskPopup" (onHide)="CancelDisableTask()" styleClass="disableTaskPopup"
+          [draggable]="false" [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <span class="title">Confirmation : "Task name" disable</span>
+  </ng-template>
+
+  <div class="div-disablecontent">
+    <div class="div-quest">
+      "Task Name" will not be visible in the new employee portal, do you want to <br /> disable "Task Name"?
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="CancelDisableTask();">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="deleteTask(deletetaskId,deleteselectedTaskId,deleteremainderID,deleterepeatId,0);showDisableTaskPopup=false">
+      Disable now
+    </button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog header="Header" [(visible)]="showActivationTaskPopup" styleClass="activationTaskPopup"
+          [draggable]="false" [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <span class="title">Confirmation : “Task name” activation</span>
+  </ng-template>
+
+  <div class="div-activationncontent">
+    <div class="div-quest">
+      "Task Name" will be visible in the new employee portal, do you want to active "Task Name"?
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="CancelActiveTask();">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="deleteTask(deletetaskId,deleteselectedTaskId,deleteremainderID,deleterepeatId,1);showActivationTaskPopup=false;">
+      Active now
+    </button>
+  </ng-template>
+</p-dialog>
+
+
+
+<div *ngIf="showAddManagerTaskPopup">
+  <app-add-manager-task [displayAddManagerTaskPopup]="showAddManagerTaskPopup" [formtype]="formtype"
+                        [addTasksInfo]="addTasks" [taskInfo]="selectedtask" [msId]="msId" [planId]="planId" [viewType]="view"
+                        (closeAddTaskPopup)="closeAddTaskSidePopup()">
+  </app-add-manager-task>
+</div>
+
+<div *ngIf="showMilestonePopup">
+  <app-edit-milestone [displayMilestoneContentPopup]="showMilestonePopup" [planId]="planId"
+                      [milestoneInfo]="selectedMilestone" (closeMilestoneContentPopup)="closeMilestonePopup()">
+  </app-edit-milestone>
+</div>
+
+
+

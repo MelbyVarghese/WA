@@ -1,0 +1,172 @@
+<div class="associate-assimilation-main-container">
+  <p-dialog id="popup1" [(visible)]="displayAssociateAssimilationPopup" [position]="'right'" [modal]="true" styleClass="pdialog"
+            [draggable]="false" [resizable]="false" class="modal-dialog">
+
+    <div class="associate-assimilation-form-header">
+      <label class="lblheader">Associate Assimilation Progress</label>
+      <div class="crossicon-box mb-5">
+        <img class="cross-icon" (click)="close()" src="./assets/images/cross-icon.svg" />
+      </div>
+    </div>
+
+    <div class="div-content flex">
+      <div class="div-left">
+        <div class="text-center">
+          <label class="lbl-associate">
+            <span class="span-associate">
+              <!--{{associateInfo?.associateName?.split(' ')[0][0]}}{{associateInfo?.associateName?.split(' ')[1][0]}}-->
+              {{firstname}}{{lastname}}
+            </span>
+
+          </label>
+        </div>
+        <div class="flex flex-column">
+          <label class="associatename">{{associateInfo?.associateName}}</label>
+          <label class="lblgrade">{{associateInfo?.gradeDesc}} • {{associateInfo?.serviceLineCode}}</label>
+          <label class="lbl-m-mail">{{associateInfo?.emailId}}</label>
+        </div>
+
+        <div class="line my-5"></div>
+
+        <div class="flex flex-column">
+          <label class="lbl-joiningdetails">Joining Details</label>
+          <label class="lbl-doj"><span>DoJ </span>{{associateInfo?.dateofJoining | date: 'dd MMM YY'}}</label>
+          <label class="lbl-loj"><span>Location</span> {{associateInfo?.cityDesc}}</label>
+        </div>
+
+        <div class="line my-5"></div>
+
+        <div class="flex flex-column">
+          <label class="lbl-joiningdetails">Reports to</label>
+          <label class="lbl-m-name">{{associateInfo?.hmName}} </label>
+          <label class="lbl-m-grade">
+            {{associateInfo?.hmGradeDesc}} •
+            {{associateInfo?.hmServiceLineCode}}
+          </label>
+          <label class="lbl-m-mail">{{associateInfo?.hmMailId}}</label>
+        </div>
+
+
+      </div>
+
+      <div class="div-right">
+
+        <div style="margin-top: 2.81rem;margin-left: 2rem;">
+
+          <p-tabView>
+            <p-tabPanel header="Progress">
+
+              <p-accordion [activeIndex]="0">
+                <p-accordionTab [header]="item.mileStones.msName" *ngFor="let item of milestones">
+                  <div class="flex flex-column">
+                    <div class="flex flex row justify-content-between" *ngFor="let task of item.taskDetails; let i = index">
+                      <div class="flex flex row">
+                        <div class="div-num">{{i+1}}</div>
+                        <label class="weekdesc">{{task.taskName}}</label>
+                      </div>
+                      <div>
+                        <button class="task-status" *ngIf="task.taskName != '1-on-1 Manager Connect' && task.isDocUploadDownloadTask==0"
+                                [ngClass]="{'started': task.status=='Started', 'not-started': task.status=='Not Started', 'completed': task.status=='Completed', 'pending': task.status=='Pending'}">
+                          {{task.status}}
+                        </button>
+
+                        <button class="task-status" *ngIf="task.taskName == '1-on-1 Manager Connect' && task.status == 'Completed' && managerTaskStatus == 'Completed' && task.isDocUploadDownloadTask==0"
+                                [ngClass]="{'started': task.status=='Started', 'not-started': task.status=='Not Started', 'completed': task.status=='Completed', 'pending': task.status=='Pending'}">
+                          {{task.status}}
+                        </button>
+
+                        <!--<button class="task-status" *ngIf="task.taskName == '1-on-1 Manager Connect'
+                       && ((task.status != 'Completed' && managerTaskStatus == 'Completed')
+                          || (task.status == 'Completed' && managerTaskStatus != 'Completed')
+                          || (task.status != 'Completed' && managerTaskStatus != 'Completed'))  "
+                              [ngClass]="{'pending': task.status !='Completed'}">
+                        Pending
+                      </button>-->
+                        <a class="view-Attachments" *ngIf="task.taskName != '1-on-1 Manager Connect'
+                        && task.isDocUploadDownloadTask==1" (click)="showdocumentpopup()">
+                          View Attachments
+                        </a>
+
+                     <button class="task-status"  *ngIf="task.taskName != '1-on-1 Manager Connect' && task.isDocUploadDownloadTask==1"
+                       [ngClass]="{'started': task.status=='Started', 'not-started': task.status=='Not Started', 'completed': task.status=='Completed', 'pending': task.status=='Pending'}">
+                       {{task.status}}
+                       </button>
+                      </div>
+
+                      <div class="flex flex-row" *ngIf="task.taskName == '1-on-1 Manager Connect'"
+                           style="margin-left:12px;margin-top:1.5rem;position:absolute;">
+                        <div class="flex flex-row">
+                          <img src="./assets/images/warning_triangle.jpg" *ngIf="task.status != 'Completed'" />
+                          <img src="./assets/images/right_tick.jpg" *ngIf="task.status == 'Completed'" />
+                          <label style="color: #000048; margin-left: 10px; font-family: Gellix; font-size: 0.75rem; font-style: normal; font-weight: 400;">Associate</label>
+                        </div>
+                        <div class="flex flex-row" style="margin-left:10px;">
+                          <img src="./assets/images/warning_triangle.jpg" *ngIf="task.taskName == '1-on-1 Manager Connect' && managerTaskStatus != 'Completed'" />
+                          <img src="./assets/images/right_tick.jpg" *ngIf="task.taskName == '1-on-1 Manager Connect' && managerTaskStatus == 'Completed'" />
+                          <label style="color: #000048; margin-left: 10px; font-family: Gellix; font-size: 0.75rem; font-style: normal; font-weight: 400;">Manager</label>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </p-accordionTab>
+              </p-accordion>
+
+
+            </p-tabPanel>
+
+            <p-tabPanel header="Feedback">
+
+              <p-panel expandIcon="pi pi-caret-up pi-caret-down" header="Feedback from Manager" [toggleable]="true"
+                       [collapsed]="!collapsed">
+                {{managerResponse}}
+              </p-panel>
+
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+
+      </div>
+
+    </div>
+
+    <p-dialog header="Header" [(visible)]="displayAssociatedocumentpopup" styleClass="scConfirmPopup uploadPopup"
+              [draggable]="false" [resizable]="false" [position]="'center'">
+      <div class="associate-document-form-header">
+        <label class="lbldocheader">View Attachments</label>
+        <div class="crossicon-box mb-5">
+          <img class="cross-documument" (click)="closedocumentpopup()" src="./assets/images/cross-icon.svg" />
+        </div>
+      </div>
+      <ng-template pTemplate="content">
+        <div class="div-para" *ngFor="let item of milestones" style="margin-left: 9px !important; margin-bottom: 0px !important;">
+          <div class="div-taskstatus" *ngFor="let task of item.taskDetails;let i = index" style="width: 100%;margin-top: 10px; ">
+            <div *ngIf="task.isDocUploadDownloadTask==1" style=" display: flex; flex-direction: row; flex-wrap: wrap;">
+              <div *ngFor="let doc of task.taskDocuments" style="width: 45%; margin: 5px;">
+                <span class="uploaded-taskStatus">
+                  {{doc.docName}} <a class="download" (click)="downloaddocument(doc.ocmContentID,task.taskId)" title="download" style=" float: right;">
+                    <img src="./assets/images/download.svg" class="download-img" />
+                  </a>
+                </span>
+              </div>
+
+              <div>
+                <p style="float: right;">
+                  <button class="round-btn" [ngClass]="{'disabled-btn':task.isAllDocDownloaded!=1||task.status == 'Completed'}" [disabled]="task.isAllDocDownloaded!=1||task.status == 'Completed'" (click)="UpdateDownloadedDocumentCompletedStatus(task.taskId,task.taskName)"
+                          style="margin-top: 90px; margin-right: 20px;">
+                    Mark as complete
+                  </button>
+                </p>
+              </div>
+            </div>
+           
+
+          </div>
+        </div>
+      </ng-template>
+    </p-dialog>
+  </p-dialog>
+
+ 
+  has context menu
+</div>

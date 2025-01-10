@@ -1,0 +1,155 @@
+[
+  {
+	"id":1,
+	"milestoneName":"Week 1",
+	"milestonDescription":"Week1 Tasks",
+  "milestonePeriod": "24-Nov-2023",
+	"tasks" : [
+		{
+		  "id": 1 ,
+		  "taskName":"Corporate Induction Session",
+		  "taskDescription":"A virtual tour of the premises",
+		  "taskStatus":"Started",
+      "imagename":"corporateinduction.png",
+		  "Dueby":"08 Sep 2023",
+		  "isTaskCheck": true,
+      "isTaskcompleted": false,
+		  "isDocAvailable": false,
+		  "isNew": true
+		},
+		{
+		  "id": 2 ,
+		  "taskName":"HCM– Personal details",
+		  "taskDescription":"Update personal details in HCM",
+		  "taskStatus":"Not Started",
+      "imagename":"hcmpersona.png",
+		  "Dueby":"08 Sep 2023",
+		  "isTaskCheck":false,
+      "isTaskcompleted": false,
+		  "isDocAvailable": true,
+		  "isNew":true
+		},
+		{
+		  "id": 3 ,
+		  "taskName":"HCM– Bank details",
+		  "taskDescription":"Update bank account number & PAN",
+		  "taskStatus":"Not Started",
+      "imagename":"hcmbank.png",
+		  "Dueby":"08 Sep 2023",
+		  "isTaskCheck": false,
+      "isTaskcompleted": false,
+		  "isDocAvailable":true,
+		  "isNew":false
+		}
+	]
+  },
+  {
+	"id": 2,
+	"milestoneName":"Week 2",
+	"milestonDescription":"Week2 Tasks",
+  "milestonePeriod": "24-Nov-2023",
+	"tasks" : [
+    {
+		  "id": 1 ,
+		  "taskName":"Corporate Induction Session",
+		  "taskDescription":"A virtual tour of the premises",
+		  "taskStatus":"Started",
+      "imagename":"corporateinduction.png",
+		  "Dueby":"08 Sep 2023",
+		  "isTaskCheck": true,
+      "isTaskcompleted": false,
+		  "isDocAvailable": false,
+		  "isNew": true
+		},
+		{
+		  "id": 2 ,
+		  "taskName":"HCM– Personal details",
+		  "taskDescription":"Update personal details in HCM",
+		  "taskStatus":"Not Started",
+      "imagename":"hcmpersona.png",
+		  "Dueby":"08 Sep 2023",
+		  "isTaskCheck":false,
+      "isTaskcompleted": false,
+		  "isDocAvailable": false,
+		  "isNew": false
+		},
+		{
+		  "id": 3 ,
+		  "taskName":"HCM– Bank details",
+		  "taskDescription":"Update bank account number & PAN",
+		  "taskStatus":"Not Started",
+      "imagename":"hcmbank.png",
+		  "Dueby":"08 Sep 2023",
+		  "isTaskCheck":false,
+      "isTaskcompleted": false,
+		  "isDocAvailable":false,
+		  "isNew":false
+		},
+    {
+		  "id": 4 ,
+		  "taskName":"MyPay details",
+		  "taskDescription":"Update bank account number & PAN",
+		  "taskStatus":"Not Started",
+      "imagename":"mypay.png",
+		  "Dueby":"08 Sep 2023",
+		  "isTaskCheck":false,
+      "isTaskcompleted": false,
+		  "isDocAvailable":true,
+		  "isNew":false
+		},
+    {
+		  "id": 5 ,
+		  "taskName":"Medi Assist details",
+		  "taskDescription":"Update personal details in HCM",
+		  "taskStatus":"Completed",
+      "imagename":"mediassist.png",
+		  "Dueby":"08 Sep 2023",
+		  "isTaskCheck":false,
+      "isTaskcompleted": false,
+		  "isDocAvailable":true,
+		  "isNew":false
+		}
+  ]
+  },
+  {
+	"id": 3,
+	"milestoneName":"Week 3",
+	"milestonDescription":"Week3 Tasks",
+  "milestonePeriod": "24-Nov-2023",
+	"tasks" : [
+    {
+		  "id": 1 ,
+		  "taskName":"Go Perform details",
+		  "taskDescription":"Update GoPerform details in HCM",
+		  "taskStatus":"Completed",
+      "imagename":"goperform.png",
+		  "Dueby":"08 Sep 2023",
+		  "isTaskCheck":false,
+      "isTaskcompleted": false,
+		  "isDocAvailable":true,
+		  "isNew":false
+		}
+  ]
+  },
+  {
+	"id": 4,
+	"milestoneName":"Month 1",
+	"milestonDescription":"Month1 Tasks",
+  "milestonePeriod": "29-Nov-2023",
+	"tasks" : []
+  },
+  {
+	"id": 5,
+	"milestoneName":"Month 2",
+	"milestonDescription":"Month2 Tasks",
+  "milestonePeriod": "29-Nov-2023",
+	"tasks" : []
+  },
+  {
+	"id": 6,
+	"milestoneName":"Month 3",
+	"milestonDescription":"Month3 Tasks",
+  "milestonePeriod": "29-Nov-2023",
+	"tasks" : []
+  }
+]

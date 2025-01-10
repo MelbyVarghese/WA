@@ -1,0 +1,627 @@
+.div-milestonetasks {
+
+  .star {
+    color: red;
+  }
+
+  .form-control-feedback {
+    color: red;
+    font-family: Gellix;
+    font-style: normal;
+    font-weight: 300;
+  }
+
+  .div-milestonetasksDesc {
+    margin-top: 2%;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  #milestone {
+
+    .p-accordion-tab {
+      border-radius: 0.375rem 0.375rem 0rem 0rem;
+      border: 1px solid var(--accent-colors-accent-2-dark-dark-blue, #2F78C4);
+      background: var(--base-color-white, #FFF);
+    }
+  }
+
+  .milestone {
+    width: 78.5625rem;
+    margin-left: 1rem;
+
+    .milestone-header {
+
+      .lbl-milestoneName {
+        color: #2F78C4;
+        font-family: Gellix;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      .lbl-milestoneDescription {
+        color: #92BBE6;
+        font-family: Gellix;
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      .lbltaskcount {
+        color: #000048;
+        text-align: right;
+        font-family: Gellix;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-right: 1.91rem;
+      }
+    }
+
+
+
+      .milestone-content {
+        width: 75.6875rem;
+        height: 4.375rem;
+        border-width: 1px;
+        border-style: ridge;
+        margin-top: 1rem;
+        border: 1px solid #F7F7F5;
+        background: #FFF;
+        box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.20);
+        border-left-width: 4px;
+        //border-left-color: #7373D8;
+
+        .task-info {
+          width: 50%;
+          margin-top: 1rem;
+          margin-left: 1rem;
+
+          .lbl-taskname {
+            color: #00004A;
+            font-family: Gellix;
+            font-size: 0.9375rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+          }
+
+          .lbl-taskdescription {
+            color: #000;
+            font-family: Gellix;
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+        }
+
+        .task-editdelete {
+          width: 50%;
+          margin-top: 1rem;
+          text-align: right;
+
+          .tasktype {
+            margin-left: 0.5rem;
+            color: #53565A;
+            text-align: right;
+            font-family: Poppins;
+            font-size: 0.90rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+
+
+          .p-inputswitch {
+            margin-left: 0.5rem;
+            height: 16px !important;
+            width: 28px !important;
+            margin-right: 25px;
+            margin-top: 0px;
+
+            .p-inputswitch-slider:before {
+              height: 12px !important;
+              width: 12px !important;
+              padding-top: 3px;
+            }
+
+            .p-inputswitch .p-inputswitch-checked .p-inputswitch-slider {
+              background-color: #26EFE9 !important;
+              height: 12px !important;
+              width: 12px !important;
+            }
+
+            .p-inputswitch .p-inputswitch-slider {
+              background: #ced4da !important;
+            }
+
+            .p-inputswitch .p-inputswitch-checked .p-inputswitch-slider:before {
+              background-color: #26EFE9 !important;
+              margin-top: -8px !important;
+              margin-left: -8px !important;
+              height: 12px !important;
+              width: 12px !important;
+            }
+
+            .p-inputswitch .p-inputswitch-slider:before {
+              margin-top: -8px !important;
+              height: 11px !important;
+              width: 11px !important;
+            }
+          }
+        }
+      }
+    
+
+    .milestone-maincontent :hover {
+      background-color: #f7f7f5;
+    }
+
+
+    .addTask {
+      width: 6.6875rem;
+      height: 2.5rem;
+      border-radius: 3.125rem;
+      border: 1px solid #2F78C4;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      margin-left: 1rem;
+      color: #2F78C4;
+      font-family: Gellix;
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      cursor: pointer;
+    }
+
+    .addTask:hover {
+      background-color: #2F78C4;
+      color: white;
+    }
+  }
+
+  .div-milestone {
+    width: 78.625rem;
+    margin-left: 1.5rem;
+    border-radius: 0rem 0rem 0.375rem 0.375rem;
+    border: 1px solid #2F78C4;
+
+    .milestone-header {
+      width: 78.5625rem;
+      height: 2.847rem;
+      border: 1px solid #2F78C4;
+      background-color: #2F78C4;
+
+      .lbl-addmilestone {
+        margin-left: 1rem;
+        margin-top: 1rem;
+        color: #FFF;
+        font-family: Gellix;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+
+    .milestone-body {
+
+      .milestone-duration {
+        margin-left: 1rem;
+        margin-top: 1rem;
+
+        .lbl-milestoneduration {
+          color: #53565A;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        .div-ddldurations {
+          // #ddldurations {
+          //   width: 10.9375rem;
+          //   height: 2.625rem;
+          //   .p-dropdown .p-dropdown-label.p-placeholder {
+          //     width: 10.9375rem;
+          //     border-radius: 0.5rem 0rem 0rem 0.5rem;
+          //     background-color: #F7F7F5;
+          //     box-shadow: 0px 0.5px 1px 0px #D0D0CE;
+          //     color: #000048;
+          //     font-family: Gellix;
+          //     font-size: 0.9375rem;
+          //     font-style: normal;
+          //     font-weight: 400;
+          //     line-height: normal;
+          //   }
+          //   .p-dropdown .p-dropdown-label {
+          //     width: 10.9375rem;
+          //     background-color: #F7F7F5;
+          //   }
+          //   .p-dropdown .p-dropdown-trigger {
+          //     background-color: #F7F7F5;
+          //   }
+          // }
+          // #ddldurationssub {
+          //   width: 4.875rem;
+          //   height: 2.625rem;
+          //  // margin-left: 3rem;
+          //   .p-dropdown .p-dropdown-label.p-placeholder {
+          //     width: 4.9375rem;
+          //     height: 2.625rem;
+          //     border-radius: 0.5rem 0rem 0rem 0.5rem;
+          //     background-color: #F7F7F5;
+          //     box-shadow: 0px 0.5px 1px 0px #D0D0CE;
+          //     color: #000048;
+          //     font-family: Gellix;
+          //     font-size: 0.9375rem;
+          //     font-style: normal;
+          //     font-weight: 400;
+          //     line-height: normal;
+          //   }
+          //   .p-dropdown .p-dropdown-label {
+          //     width: 4.875rem;
+          //     background-color: #F7F7F5;
+          //   }
+          //   .p-dropdown .p-dropdown-trigger {
+          //     background-color: #F7F7F5;
+          //   }
+          // }
+
+
+          .lbl-period {
+            margin-left: 1rem;
+            margin-top: 0.75rem;
+            width: 7.23925rem;
+            height: 1.00206rem;
+            color: #2F78C4;
+            font-family: Gellix;
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+        }
+
+        .div-milestonename {
+          margin-left: 1.5rem;
+
+          .lbl-milestonename {
+            color: #53565A;
+            font-family: Gellix;
+            font-size: 0.9375rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+
+          .txtmilestonename {
+            width: 47.46875rem;
+            height: 2.581rem;
+            background-color: #F7F7F5;
+            color: #000048;
+            font-family: Gellix;
+            font-size: 0.9375rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+        }
+      }
+
+      .div-milestonebanner {
+        margin-top: 1rem;
+        margin-left: 1rem;
+
+        .lbl-banner {
+          color: #53565A;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        .txtbanner {
+          width: 76.4375rem;
+          height: 4.39063rem;
+          margin-top: 0.5rem;
+          background-color: #F7F7F5;
+          resize: none;
+          border-width: 0px;
+          color: #000048;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+
+      .div-canceladdnow {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        .btncancel {
+          width: 5.875rem;
+          height: 2.5rem;
+          background-color: white;
+          border-radius: 3.125rem;
+          border: 1px solid black;
+          margin-left: 1rem;
+          color: #000048;
+          font-family: Gellix;
+          font-size: 0.875rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+
+        .btnaddnow {
+          width: 6.6875rem;
+          height: 2.5rem;
+          background-color: white;
+          border-radius: 3.125rem;
+          border: 1px solid #2F78C4;
+          margin-left: 1rem;
+          margin-right: 1rem;
+          color: #2F78C4;
+          font-family: Gellix;
+          font-size: 0.875rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+      }
+    }
+  }
+
+  .addmilestone {
+    margin-left: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+
+    .btnaddmilestone {
+      width: 10.1875rem;
+      height: 2.5rem;
+      border-radius: 3.125rem;
+      background: #92BBE6;
+      color: #000048;
+      font-family: Gellix;
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      border-width: 0px;
+      cursor: pointer;
+    }
+  }
+
+  .div-line {
+    margin-left: 1rem;
+    margin-top: 1.5rem;
+    width: 78.57394rem;
+    height: 0.0625rem;
+    border-color: #E8E8E6;
+    border-style: solid;
+    border-width: 1px;
+  }
+
+  .div-next {
+    width: 78.5625rem;
+    height: 3rem;
+    background-color: white;
+    margin-bottom: 1.75rem;
+
+    .ancprev {
+      color: #2F78C4;
+      font-family: Gellix;
+      font-size: 0.8125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1875rem;
+      text-decoration: none;
+      margin-right: 1.6rem;
+    }
+
+    .lblbar {
+      color: #2F78C4;
+      font-family: Gellix;
+      font-size: 0.8125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1875rem;
+    }
+
+    .ancnext {
+      color: #2F78C4;
+      font-family: Gellix;
+      font-size: 0.8125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1875rem;
+      text-decoration: none;
+      margin-left: 1.2rem;
+      margin-right: 10px;
+    }
+  }
+
+  .div-footer {
+    height: 2.44rem;
+    background-color: #F7F7F5;
+  }
+}
+
+
+  :host {
+
+    ::ng-deep .p-accordion .p-accordion-header:not(.p-highlight):not(.p-disabled):hover .p-accordion-header-link {
+      background-color: #2F78C4;
+
+      .milestone-header {
+        .lbl-milestoneName {
+          color: white;
+        }
+
+        .lbl-milestoneDescription {
+          color: white;
+        }
+
+        .lbltaskcount {
+          color: white;
+        }
+
+        img {
+          filter: brightness(950%);
+        }
+      }
+    }
+
+    ::ng-deep .p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link {
+      background-color: #2F78C4;
+
+      .milestone-header {
+        .lbl-milestoneName {
+          color: white;
+        }
+
+        .lbl-milestoneDescription {
+          color: white;
+        }
+
+        .lbltaskcount {
+          color: white;
+        }
+
+        img {
+          filter: brightness(950%);
+        }
+      }
+    }
+  }
+
+  .disableTaskPopup {
+    width: 556px;
+    height: 125px;
+
+    .p-dialog-header {
+      margin-top: -100px;
+      background-color: #000048;
+      height: 50px;
+
+      .p-icon {
+        color: white !important;
+      }
+
+      .title {
+        font-family: Gellix;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 22.3px;
+        text-align: left;
+        color: white;
+      }
+    }
+
+    .p-dialog-footer {
+      background-color: #F2F2F2;
+      padding: 10px;
+    }
+
+    .div-disablecontent {
+
+      .div-quest {
+        font-family: Gellix;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 19.5px;
+        text-align: left;
+        margin-top: 2rem;
+      }
+
+      .div-descr {
+        font-family: Gellix;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 19.5px;
+        text-align: left;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+
+  .activationTaskPopup {
+    width: 556px;
+    height: 125px;
+
+    .p-dialog-header {
+      margin-top: -100px;
+      background-color: #000048;
+      height: 50px;
+
+      .p-icon {
+        color: white !important;
+      }
+
+      .title {
+        font-family: Gellix;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 22.3px;
+        text-align: left;
+        color: white;
+      }
+    }
+
+    .p-dialog-footer {
+      background-color: #F2F2F2;
+      padding: 10px;
+    }
+
+    .div-activationncontent {
+
+      .div-quest {
+        font-family: Gellix;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 19.5px;
+        text-align: left;
+        margin-top: 2rem;
+      }
+
+      .div-descr {
+        font-family: Gellix;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 19.5px;
+        text-align: left;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    width: 28px;
+    height: 16px;
+    background: #26efe9 !important;
+  }
+
+  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
+    background: #000048;
+    margin-top: -8px !important;
+    margin-left: -8px !important;
+  }

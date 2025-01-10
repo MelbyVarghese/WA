@@ -1,0 +1,63 @@
+.div-error {
+
+  .div-main {
+    margin-top: 11.3125rem;
+    margin-left: 6.1875rem;
+
+    .div-leftcontent {
+
+      .lbl-message1 {
+        font: normal normal 600 47px/56px Gellix;
+        letter-spacing: 0px;
+        color: #010445;
+        opacity: 1;
+      }
+
+      .lbl-message2 {
+        margin-top: 1rem;
+        font: normal normal normal 27px/32px Gellix;
+        letter-spacing: 0px;
+        color: #5F8DC8;
+        opacity: 1;
+      }
+
+      .lbl-message3 {
+        margin-top: 1rem;
+
+        .span1 {
+          font: normal normal 600 20px/31px Gellix;
+          letter-spacing: 0px;
+          color: #010445;
+        }
+
+        .span2 {
+          font: normal normal normal 20px/31px Gellix;
+          letter-spacing: 0px;
+          color: #010445;
+        }
+      }
+
+      .btn-back {
+        margin-top: 1rem;
+        width: 11.875rem;
+        height: 2.5rem;
+        background: #9ABBE1 0% 0% no-repeat padding-box;
+        border-radius: 1.25rem;
+        opacity: 1;
+        font: normal normal 600 14px/31px Gellix;
+        letter-spacing: 0px;
+        color: #010445;
+        border-width:0px;       
+      }
+    }
+
+    .div-rightcontent {
+
+      .errImage {
+        width: 30.8125rem;
+        height: 16.75rem;
+        margin-left:1rem;
+      }
+    }
+  }
+}

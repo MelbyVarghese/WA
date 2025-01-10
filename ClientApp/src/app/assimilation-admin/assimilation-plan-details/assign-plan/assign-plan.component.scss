@@ -1,0 +1,307 @@
+.div-assnplan {
+  padding: 0 1.5rem;
+
+  .star {
+    color: red;
+  }
+
+  .div-plandesc {
+    /* position: absolute; */
+    margin-top: 2.32rem;
+    // margin-left: 1rem;
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .div-line {
+    /* position: absolute; */
+    margin-top: 1.32rem;
+    // margin-left: 1rem;
+    width: 78.5625rem;
+    height: 0.0625rem;
+    background-color: #e8e8e6;
+  }
+
+  .div-filters {
+    /* position: absolute; */
+    margin-top: 2.32rem;
+    // margin-left: 1rem;
+    /* width: 100%;   */
+    background: #fff;
+    color: #53565a;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    .contains-values-fill {
+      fill: #f2f2f2;
+      filter: drop-shadow(0px 0.5px 1px #d0d0ce);
+    }
+
+    .filter-btn {
+      border-radius: 3.125rem;
+      border: 1px solid #2f78c4;
+      width: 25.25rem;
+      padding: 0.75rem 1.5rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      color: #2f78c4;
+      margin-top: 1rem;
+      font-family: Gellix;
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      cursor: pointer;
+
+      &:hover {
+        color: #fff;
+        background: #2f78c4;
+      }
+    }
+
+    .disabled-btn {
+      color: #000048;
+      border: none;
+      background-color: #D0D0CE;
+    }
+
+    .btnitems {
+      // width: auto;
+      // height: 2.4rem;
+      // border-radius: 3.125rem;
+      // border-width: 0px;
+      // background: #2f78c4;
+      // margin-right: 1rem;
+      // color: #fff;
+      // font-family: Gellix;
+      // font-size: 0.75rem;
+      // font-style: normal;
+      // font-weight: 400;
+      // line-height: normal;
+      // cursor: pointer;
+      // border-radius: 62.5rem;
+      // border: 1px solid #2f78c4;
+      // background: #2f78c4;
+      // height: 2.0625rem;
+      // color: #fff;
+      // font-family: Gellix;
+      // font-size: 0.75rem;
+      // font-style: normal;
+      // font-weight: 400;
+      // line-height: normal;
+      // padding: 0.625rem 1rem;
+      // margin-right: 0.62rem;
+      // margin-top: 0.62rem;
+      border-radius: 62.5rem;
+      border: 1px solid #2f78c4;
+      background: #2f78c4;
+      height: 2.0625rem;
+      color: #fff;
+      font-family: Gellix;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      padding: 0.55rem 1rem;
+      margin-right: 0.62rem;
+      margin-top: 0.62rem;
+
+      &:disabled {
+        border: 1px solid #97999b;
+        background: #fff;
+        color: #97999b;
+      }
+
+      p {
+        padding: 0;
+      }
+
+      .btnItemClose {
+        margin-top: 0px;
+        height: 0.938rem;
+        margin-left: 0.313rem;
+      }
+    }
+
+    .div-gradeService {
+      margin-top: 1.5rem;
+      //margin-left: 1rem;
+    }
+
+    .div-gradeService1 {
+      margin-top: 1.5rem;
+      margin-left: 1rem;
+      margin-bottom: 1.5rem;
+
+
+
+      #efftdate {
+        .p-datepicker table td.p-datepicker-today > span {
+          background: none;
+        }
+      }
+    }
+    // .div-grade {
+    //   width: 35%;
+    //   color: #53565a;
+    //   font-family: Gellix;
+    //   font-size: 0.9375rem;
+    //   font-style: normal;
+    //   font-weight: 400;
+    //   line-height: normal;
+    // }
+    // .div-ServiceLine {
+    //   width: 35%;
+    // }
+    // .div-Geography {
+    //   width: 30%;
+    // }
+    // .div-loj {
+    //   width: 35%;
+    // }
+    // .div-doj {
+    //   width: 35%;
+    // }
+    // .div-applyfilter {
+    //   width: 30%;
+    // }
+
+    #dvdaysrem {
+      .p-multiselect {
+        width: 10.25rem;
+        height: 2.5rem;
+        background-color: #f2f2f2;
+      }
+    }
+
+    #dvDojRange {
+      .p-calendar {
+        width: 25.24031rem;
+        height: 2.5rem;
+      }
+
+      .p-calendar-clear-icon {
+        color: #000048;
+        right: 2rem;
+      }
+
+      .p-calendar .p-inputtext {
+        background-color: #f7f7f5;
+        border-right-color: #f7f7f5;
+      }
+
+      .p-calendar .p-button {
+        background-color: #f7f7f5;
+        border-color: #f7f7f5;
+        height: 2.5rem;
+        border-width: 1px;
+        border-color: #ced4da;
+        border-left: none;
+      }
+
+      .p-calendar .p-icon-wrapper {
+        color: #000048;
+        // border: 1px solid #ced4da;
+        background-color: #f7f7f5;
+      }
+
+      #efftdate {
+
+        .p-datepicker table td.p-datepicker-today > span {
+          border-radius: 0% !important;
+          background: none;
+        }
+      }
+
+      .p-calendar .p-datepicker table td.p-datepicker-today > span {
+        border-radius: 0% !important;
+        background: none !important;
+      }
+    }
+
+    .clearAll {
+      color: #2f78c4;
+      text-align: right;
+      font-family: Gellix;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      cursor: pointer;
+      margin-top: 0.625rem;
+      position: absolute;
+    }
+  }
+
+  .div-line2 {
+    /* position: absolute; */
+    margin-top: 1.32rem;
+    margin-left: 1rem;
+    width: 78.5625rem;
+    height: 0.0625rem;
+    background-color: #e8e8e6;
+  }
+
+  .div-next {
+    text-align: right;
+    /* width: 100%; */
+    width: 78.5625rem;
+    /* position: absolute; */
+    margin-top: 1.32rem;
+    margin-bottom: 1.75rem;
+
+    .anc {
+      text-decoration: none;
+      color: #2f78c4;
+      font-family: Gellix;
+      font-size: 0.8125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1875rem;
+    }
+  }
+}
+
+:host {
+  // ::ng-deep .p-multiselect {
+  //   width: 22.25rem;
+  //   height: 2.5rem;
+  //   background-color: #d0d0ce;
+  // }
+
+  ::ng-deep .p-multiselect-label {
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  ::ng-deep .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+
+  ::ng-deep .p-disabled,
+  .p-component:disabled,
+  ::ng-deep .p-disabled {
+    opacity: 1;
+  }
+
+ 
+ 
+}

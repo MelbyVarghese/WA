@@ -1,0 +1,290 @@
+@import "../../../assets/scss/base/variables";
+
+.page-title {
+  // font: normal normal 600 2.25rem/2.5rem "Gellix-SemiBold", sans-serif;
+  // letter-spacing: 0px;
+  // color: $blue-color;
+  font: normal normal 600 2.25rem/2.5rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $blue-color;
+}
+
+.accordion-title {
+  font: normal normal 600 1.625rem/1.813rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $blue-color;
+  flex-grow: 1;
+}
+
+.accordion-edittitle {
+  font: normal normal 600 1.5rem/1.688rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $a-disable-title;
+}
+
+.edit-link {
+  text-align: left;
+  text-decoration: underline;
+  font: normal normal 600 1.25rem/1.375rem "Gellix-Regular", sans-serif;
+  letter-spacing: 0px;
+  color: $a-acc-edit-link;
+  opacity: 1;
+  //padding-left: 98rem;
+  cursor: pointer;
+}
+
+.submited-text {
+  color: $a-submited-title;
+}
+
+.acc-detail-heading {
+  font: normal normal 600 1.125rem/1.25rem "Gellix-Regular", sans-serif;
+  letter-spacing: 0px;
+  color: $a-acc-heading;
+  opacity: 1;
+}
+
+.edit-detail-heading {
+  font: normal normal 600 1.25rem/1.375rem "Gellix-Regular", sans-serif;
+  letter-spacing: 0px;
+  color: #53565a;
+  opacity: 1;
+}
+
+.edit-detail-sub-heading {
+  font: normal normal 600 1rem/1.125rem "Gellix-Regular", sans-serif;
+  letter-spacing: 0px;
+  color: $a-acc-heading;
+  opacity: 1;
+}
+
+.acc-detail-text {
+  font: normal normal 600 1.125rem/1.25rem "Gellix-Regular", sans-serif;
+  letter-spacing: 0px;
+  color: $blue-color;
+  opacity: 1;
+}
+
+.add-more {
+  font: normal normal 600 1.125rem/1.25rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  text-decoration: underline;
+  color: $button-bg-color;
+  cursor: pointer;
+}
+
+.acc-checkbox {
+  font: normal normal 600 1rem/1.125rem "Gellix-Regular", sans-serif;
+}
+
+.acc-editcheckbox {
+  font: normal normal 600 1rem/1.125rem "Gellix-Regular", sans-serif;
+  color: #a1a5a6;
+}
+
+.acc-radio-heading {
+  color: $form-label-color;
+}
+
+.progress-text {
+  font: normal normal 600 1.125rem/1.25rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $a-acc-edit-link;
+}
+
+//help-support
+.help-acc-title {
+  font: normal normal 600 1rem/1.125rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $blue-color;
+}
+
+.help-acc-desc {
+  font: normal normal 600 1rem/1.125rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $a-help-desc;
+}
+
+.still-text {
+  text-align: left;
+  font: normal normal 600 1.125rem/1.125rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $blue-color;
+}
+
+.f-desc {
+  text-align: left;
+  font: normal normal 600 1rem/1.125rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $a-help-desc;
+}
+
+.f-desc-link {
+  text-align: left;
+  text-decoration: underline;
+  font: normal normal 600 1rem/1.125rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $button-bg-color;
+}
+
+.offer-title {
+  text-align: left;
+  font: normal normal 600 1.125rem/1.25rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $blue-color;
+}
+
+.offer-sub-title {
+  text-align: left;
+  font: normal normal 600 1rem/1.125rem "Gellix-Regular", sans-serif;
+  letter-spacing: 0px;
+  color: $a-offer-sub;
+}
+
+.offer-heading {
+  text-align: center;
+  font: normal normal 600 2.6rem/1.8rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $form-label-color;
+  opacity: 2;
+}
+
+.offer-data-containt {
+  text-align: center;
+  font: normal normal 600 1rem/1.125rem "Gellix-Regular", sans-serif;
+  letter-spacing: 0px;
+  color: $form-label-color;
+  opacity: 2;
+}
+
+.confirm-checkbox-text {
+  font: normal normal 600 0.875rem/1rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $blue-color;
+  cursor: pointer;
+}
+
+.confirmation-title {
+  font: normal normal 600 1.625rem/1.813rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $blue-color;
+}
+
+.confirmation-subtitle {
+  font: normal normal normal 1.8rem/2rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $gray-color;
+}
+
+.offer-accepted-text {
+  text-align: left;
+  font: normal normal 600 0.875rem/1rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: #06c7cc;
+}
+
+//quiz
+.circle-digit {
+  text-align: left;
+  font: normal normal 600 3.5rem/3.9rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $white-color;
+}
+
+.circle-text {
+  text-align: left;
+  font: normal normal 600 1.4rem/1.6rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $white-color;
+  padding-left: 2rem;
+}
+
+.q-text {
+  text-align: left;
+  font: normal normal 600 1.125rem/1.25rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $a-acc-heading;
+}
+
+.q-timertext {
+  text-align: left;
+  font: normal normal 600 1.125rem/1.25rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $a-skills-bgbutton;
+}
+
+//interview-tips
+
+.interview-title {
+  text-align: left;
+  font: normal normal 600 1.25rem/1.375rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $blue-color;
+}
+
+.interview-detail-title {
+  text-align: left;
+  font: normal normal 600 1.5rem/1.688rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $blue-color;
+}
+
+.interview-desc {
+  text-align: left;
+  font: normal normal 600 1rem/1.125rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $gray-color;
+}
+
+.views-text {
+  text-align: left;
+  font: normal normal 600 0.875rem/1rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $form-label-color;
+}
+
+.views-text-video {
+  text-align: left;
+  font: normal normal 600 0.75rem/0.813rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: #53565a;
+  // color: $form-label-color;
+}
+
+.tips-detail-ans {
+  text-align: left;
+  font: normal normal 600 0.875rem/1rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: #53565a;
+  // color: $form-label-color;
+}
+
+//interview
+
+.interview-title1 {
+  text-align: left;
+  font: normal normal 600 1rem/1.125rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: $form-label-color;
+}
+
+.interview-title2 {
+  text-align: left;
+  font: normal normal 600 1.4rem/1.6rem "Gellix-Regular", sans-serif;
+  letter-spacing: 0px;
+  color: $form-label-color;
+}
+.dashboard-sidebar-title {
+  text-align: left;
+  font: normal normal 600 1.125rem/1.25rem "Gellix-SemiBold", sans-serif;
+  letter-spacing: 0px;
+  color: #000348;
+  opacity: 1;
+}
+.view-all-text {
+  text-align: center;
+  font: normal normal normal 0.813rem/0.938rem "Gellix-Regular", sans-serif;
+  letter-spacing: 0px;
+  color: #2f78c4;
+  opacity: 1;
+}

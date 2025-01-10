@@ -1,0 +1,182 @@
+<div class="div-assnplan">
+  <div class="div-plandesc">
+    Choose & define which associates the assimilation plan is meant for:
+  </div>
+
+  <div class="div-line"></div>
+
+  <div class="div-filters mt-3">
+
+    <!-- <div class="flex flex-row flex-wrap">
+      <ng-container *ngFor="let grd of selected_Grades">
+        <button class="btnitems flex flex-row" [disabled]="!canEdit" (click)="removeCategoryItem('Grade',grd.name)"
+          [ngStyle]="getFilterStyles()">
+          <p>{{grd.name}} </p>
+          <p><img src="./assets/images/cross-icon.svg" class="btnItemClose"></p>
+        </button>
+      </ng-container>
+      <ng-container *ngFor="let grd of selected_serviceLines">
+        <button class="btnitems flex flex-row" [disabled]="!canEdit" [ngStyle]="getFilterStyles()"
+          (click)="removeCategoryItem('ServiceLine',grd.name)">
+          <p>{{grd.name}} </p>
+          <p><img src="./assets/images/cross-icon.svg" class="btnItemClose"></p>
+        </button>
+      </ng-container>
+      <ng-container *ngFor="let grd of selected_geographies">
+        <button class="btnitems flex flex-row" [disabled]="!canEdit" [ngStyle]="getFilterStyles()"
+          (click)="removeCategoryItem('Geography',grd.name)">
+          <p>{{grd.name}} </p>
+          <p><img src="./assets/images/cross-icon.svg" class="btnItemClose"></p>
+        </button>
+      </ng-container>
+      <ng-container *ngFor="let grd of selected_loj">
+        <button class="btnitems flex flex-row" [disabled]="!canEdit" [ngStyle]="getFilterStyles()"
+          (click)="removeCategoryItem('LocationOfJoining',grd.name)">
+          <p>{{grd.name}} </p>
+          <p><img src="./assets/images/cross-icon.svg" class="btnItemClose"></p>
+        </button>
+      </ng-container>
+      <ng-container>
+        <button class="btnitems flex flex-row" [disabled]="!canEdit"
+          *ngIf="planEffectiveDate?.toLocaleDateString() != null " [ngStyle]="getFilterStyles()"
+          (click)="removeCategoryItem('Preferred_Date',planEffectiveDate)">
+          <p>{{planEffectiveDate?.toLocaleDateString()}} </p>
+          <p><img src="./assets/images/cross-icon.svg" class="btnItemClose"></p>
+        </button>
+      </ng-container>
+      <div *ngIf="selected_Grades.length > 0 ||  selected_serviceLines.length > 0 ||
+               selected_geographies.length > 0 || selected_loj.length || planEffectiveDate != undefined"
+        style="text-align: center;">
+        <a class="clearAll" (click)="clearItems()">Clear All</a>
+      </div>
+    </div> -->
+
+    <div class="flex flex-row flex-wrap filter-chips-inside" *ngIf="(selected_serviceLines!=null && selected_serviceLines.length > 0) ||
+      (selected_geographies!=null && selected_geographies.length > 0) || planEffectiveDate != undefined">
+      <!--<ng-container *ngFor="let grd of selected_Grades">
+        <button [ngClass]="{'disabled': !canEdit}" [disabled]="!canEdit" class="btnitems flex flex-row"
+          (click)="removeCategoryItem('Grade', grd.gradeDesc)">
+          <label>{{ grd.gradeDesc }} </label>
+          <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+        </button>
+      </ng-container>-->
+      <ng-container *ngFor="let grd of selected_serviceLines">
+        <button [ngClass]="{'disabled': !canEdit}" [disabled]="!canEdit" class="btnitems flex flex-row"
+          (click)="removeCategoryItem('ServiceLine', grd.serviceLineDesc)">
+          <label>{{ grd.serviceLineDesc }} </label>
+          <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+        </button>
+      </ng-container>
+      <ng-container *ngFor="let grd of selected_geographies">
+        <button [ngClass]="{'disabled': !canEdit}" [disabled]="!canEdit" class="btnitems flex flex-row"
+          (click)="removeCategoryItem('Geography', grd.countryDesc)">
+          <label>{{ grd.countryDesc }} </label>
+          <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+        </button>
+      </ng-container>
+      <!--<ng-container *ngFor="let grd of selected_loj">
+        <button [ngClass]="{'disabled': !canEdit}" [disabled]="!canEdit" class="btnitems flex flex-row" (click)="
+            removeCategoryItem('LocationOfJoining', grd.cityDesc)
+          ">
+          <label>{{ grd.cityDesc }} </label>
+          <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+        </button>
+      </ng-container>-->
+      <ng-container *ngIf="planEffectiveDate != undefined">
+        <button [ngClass]="{'disabled': !canEdit}" [disabled]="!canEdit" class="btnitems flex flex-row" (click)="
+            removeCategoryItem('PlanEffectiveDate', planEffectiveDate)
+          ">
+          <label>{{planEffectiveDate | date: 'dd-MM-yy'}} </label>
+          <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+        </button>
+      </ng-container>
+      <div *ngIf="(selected_serviceLines!=null && selected_serviceLines.length > 0) ||
+        (selected_geographies!=null && selected_geographies.length > 0) ||  planEffectiveDate != undefined" class="align-items-center flex">
+        <a class="clearAll mt-2" (click)="clearItems()" *ngIf="canEdit">Clear All</a>
+      </div>
+    </div>
+
+    <div class="div-gradeService flex justify-content-between">
+      <!--<div class="div-grade flex flex-column">
+    <div class="mb-1">
+      Grade<span [ngStyle]="getStarStyle()">*</span>
+    </div>
+    <div>
+      <p-multiSelect [options]="grades" [(ngModel)]="selected_Grades" optionLabel="gradeDesc"
+        class="contains-values-fill" [ngClass]="{ 'empty-fill': selected_Grades.length == 0 }" [style.zIndex]="1"
+        appendTo="body" [disabled]="!canEdit"></p-multiSelect>
+    </div>
+  </div>-->
+      <div class="div-ServiceLine flex flex-column">
+        <div class="mb-1">
+          Service line<span [ngStyle]="getStarStyle()">*</span>
+        </div>
+        <div>
+          <p-multiSelect [options]="serviceLines" [(ngModel)]="selected_serviceLines" optionLabel="serviceLineDesc"
+                         class="contains-values-fill" [ngClass]="{ 'empty-fill': selected_serviceLines.length == 0 }"
+                         [style.zIndex]="2" appendTo="body" [disabled]="!canEdit"></p-multiSelect>
+        </div>
+      </div>
+      <div class="div-Geography flex flex-column">
+        <div class="mb-1">
+          Geography<span [ngStyle]="getStarStyle()">*</span>
+        </div>
+        <div>
+          <p-multiSelect [options]="geographies" [(ngModel)]="selected_geographies" optionLabel="countryDesc"
+                         class="contains-values-fill" [ngClass]="{ 'empty-fill': selected_geographies.length == 0 }"
+                         [style.zIndex]="3" appendTo="body" [disabled]="!canEdit"></p-multiSelect>
+        </div>
+      </div>
+      <div class="div-doj flex flex-column" id="dvDojRange">
+        <div class="mb-1">
+          Plan effective date<span [ngStyle]="getStarStyle()">*</span>
+        </div>
+        <div>
+          <p-calendar id="efftdate" [(ngModel)]="planEffectiveDate" [showIcon]="true" [disabled]="!canEdit" dateFormat="dd-mm-y"
+                      [readonlyInput]="true" [ngClass]="{ 'empty-fill': planEffectiveDate == undefined }" appendTo="body"
+                      [minDate]="nextday" class="contains-values-fill"></p-calendar>
+        </div>
+      </div>
+    </div>
+
+    <div class="div-gradeService1 flex justify-content-end">
+      <!--<div class="div-loj flex flex-column">
+        <div class="mb-1">
+          Location of joining<span [ngStyle]="getStarStyle()">*</span>
+        </div>
+        <div>
+          <p-multiSelect [options]="loj" [(ngModel)]="selected_loj" optionLabel="cityDesc" class="contains-values-fill"
+            [style.zIndex]="4" appendTo="body" [ngClass]="{ 'empty-fill': selected_loj.length == 0 }"
+            [disabled]="!canEdit"></p-multiSelect>
+        </div>
+      </div>-->
+      <!--<div class="div-doj flex flex-column" id="dvDojRange">
+        <div class="mb-1">
+          Plan effective date<span [ngStyle]="getStarStyle()">*</span>
+        </div>
+        <div>
+          <p-calendar id="efftdate" [(ngModel)]="planEffectiveDate" [showIcon]="true" [disabled]="!canEdit" dateFormat="dd-mm-y"
+            [readonlyInput]="true" [ngClass]="{ 'empty-fill': planEffectiveDate == undefined }" appendTo="body"
+            [minDate]="nextday"  class="contains-values-fill"></p-calendar>
+        </div>
+      </div>-->
+      <div class="div-applyfilter flex flex-column">
+        <div class="mb-1">
+
+        </div>
+        <!-- <button [ngStyle]="getFilterButtonStyles()" [disabled]="!canEdit" (click)="saveAssignPlan()">Apply -->
+        <button class="filter-btn" *ngIf="canEdit" [ngClass]="{'disabled-btn': !canEdit}" [disabled]="!canEdit"
+          (click)="saveAssignPlan()">Apply
+          filters</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="div-line2"></div>
+
+  <div class="div-next flex flex-row justify-content-end">
+    <a href="javascript:void(0)" class="anc" (click)="nextStep($event)">Next</a>
+    <img src="./assets/images/right-arrow.svg" style="margin-left: 5px;cursor: pointer;" />
+  </div>
+</div>

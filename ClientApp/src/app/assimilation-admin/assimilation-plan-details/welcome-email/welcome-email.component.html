@@ -1,0 +1,208 @@
+<div class="div-welcomeEmail" [formGroup]="myform">
+
+  <div class="div-WelcomeEmailDesc">
+    Review & set the welcome email invite that would be sent to the newly hired associates:
+  </div>
+
+  <div class="div-email flex flex-row justify-content-between">
+
+    <div class="div-emailContent">
+
+      <div class="div-emailInfo flex flex-row">
+        <div>
+          <img src="./assets/images/info_circle.svg">
+        </div>
+        <div style="margin-left: 5px;">
+          This is the standard email to be sent as welcome invitations to newly hired associates. Please click ‘Edit’ &
+          save changes to modify message body or subject if required.
+        </div>
+      </div>
+
+      <div class="div-emailsubject flex flex-column">
+        <div class="subject">
+          Subject of email<span class="star">*</span>
+        </div>
+        <div style="margin-top: 0.5rem;">        
+          <input type="text" pInputText formControlName="ESubject" [ngStyle]="getBackgroundStyles()" [readonly]="true"
+            (keyup)="setSubject()" />
+        </div>
+
+        <div *ngIf="myform.controls['ESubject'].touched">
+          <div class="form-control-feedback" *ngIf="myform.controls['ESubject'].errors?.['required']">
+            Subject is required
+          </div>
+        </div>
+      </div>
+
+      <div class="div-emailmessage flex flex-column">
+        <div class="message">
+          Message<span class="star">*</span>
+        </div>
+        <div style="margin-top: 0.5rem;">        
+
+          <textarea class="txtmessagearea" rows="5" cols="30" pInputTextarea formControlName="EMessage"  [readonly]="true"
+            [ngStyle]="getBackgroundStyles()" (keyup)="setMessage()"></textarea>
+
+        </div>
+
+        <div *ngIf="myform.controls['EMessage'].touched">
+          <div class="form-control-feedback" *ngIf="myform.controls['EMessage'].errors?.['required']">
+            Message is required
+          </div>
+        </div>
+      </div>
+
+      <div class="div-emailcontact flex flex-column">
+        <div class="contact" *ngIf="plantitle == 'N2C Tech'">
+          Support contact email (In case of queries, please reach out to Your N2C HR)         
+        </div>
+
+        <div class="contact" *ngIf="plantitle != 'N2C Tech'">
+          Support contact email (In case of queries, please reach out to )         
+        </div>
+
+        <!--<div style="margin-top: 0.5rem;">
+     <input type="text" pInputText formControlName="EContact" [ngStyle]="getBackgroundStyles()"
+     (keyup)="setContact()" />
+  </div>-->
+
+        <ng-container *ngFor="let pt of supportMails" >
+
+          <div class="flex flex-row div-mails" *ngIf="plantitle != 'N2C Tech'">
+            <div>
+              <img src="assets/images/supportmail.png" class="locicon" />
+            </div>
+            <div class="mail flex flex-column">
+              <a href="javascript:void(0)" class="anc">{{getMailId(pt)}}</a>
+              <!--<span class="zone">
+          {{getZoneName(pt)}}
+          <span class="location">{{getLocationName(pt)}}</span>
+        </span>-->
+            </div>
+          </div>
+
+        </ng-container>
+
+        <div *ngIf="myform.controls['EContact'].touched">
+          ta
+          
+          <div class="form-control-feedback" *ngIf="myform.controls['EContact'].errors?.['required']">
+            Contact email is required
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="div-emailsave flex flex-start" *ngIf="canEdit">
+        <button class="btnsaveChanges" (click)="saveChanges()">Save Changes</button>
+      </div>-->
+    </div>
+
+    <div class="div-emailPreview">
+
+      <div class="div-previewheader flex flex-row justify-content-between">
+        <div class="preview-text">Email preview:</div>
+        <div class="preview-zoom flex flex-row justify-content-between">
+          <div>
+            <img class="zoomImg" src="./assets/images/zoom_in.svg" (click)="zoomplus()">
+          </div>
+          <div>
+            <img class="zoomImg" src="./assets/images/zoom_out.svg" (click)="zoomminus()">
+          </div>
+          <div class="zoompercentage">{{zoompercentage}}%</div>
+        </div>
+      </div>
+
+      <div class="div-contentpreview" [style.width]="zoomwidth + 'px'">
+
+        <div class="content-images flex flex-row justify-content-between">
+          <div>
+            <img class="cogprim" src="./assets/images/cog_prim.svg">
+          </div>
+          <div class="flex flex-row">
+            <img class="rectimg1" src="./assets/images/light_blue_rectangle.svg">
+            <img class="rectimg2" src="./assets/images/dark_blue_rectangle.svg">           
+          </div>
+        </div>
+
+        <div class="div-previewsubject">
+          {{emailSubject}}
+        </div>
+
+        <div class="div-prviewmailmessage">
+
+          <div class="associate">
+            Dear Associate,
+          </div>
+
+          <div class="mailmessage">
+            {{emailMessage}}
+          </div>
+
+          <div class="div-accessportal flex flex-column">
+            <label class="lblaccessportal">Click below to access the portal</label>
+            <button class="btnaccessportal">Employee experience portal</button>
+          </div>
+
+          <div class="div-query">
+            <br /><br />
+            In case of queries, please reach out to
+            <span *ngIf="plantitle == 'N2C Tech'">Your N2C HR</span>
+            <br />
+
+            <div class="flex flex-row div-mails" *ngIf="plantitle != 'N2C Tech'" >
+              <div>
+                <img src="assets/images/supportmail.png" class="locicon" />
+              </div>
+              <div class="mail flex flex-column" >
+                <a href="javascript:void(0)" class="anc">{{getMailId(emailContact)}}</a>
+                <!--<span class="zone">
+                  {{getZoneName(emailContact)}}
+                  <span class="location">{{getLocationName(emailContact)}}</span>
+                </span>-->
+              </div>
+            </div>
+
+          </div>
+
+          <div class="div-thank flex flex-column">
+            <label class="lbl-thank">Thank you</label>
+            <label class="lbl-adminteam">N2C HR CognizantOn</label>
+          </div>
+
+          <div style="height:3rem;">
+          </div>
+
+
+        </div>
+
+        </div>
+
+    </div>
+  </div>
+
+  <div class="div-next flex flex-row justify-content-end">
+    <div style="margin-top: 10px;" class="flex flex-row">
+      <div>
+        <img src="./assets/images/left-arrow.svg" (click)="prevStep($event)"
+             style="margin-right: 10px;margin-top: 3px; cursor: pointer;height:0.6875rem;">
+      </div>
+      <div>
+        <a href="javascript:void(0)" class="ancprev" (click)="prevStep($event)">Previous</a>
+      </div>
+      <div>
+        <label class="lblbar">|</label>
+      </div>
+      <div>
+        <a href="javascript:void(0)" class="ancnext" (click)="nextStep($event)">Next</a>
+      </div>
+      <div>
+        <img src="./assets/images/right-arrow.svg" (click)="nextStep($event)"
+             style="margin-top: 5px;cursor: pointer;height:0.6875rem;">
+      </div>
+    </div>
+  </div>
+
+  <div class="div-footer"></div>
+
+
+</div>

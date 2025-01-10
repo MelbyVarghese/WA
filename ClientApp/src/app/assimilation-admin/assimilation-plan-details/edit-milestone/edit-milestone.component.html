@@ -1,0 +1,60 @@
+<div class="edit-milestone-main-container">
+
+  <p-dialog [(visible)]="displayMilestoneContentPopup" [position]="'right'" [modal]="true" styleClass="pdialog"
+            [draggable]="false" [resizable]="false" class="modal-dialog">
+
+    <div class="edit-milestone-form-header">
+      <label class="lblheader">{{milestoneInfo.msName}} - Milestone details</label>
+      <div class="crossicon-box mb-5">
+        <img class="cross-icon" (click)="close()" src="./assets/images/cross-icon.svg" />
+      </div>
+    </div>
+
+    <div class="div-content  flex flex-column">
+
+      <div class="div-duration flex flex-column">
+        <label class="lbl-milestoneduration">Milestone duration<span class="star">*</span></label>
+        <div class="div-ddldurations flex flex-row ">
+          <p-dropdown [options]="durations" id="ddldurations1" (onChange)="setMilestoneName()"
+                      [style]="{'width':'10.9375rem','height': '2.625rem','background-color':'#F7F7F5','color':'#000048','border-radius':'0px',
+                'font-family': 'Gellix','font-size': '0.9375rem','font-style': 'normal','font-weight': '400'}"
+                      [(ngModel)]="selected_duration" optionLabel="durationDesc" placeholder="Select"></p-dropdown>
+
+          <p-dropdown [options]="durationPeriods" id="ddldurationssub1" (onChange)="setMilestoneName()"
+                      [style]="{'width':'6.9375rem','height': '2.625rem','background-color':'#F7F7F5','color':'#000048','border-radius':'0px',
+          'font-family': 'Gellix','font-size': '0.9375rem','font-style': 'normal','font-weight': '400'}"
+                      [(ngModel)]="selected_durationPeriod" optionLabel="durationCalDesc" placeholder="Select"></p-dropdown>
+          <label class="lbl-period">Day {{milestoneInfo.startDay}} to Day {{milestoneInfo.endDay}}</label>
+        </div>
+      </div>
+
+      <div class="div-milestonename flex flex-column">
+        <label class="lblmilestonename">Milestone name<span class="star">*</span></label>
+        <input type="text" class="txtmilestonename" pInputText [(ngModel)]="msName" [readonly]="true" />
+      </div>
+
+      <div *ngIf="showmilestionevalidation">
+        <label style="color: red;margin-left:1rem;">Please enter milestone name</label>
+      </div>
+
+      <div class="div-milestonebanner flex flex-column">
+        <label class="lblbanner">Greeting text for the milestone on banner<span class="star">*</span></label>
+        <textarea class="txt-milestonebanner" rows="5" cols="30" pInputTextarea [(ngModel)]="milestonebanner"></textarea>
+      </div>
+
+      <div *ngIf="showbannervalidation">
+        <label style="color:red;margin-left:1rem;">Please provide milestone description</label>
+      </div>
+
+    </div>
+
+    <div class="div-footer">
+      <div class="footerbtns flex flex-row">
+        <button class="btnSave" type="button" (click)="save()">Save</button>
+        <button class="btnCancel" (click)="close()">Cancel</button>
+      </div>
+    </div>
+
+
+  </p-dialog>
+</div>

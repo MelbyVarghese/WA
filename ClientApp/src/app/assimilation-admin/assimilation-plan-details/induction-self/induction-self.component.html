@@ -1,0 +1,93 @@
+<div class="div-inductionself">
+
+  <div class="div-inductionselfDesc flex flex-row justify-content-between">
+    <div>
+      Upload induction & self help contents:
+    </div>
+    <div class="showing">
+      Showing {{contents.length}}
+    </div>
+  </div>
+
+  <div class="div-contents flex flex-column flex-wrap">
+    <ng-container *ngFor="let cnt of contents">
+      <div class="content flex flex-column">
+
+        <div class="contenttexts flex flex-row justify-content-between">
+          <div>
+            <label class="lbl-contentname">{{cnt.title}}</label>
+          </div>
+          <div *ngIf="IsSaveButton">
+            <img src="./assets/images/edit.svg" (click)="selectedInductionContent=cnt;showContentPopup('Edit')"
+                 style="margin-right: 1.56rem;background-color: white;cursor:pointer;">
+            <img src="./assets/images/delete.svg" style="margin-right: 1.54rem;background-color: white;cursor:pointer;"
+                 (click)="deleteInductionContent(cnt.indContentId)">
+          </div>
+        </div>
+
+        <div class="dev-contectdesc">
+          <label>{{cnt.description}}</label>
+        </div>
+
+        <div class="div-fileinfo flex flex-row justify-content-between">
+          <div style="width: 75%; height: auto; overflow-wrap: anywhere;">
+            {{cnt.link}}
+          </div>
+          <div>
+            <img src="./assets/images/tickcircle.svg" style="margin-right: 1rem;">
+          </div>
+        </div>
+
+        <!--<div class="div-fileinfo">
+          <div style="width: 75%; height: auto; float: left; overflow-wrap:anywhere;">
+            {{cnt.link}}
+          </div>
+          <div style="float:right;width:25%;text-align:right;">
+            <img src="./assets/images/tickcircle.svg" style="margin-right: 1rem;">
+          </div>
+        </div>-->
+
+      </div>
+    </ng-container>
+
+    <div *ngIf="IsSaveButton" class="div-addcontent">
+      <button class="btnaddcontent" (click)="selectedInductionContent=setInfo();showContentPopup('Add')">+ Add content</button>
+    </div>
+
+    <div *ngIf="IsSaveButton" class="div-line"></div>
+
+  </div> 
+
+  <div class="div-next flex flex-row justify-content-end">
+    <div style="margin-top: 10px;" class="flex flex-row">
+      <div>
+        <img src="./assets/images/left-arrow.svg" (click)="prevStep($event)"
+             style="margin-right: 10px;margin-top: 3px; cursor: pointer;height:0.6875rem;">
+      </div>
+      <div>
+        <a href="javascript:void(0)" class="ancprev" (click)="prevStep($event)">Previous</a>
+      </div>
+      <div>
+        <label class="lblbar">|</label>
+      </div>
+      <div>
+        <a href="javascript:void(0)" class="ancnext" (click)="nextStep($event)">Next</a>
+      </div>
+      <div>
+        <img src="./assets/images/right-arrow.svg" (click)="nextStep($event)"
+             style="margin-top: 5px;cursor: pointer;height:0.6875rem;">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="div-footer"></div>
+
+</div>
+
+<div *ngIf="showInductionContentPopup">
+  <app-induction-content [displayInductionContentPopup]="showInductionContentPopup" [planId]="planId" [viewType]="viewType"
+    [inductionContentInfo]="selectedInductionContent" (closeAssociateAssimilationPopup)="closeContentPopup()">
+  </app-induction-content>
+</div>
+

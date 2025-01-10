@@ -1,0 +1,128 @@
+<div class="upload-newresource-main-container">
+
+  <p-dialog [(visible)]="displayUploadNewResourcePopup" [position]="'right'" [modal]="true" styleClass="pdialog"
+    [draggable]="false" [resizable]="false" class="modal-dialog">
+
+    <div class="upload-newresource-form-header">
+      <label class="lblheader">Upload key documents</label>
+      <div class="crossicon-box mb-5">
+        <img class="cross-icon" (click)="close()" src="./assets/images/cross-icon.svg" />
+      </div>
+    </div>
+
+    <div class="div-content">
+
+      <div class="div-uploadcontent">
+
+        <div class="div-info">
+          <label>Add your files here. You can add upto 3 files <span style="color:red;">*</span></label>
+        </div>
+
+        <div class="uploads">
+          <form enctype="multipart/form-data">
+            <div class="uploadtype" draggable="true" (dragover)="onDragOver($event)" (drop)="drop($event, 'id')"
+              (dragleave)="onDragLeave($event)">
+              Drag and drop files here or <span (click)="FileUpload('id')" class="browse">select files</span>
+            </div>
+            <div class="div-filesizeinfo flex flex-column mt-2">
+              <label>only .pdf/.doc/.docx format files at 5MB or less</label>
+              <label>only .mp4 format files at 350MB or less</label>
+              <label>Please ensure that file name doesn't have special characters</label>
+            </div>
+          </form>
+
+          <input type="file" id="id-file" style="display: none" multiple="true" (change)="onFileChanged($event, 'id')"
+           accept=".pdf,.doc,.docx,.mp4,video/mp4" />
+          <!-- [(ngModel)]="selectedFiles" /> -->
+
+          <div *ngIf="selectedFiles?.length > 0">
+            <div *ngFor="let file of selectedFiles" class="contentFilename flex flex-row justify-content-between">
+              <div>
+                <!-- <input type="text" id="txtfilename" pInputText [value]="file.name" /> -->
+                <label>{{file.name}}</label>
+              </div>
+              <div>
+                <img src="./assets/images/cross.svg" style="cursor: pointer" (click)="deleteFile(file)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="div-serviceline">
+
+        <div class="serviceInfo flex flex-row">
+          <div>
+            <label>Upload for associates from service line <span style="color:red;">*</span></label>
+          </div>
+          <div>
+            <img src="./assets/images/info.svg" style="margin-left:0.5rem;" tooltipPosition="bottom"
+                 placeholder="Bottom" pTooltip="Select N2C IOA for Cognizant Digital Ops &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 Select N2C Tech for rest of the Service Lines">
+          </div>
+        </div>
+
+        <!--<div class="flex flex-row servicelines">
+    <div class="flex flex-row">
+      <div>
+        <input type="radio" id="rbtn2cioa" class="rbtn2cinfo" name="serviceline" [checked]="true"
+          (click)="selectedServiceLine = 'N2C IOA'">
+      </div>
+      <div>
+        <label class="lbl-n2c">N2C IOA</label>
+      </div>
+    </div>
+    <div class="flex flex-row" style="margin-left:1.5rem;">
+      <div>
+        <input type="radio" id="rbtn2ctech" class="rbtn2cinfo" name="serviceline"
+          (click)="selectedServiceLine = 'N2C Tech'">
+      </div>
+      <div>
+        <label class="lbl-n2c">N2C Tech</label>
+      </div>
+    </div>
+    <div class="flex flex-row" style="margin-left:1.5rem;">
+      <div>
+        <input type="radio" id="rbtn2ctech" class="rbtn2cinfo" name="serviceline"
+          (click)="selectedServiceLine = 'N2C IOA, N2C Tech'">
+      </div>
+      <div>
+        <label class="lbl-n2c">Both</label>
+      </div>
+    </div>
+  </div>-->
+
+        <div class="popheight">
+          <br/>
+          <p-dropdown id="lstplanId" [options]="apTemplates" [(ngModel)]="selectedplan" optionLabel="planTitle"
+                      (onchange)="OnPlanChange()" class="p-dropdownview" appendTo="body"
+                      placeholder="Select a plan"></p-dropdown>
+        </div>
+      </div>
+
+
+    </div>
+
+    <ng-template pTemplate="footer">
+
+      <div class="div-footer flex flex-row justify-content-start">
+        <button class="round-btn" (click)="upload()" [disabled]="selectedFiles.length == 0"
+          [ngClass]="{'disabled-btn': selectedFiles.length == 0}">
+          Upload
+        </button>
+        <button class="normal-round-btn " (click)="close()">
+          Cancel
+        </button>
+      </div>
+
+    </ng-template>
+
+
+  </p-dialog>
+
+</div>
+
+<p-blockUI [blocked]="blockedPanel">
+  <!-- <i class="pi pi-lock" style="font-size: 3rem"></i> -->
+  <p-progressSpinner ariaLabel="loading" />
+</p-blockUI>

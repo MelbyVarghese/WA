@@ -1,0 +1,198 @@
+<div class="add-manager-task-container">
+
+  <p-dialog [(visible)]="displayAddManagerTaskPopup" [position]="'right'" [modal]="true" styleClass="pdialog"
+            [draggable]="false" [resizable]="false" class="modal-dialog">
+
+    <div class="add-manager-task-content-form-header">
+      <label class="lblheader">{{formtype== 'milestone' ? 'Add task' : 'Add manager task'}}</label>
+      <div class="crossicon-box mb-5">
+        <img class="cross-icon" (click)="close()" src="./assets/images/cross-icon.svg" />
+      </div>
+    </div>
+
+    <div class="div-addtasks" *ngIf="viewType == 'add'">
+      <div class="flex flex-row">
+        <div class="flex flex-row">
+          <div>
+            <input type="radio" id="rbtntaskslist" class="rbtinfo" (click)="setTaskType('taskslist')" name="fav_upload">
+          </div>
+          <div>
+            <label class="rbttext">Select from the tasks list</label>
+          </div>
+        </div>
+        <div class="flex flex-row" style="margin-left:1.5rem;">
+          <div>
+            <input type="radio" id="rbtncustomelist" class="rbtinfo" (click)="setTaskType('customelist')" name="fav_upload">
+          </div>
+          <div>
+            <label class="rbttext">Custom task</label>
+          </div>
+        </div>
+
+        <div class="flex flex-row" style="margin-left:1.5rem;" *ngIf="formtype == 'milestone'">
+          <div>
+            <input type="radio" id="rbtnsessionlist" class="rbtinfo" (click)="setTaskType('sessionlist')" name="fav_upload">
+          </div>
+          <div>
+            <label class="rbttext">Session task</label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="div-task flex flex-column" *ngIf="((viewType=='edit' || viewType=='view') ||
+         (viewType=='add' && taskType == 'customelist' ) || (viewType=='add' && taskType == 'taskslist' )||
+         (viewType=='add' && taskType == 'sessionlist' )) ">
+
+      <div class="div-taskname flex flex-column"
+           *ngIf="(viewType=='edit' || viewType=='view' || viewType=='add') && (taskType == 'taskslist' )">
+        <label class="lbltitle">Task name</label>
+
+        <p-dropdown [options]="taskNames" [(ngModel)]="selectedtask" [readonly]="isDisabled" (onChange)="setView()"
+                    [ngClass]="viewType == 'view' ? 'p-dropdownview' : 'p-dropdownedit'"
+                    (ngModelChange)="setTaskDetails(selectedtask)" optionLabel="taskName" optionValue="pkTaskMasterId"></p-dropdown>
+      </div>
+
+      <div class="div-taskname2 flex flex-column" *ngIf="(viewType=='add' || viewType=='edit' || viewType=='view') && (taskType == 'customelist' || taskType == 'sessionlist')">
+        <label class="lbltitle">
+          Task name <span style="font-style:italic">(Maximum limit 32 characters) </span>
+          <span class="star">*</span>
+        </label>
+        <input type="text" pInputText [(ngModel)]="selectedtask" maxlength="32" [ngStyle]="getFilterStyles()"
+               [readonly]="isDisabled" placeholder="Type here" (keyup)="viewTaskTitleValidation()" />
+          
+        <div class="form-control-feedback" *ngIf="isTaskTitle">
+          Task Title is required
+        </div>
+
+      </div>
+
+      <div class="div-taskimage flex flex-column">
+        <label class="lblImage">Image<span class="star">*</span></label>
+        <p-dropdown *ngIf="showImagedropdown" [options]="imagenames" [(ngModel)]="selected_image"
+                    [ngClass]="viewType == 'view' ? 'p-dropdownview' : 'p-dropdownedit'" (click)="viewlargeImage()"
+                    optionLabel="name" [readonly]="isDisabled"></p-dropdown>
+
+        <div class="div-largeimage" *ngIf="showlargeImage">
+          <div class="img-header flex flex-row justify-content-between">
+            <div style="padding: 10px;"> <label>{{imagenames[0].name}}</label></div>
+            <div class="justify-content-start">
+              <img src="./assets/images/cross-icon.svg" (click)="showlargeImage=false;showImagedropdown=true;" />
+            </div>
+          </div>
+          <div style="text-align: center;">
+            <img style="width:400px" src="./assets/images/{{imagenames[0].name}}" />
+          </div>
+          <div class="imgfooter">
+            <button class="btnchangeimage" (click)="showlargeImage=false;showImages = true">Change image</button>
+          </div>
+        </div>
+
+        <div class="div-imagelist" *ngIf="showImages">
+          <div class="img-header flex flex-row justify-content-between">
+            <div style="padding: 10px;"><label>Choose Image</label></div>
+            <div class="justify-content-start">
+              <img src="./assets/images/cross-icon.svg" (click)="showImages=false;showImagedropdown=true" />
+            </div>
+          </div>
+          <div class="imagelist flex flex-wrap column-gap-4 row-gap-3">
+
+            <ng-container *ngFor="let imglt of imageList;let i=index;">
+              <div class="flex flex-row">
+                <img src="./assets/images/{{imglt.name}}" (click)="viewCheckbox($event,i)" />
+                <input type="checkbox" id="imagechk_{{i}}" [checked]="imglt.isSelected">
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="imgfooter">
+            <button class="btnuseimage" (click)="showImages = false;showImagedropdown=true;isImageShow=false;">Use Image</button>
+          </div>
+        </div>
+
+        <div class="form-control-feedback" *ngIf="isImageShow">
+          Image is required
+        </div>
+
+      </div>
+
+      <div class="div-taskdescription flex flex-column">
+        <label class="lbldescription">
+          Task description  <span style="font-style:italic">(Maximum limit 42 characters) </span>
+          <span class="star">*</span>
+        </label>
+        <textarea class="txtdescription" rows="5" cols="30" pInputTextarea (keyup)="viewTaskDescriptionValidation()" [ngStyle]="getFilterStyles()"
+                  maxlength="42" placeholder="Type description here" [(ngModel)]="taskdescription" [readonly]="isDisabled">
+       </textarea>
+
+        <div class="form-control-feedback" *ngIf="isTaskDescription">
+          Task description is required
+        </div>
+      </div>
+
+      <div class="div-grade flex flex-column" *ngIf="formtype != 'manager'">
+        <label class="lblgrade">Grade</label>
+        <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                       [style.zIndex]="1" [ngClass]="viewType == 'view' ? 'p-dropdownview' : 'p-dropdownedit'"                       
+                       [options]="grades" [(ngModel)]="selected_Grades" optionLabel="gradeDesc"
+                       appendTo="body">
+        </p-multiSelect>
+      </div>
+
+      <div class="div-redirection flex flex-column" *ngIf="(viewType=='add' || viewType=='edit') && taskType == 'customelist'">
+        <label class="lblredirection">Redirection link  <span class="star">*</span></label>
+        <input type="text" pInputText placeholder="Paste link here" [ngStyle]="getFilterStyles()"
+               (keyup)="viewRedirectionLinkValidation()" [(ngModel)]="reDirectionLink" />
+
+        <div class="form-control-feedback" *ngIf="isRedirectionLink">
+          Redirection link is required
+        </div>
+      </div>
+
+
+      <div class="div-taskreminder flex flex-column" *ngIf="taskType != 'sessionlist'">
+        <label class="lblreminderscription">Reminder schedule for task completion</label>
+
+        <div class="reminder  flex flex-row">
+          <div class="flex flex-column">
+            <label class="lblreminderename">Starting<span class="star">*</span></label>
+            <p-dropdown [options]="reminders" [(ngModel)]="selected_reminder" (onChange)="validateStarting()"
+                        [ngClass]="viewType == 'view' ? 'p-dropdownview' : 'p-dropdownedit'" optionLabel="description" optionValue="pkReminderId"
+                        [readonly]="isDisabled"></p-dropdown>
+            <label *ngIf="isStartingShow" style="color:red;">Please select Starting</label>
+          </div>
+          <div class="flex flex-column" style="margin-left: 1rem;">
+            <label class="lblreminderename">Repeat every<span class="star">*</span></label>
+            <p-dropdown [options]="repeats" [(ngModel)]="selected_repeat" (onChange)="validateRepeat()"
+                        [ngClass]="viewType == 'view' ? 'p-dropdownview' : 'p-dropdownedit'" optionLabel="description" optionValue="pkRepeatId"
+                        [readonly]="isDisabled"></p-dropdown>
+            <label *ngIf="isRepeatShow" style="color:red;">Please select Repeat every</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="div-taskcomplete flex flex-row" *ngIf="taskType != 'sessionlist'">
+        <div>
+          <input type="checkbox" [checked]="taskInfo.isMarkEnabled" [disabled]="isAssociateComplete" [(ngModel)]="isTaskCompleted">
+        </div>
+        <div class="flex justify-content-center">
+          <label class="lblcomplete">Let associates mark as done when complete </label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="div-footer">
+      <div class="footerbtns flex flex-row">
+        <button *ngIf="viewType != 'view'" class="btnSave" (click)="saveTaskDetails()">Save</button>
+        <button *ngIf="viewType != 'view'" class="btnCancel" (click)="close()">Cancel</button>
+        <button *ngIf="viewType == 'view'" class="btnCancel" (click)="close()">Back</button>
+      </div>
+    </div>
+
+  </p-dialog>
+
+</div>
+
+

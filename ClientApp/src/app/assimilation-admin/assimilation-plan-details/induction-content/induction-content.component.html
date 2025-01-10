@@ -1,0 +1,187 @@
+<!-- <form [formGroup]="myform" [formGroup]="myform"> -->
+
+  <div class="induction-content-main-container" [formGroup]="myform" >
+  <p-dialog [(visible)]="displayInductionContentPopup" [position]="'right'" [modal]="true" styleClass="pdialog"
+    [draggable]="false" [resizable]="false" class="modal-dialog">
+
+    <div  class="induction-content-form-header">
+      <label class="lblheader">Induction content</label>
+      <div class="crossicon-box mb-5">
+          <img class="cross-icon" (click)="close()" src="./assets/images/cross-icon.svg" />
+        </div>
+    </div>
+
+    <div class="div-content flex flex-column">
+
+      <div class="div-contentname flex flex-column" >
+        <label class="lbltitle">
+          Title
+          <span style="font-style:italic">(Maximum limit 34 characters) </span>
+          <span class="star">*</span>
+        </label>
+       
+        <input type="text" class="txtcontentName" maxlength="34" pInputText formControlName="contenttitle" (keyup)="setContentName()"  />
+
+        <div *ngIf="myform.controls['contenttitle'].touched" >
+          <div class="form-control-feedback" *ngIf="myform.controls['contenttitle'].errors?.['required']">
+            Title is required
+          </div>
+        </div>
+
+      </div>
+
+    
+
+      <div class="div-contentdesciption flex flex-column">
+        <label class="lbl-description">
+          Description
+          <span style="font-style:italic">(Maximum limit 70 characters) </span>
+          <span class="star">*</span>
+        </label>
+        <textarea class="txt-description" rows="5" cols="30"  maxlength="70" pInputTextarea
+        formControlName="contentdescription" (keyup)="setContentDescription()"></textarea>
+
+        <div *ngIf="myform.controls['contentdescription'].touched" >
+          <div class="form-control-feedback"   *ngIf="myform.controls['contentdescription'].errors?.['required']">
+            Description is requireds
+          </div>
+        </div>
+
+      </div>
+
+      <div class="div-uploads">
+
+        <!--<div class="flex flex-row">
+      <div class="flex flex-row">
+        <div>
+          <input type="radio" class="rbtinfo" [checked]="true" (click)="setUploadView('uploadDevice')" name="fav_upload">
+        </div>
+        <div>
+          <label class="rbttext">Upload from this device</label>
+        </div>
+      </div>
+      <div class="flex flex-row" style="margin-left: 1rem;">
+        <div>
+          <input type="radio" (click)="setUploadView('linkContent')" class="rbtinfo" name="fav_upload">
+        </div>
+        <div>
+          <label class="rbttext">Provide link for the content</label>
+        </div>
+      </div>
+  </div>-->
+        <!--<div class="uploads" *ngIf="isUploadDevice" >
+    <div><label class="lbl-addfile">Add File<span class="star">*</span></label></div>
+    <form enctype="multipart/form-data">
+    <div class="uploadtype" draggable="true" (dragover)="onDragOver($event)"
+    (drop)="drop($event, 'id')"  (dragleave)="onDragLeave($event)">
+      Drag and drop files here or <span (click)="FileUpload('id')" class="browse">upload</span>
+    </div>
+    <div class="div-filesizeinfo flex flex-column">
+      <label>only .pdf or .mp4 files at 100mb or less</label>
+      <label *ngIf="showfilewarning" style="color: red;">{{filewarning}}</label>
+    </div>
+  </form>
+
+  <input type="file" id="id-file"  style="display: none" (change)="onFileChanged($event, 'id')"/>
+
+    <div class="contentFilename flex flex-row justify-content-between">
+      <div>
+        <input type="text" id="txtfilename" pInputText formControlName="contentfilename" />
+      </div>
+      <div>
+        <img src="./assets/images/cross.svg" (click)="deleteFile()">
+      </div>
+    </div>
+
+    <div class="form-control-feedback" *ngIf="showFileValidation">
+      File is required
+    </div>
+  </div>-->
+
+        <div class="div-taskimage flex flex-column">
+          <label class="lblImage">Image<span class="star">*</span></label>
+          <p-dropdown *ngIf="showImagedropdown" [options]="imagenames" formControlName="contentfilename"
+                      [(ngModel)]="selected_image"
+                      (click)="viewlargeImage()" optionLabel="name" [disabled]="isDisabled"></p-dropdown>
+
+          <div class="form-control-feedback" *ngIf="showFileValidation">
+            File is required
+          </div>
+
+          <div *ngIf="myform.controls['contentfilename'].touched">
+            <div class="form-control-feedback" *ngIf="myform.controls['contentfilename'].errors?.['required']">
+              File is required
+            </div>
+          </div>
+
+          <div class="div-largeimage" *ngIf="showlargeImage">
+            <div class="img-header flex flex-row justify-content-between">
+              <div style="padding: 10px;"> <label>{{imagenames[0].name}}</label></div>
+              <div class="justify-content-start">
+                <img src="./assets/images/cross-icon.svg" (click)="showlargeImage=false;showImagedropdown=true;" />
+              </div>
+            </div>
+            <div style="text-align: center;">
+              <img style="width:400px" src="./assets/images/{{imagenames[0].name}}" />
+            </div>
+            <div class="imgfooter">
+              <button class="btnchangeimage" (click)="showlargeImage=false;showImages = true">Change image</button>
+            </div>
+          </div>
+
+          <div class="div-imagelist" *ngIf="showImages">
+            <div class="img-header flex flex-row justify-content-between">
+              <div style="padding: 10px;"><label>Choose Image</label></div>
+              <div class="justify-content-start">
+                <img src="./assets/images/cross-icon.svg" (click)="showImages=false;showImagedropdown=true" />
+              </div>
+            </div>
+            <div class="imagelist flex flex-wrap column-gap-4 row-gap-3">
+
+              <ng-container *ngFor="let imglt of imageList;let i=index;">
+                <div class="flex flex-row">
+                  <img src="./assets/images/{{imglt.name}}" (click)="viewCheckbox($event,i)" />
+                  <input type="checkbox" id="imagechk_{{i}}" [checked]="imglt.isSelected">
+                </div>
+              </ng-container>
+            </div>
+
+            <div class="imgfooter">
+              <button class="btnuseimage" (click)="showImages = false;showImagedropdown=true">Use Image</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="linkcontent">
+          <label class="lbllink">Link for the content<span class="star">*</span></label>
+          <input type="text" class="txtlinkcontent" pInputText formControlName="contentlink"
+                 (keyup)="setContentFileLink()" placeholder="Paste the link here" />
+
+          <div class="form-control-feedback" *ngIf="showFileLinkValidation">
+            Link is required
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="div-footer">
+      <div class="footerbtns flex flex-row">
+        <button class="btnSave" type="button" (click)="saveInductionContent($event)">Save</button>
+        <!-- <button class="btnSave" type="submit">Save</button> -->
+        <button class="btnCancel" (click)="close()">Cancel</button>
+      </div>
+    </div>
+  </p-dialog>
+</div>
+
+<!-- </form> -->
+
+
+
+
+

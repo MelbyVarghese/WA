@@ -1,0 +1,462 @@
+.associate-assimilation-main-container {
+  margin-top: 3.125rem;
+  margin-left: -1.438rem;
+
+  .p-tabview .p-tabview-panels {
+    padding: 2rem 0;
+    background: none;
+  }
+
+  .p-accordion .p-accordion-header .p-accordion-header-link {
+    height: 2.5625rem;
+    border: 1px solid #2f78c4;
+    border-radius: 0;
+    background: #fff;
+    color: #2f78c4;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link {
+    background: #2f78c4;
+    border-radius: 0;
+    // border-radius: 0.3125rem 0.3125rem 0rem 0rem;
+    border: 1px solid #2f78c4;
+    color: #fff;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    height: 2.5625rem;
+  }
+
+  .p-accordion .p-accordion-header .p-accordion-header-link .p-accordion-toggle-icon {
+    position: absolute;
+    margin-left: 27.3rem;
+  }
+
+  .p-accordion .p-accordion-content {
+    border-radius: 0;
+    border: 1px solid #2f78c4;
+    background: #fff;
+  }
+
+  .p-dialog {
+    margin-top: 0;
+    margin-right: 0rem !important;
+    margin-bottom: 0;
+    margin-left: 0;
+    max-height: 100%;
+    width: 48.9375rem;
+    height: 74.375rem;
+  }
+
+  .p-dialog .p-dialog-content {
+    padding: 0;
+  }
+
+  .p-dialog-header {
+    display: none;
+  }
+
+  .associate-assimilation-form-header {
+    width: 100% !important;
+    /* height: 2.5625rem; */
+    height: 3.125rem;
+    background: #000048;
+  }
+
+  .associate-document-form-header {
+    width: 100% !important;
+    height: 2.5625rem;
+    /* height: 2.125rem;*/
+    background: #000048;
+  }
+
+  .cross-documument {
+    height: 1.2rem;
+    cursor: pointer;
+    margin-top: 0.68rem;
+    margin-right: 0.81rem;
+  }
+
+  .lblheader {
+    color: #fff;
+    font-family: Gellix;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-left: 1.53rem;
+    margin-top: 0.68rem;
+    position: absolute;
+  }
+
+  .div-header {
+    height: 3.125rem;
+    width: 100%;
+    background: #000048;
+  }
+
+  .crossicon-box {
+    position: relative;
+    float: right;
+    text-align: right;
+
+    .cross-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      cursor: pointer;
+      margin-top: 0.68rem;
+      margin-right: 0.81rem;
+    }
+  }
+
+  .div-content {
+    width: 100%;
+    position: absolute;
+    margin-top: 0px;
+    height: 47.31731rem;
+    background: #f1f1f1;
+  }
+
+  .div-left {
+    width: 13.8125rem;
+    height: 47.31731rem;
+    padding: 2.62rem 1.75rem;
+    background-color: white;
+  }
+
+  .div-right {
+    width: 67%;
+    height: 47.31731rem;
+    background-color: #f1f1f1;
+
+    .div-num {
+      width: 1.1875rem;
+      height: 1.1875rem;
+      background-color: #6fa5dc;
+      border-radius: 50%;
+      color: #fff;
+      text-align: center;
+      font-family: Gellix;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      padding-top: 3px;
+      margin-bottom: 0.63rem;
+    }
+
+    .weekdesc {
+      color: #000048;
+      margin-left: 10px;
+      font-family: Gellix;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      position: relative;
+      top: 3px;
+    }
+
+    .task-status {
+      border-radius: 0.9375rem;
+      font-family: Gellix;
+      font-size: 0.625rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 0.4375rem;
+      border-width: 0px;
+      border-style: ridge;
+      padding: 0.38rem 0.63rem;
+    }
+
+    .completed {
+      margin-left: -2px;
+      background: #31c722;
+      color: #fff;
+    }
+
+    .started {
+      background: #06c7cc;
+      color: #fff;
+    }
+
+    .not-started {
+      background: #e8e8e6;
+      color: #97999b;
+    }
+
+    .pending {
+      background: #eccf3f;
+      color: #fff;
+    }
+  }
+
+  .lbl-associate {
+    border-radius: 50%;
+    background-color: #2f78c4;
+    color: white;
+    display: inline-block;
+    height: 7.5rem;
+    width: 7.5rem;
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .span-associate {
+    color: #fff;
+    font-family: Gellix;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    top: 1.4rem;
+    letter-spacing: 0.4rem;
+    position: relative;
+  }
+
+  .associatename {
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 1.81rem;
+  }
+
+  .lblgrade {
+    color: #53565a;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .line {
+    width: 100%;
+    border-bottom: 1px solid #d0d0ce;
+  }
+
+  .lbl-joiningdetails {
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .lbl-doj {
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 1rem;
+
+    span {
+      color: #53565a;
+      font-family: Gellix;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-right: 2.8rem;
+    }
+  }
+
+  .lbl-loj {
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    span {
+      color: #53565a;
+      font-family: Gellix;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-right: 1rem;
+    }
+  }
+
+  .lbl-m-name {
+    margin-top: 0.87rem;
+    color: #53565a;
+    font-family: Gellix;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .lbl-m-grade {
+    color: #53565a;
+    font-family: Gellix;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .lbl-m-mail {
+    color: #2e308e;
+    font-family: Gellix;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 0.5rem;
+    word-wrap: break-word;
+    width: 73%;
+  }
+
+  .p-tabview .p-tabview-nav {
+    background-color: #f1f1f1;
+    border-bottom-color: #2f78c4;
+  }
+
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    background-color: #f1f1f1;
+    border-bottom-color: #2f78c4;
+    color: #000048;
+  }
+
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    color: #2f78c4;
+    background-color: white;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border-color: white;
+    border-bottom-color: #2f78c4;
+  }
+
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+    box-shadow: none;
+  }
+
+  .p-panel.p-panel-toggleable .p-panel-header {
+    background-color: white;
+    border-radius: 0px;
+    margin-bottom: 1px;
+    height: 2.5625rem;
+    color: #2f78c4;
+    font-family: Gellix;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .p-panel.p-panel-toggleable .p-panel-header:focus-within {
+    background-color: #2f78c4;
+    color: white;
+  }
+
+  .wordEllipse {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mComplete {
+    margin-left: 10px;
+    background: #26EFE9;
+    font-family: Gellix;
+    font-size: 0.725rem !important;
+    font-weight: 600;
+    line-height: 12.27px;
+    text-align: left;
+    color: #000048;
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }
+
+
+  .view-Attachments {
+    color: #000048;
+    font-family: Gellix;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 42px;
+    text-decoration: underline;
+  }
+
+  .disabled-button {
+    background-color: grey;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .enabled-button {
+    background-color: blue; /* or any color you prefer */
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  .div-para .div-taskstatus .uploaded-taskStatus {
+    padding: 0.35rem 0.5rem;
+    justify-content: center;
+    border-radius: .25rem;
+    border: 1px solid #2f78c4;
+    background: none;
+    color: #000048;
+    overflow-wrap: anywhere;
+    font-family: Gellix;
+    font-size: 1.0rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: inline-block;
+    width: 100%;
+    word-break: break-all;
+    margin: 5px;
+  }
+
+  .move-left {
+    left: 100%;
+  }
+
+  .uploadPopup {
+    width: 26.75rem !important;
+    height: 210px !important;
+  }
+
+  .lbldocheader {
+    color: #fff;
+    font-family: Gellix;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-left: 0.53rem;
+    margin-top: 0.68rem;
+    position: absolute;
+  }
+  /* .p-panel .p-panel-header .p-panel-header-icon:enabled {
+  background-color: white;
+}
+
+.p-panel .p-panel-header .p-panel-header-icon:enabled:hover {
+  background-color: white;
+} */
+}

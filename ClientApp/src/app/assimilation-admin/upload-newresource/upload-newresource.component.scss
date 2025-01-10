@@ -1,0 +1,230 @@
+.upload-newresource-main-container {
+  margin-top: 3.125rem;
+  margin-left: -1.438rem;
+
+  .p-dialog {
+    margin-top: 0;
+    margin-right: 0rem !important;
+    margin-bottom: 0;
+    margin-left: 0;
+    max-height: 100%;
+    /*width: 48.9375rem;*/
+    width: 35.125rem;
+    height: 74.375rem;
+  }
+
+  .p-dialog .p-dialog-content {
+    padding: 0;
+  }
+
+  .p-dialog-header {
+    display: none;
+  }
+
+  .p-dialog-footer {
+    height: 68px;
+    background: #F2F2F2;
+  }
+
+
+
+
+  .upload-newresource-form-header {
+    width: 100% !important;
+    /* height: 2.5625rem; */
+    height: 3.125rem;
+    background: #000048;
+
+    .lblheader {
+      color: #fff;
+      font-family: Gellix;
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      margin-left: 1.53rem;
+      margin-top: 0.68rem;
+      position: absolute;
+    }
+
+    .div-header {
+      height: 3.125rem;
+      width: 100%;
+      background: #000048;
+    }
+
+    .crossicon-box {
+      position: relative;
+      float: right;
+      text-align: right;
+
+      .cross-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
+        margin-top: 0.68rem;
+        margin-right: 0.81rem;
+      }
+    }
+  }
+
+  .div-content {
+    background: #FFFFFF;
+    height: 38.450rem;
+
+    .div-info {
+      margin-top: 1.5rem;
+      margin-left: 1rem;
+      font-family: Gellix;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 16.73px;
+      text-align: left;
+    }
+
+    .div-uploadcontent {
+
+      .div-info {
+        margin-top: 1.5rem;
+        margin-left: 1rem;
+        font-family: Gellix;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 16.73px;
+        text-align: left;
+      }
+
+      .uploads {
+        margin-top: 1rem;
+        margin-left: 1rem;
+
+        .lbl-addfile {
+          color: #53565A;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        .uploadtype {
+          width: 31.75rem;
+          height: 4rem;
+          background-color: #FFF;
+          border-style: dashed;
+          border-width: 1px;
+          margin-top: 0.5rem;
+          text-align: center;
+          padding: 1rem;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          color: #2F78C4;
+
+          .browse {
+            font: normal normal 600 13px/18px Gellix, sans-serif;
+            color: #2f78c4;
+            cursor: pointer;
+          }
+        }
+
+        .contentFilename {
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+          width: 31.75rem;
+          border: 1px solid #D0D0CE;
+          padding: 1rem;
+          color: #000048;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1.125rem;
+        }
+
+        .p-inputtext {
+          width: 25rem;
+          height: 0.5rem;
+          border-width: 0px;
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+        }
+
+        .div-filesizeinfo {
+          color: #6F6F6F;
+          font-family: Gellix;
+          font-size: 0.75rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+    }
+
+    .div-serviceline {
+      margin-left: 1rem;
+      margin-top: 2rem;
+
+      .serviceInfo {
+        font-family: Gellix;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 16.73px;
+        text-align: left;
+
+        .p-tooltip {
+          background: #000048 !important;
+          width: 206px;
+          height: 81px;
+
+          .p-tooltip-text {
+            font-family: Gellix;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 13.38px;
+            text-align: left;
+          }
+        }
+      }
+
+      .servicelines {
+        margin-top: 0.5rem;
+
+        .lbl-n2c {
+          font-family: Gellix;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 15.61px;
+          text-align: left;
+        }
+
+        .rbtn2cinfo {
+          display: block;
+          width: 12px;
+          height: 15px;
+        }
+      }
+
+      .popheight {
+          height:5rem;
+
+        .p-dropdownview {
+          width: 31.375rem;
+          height: 2.5rem;
+          background-color: #D0D0CE !important;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+  .div-footer {
+    padding: 10px;
+    padding-left: 5px !important;
+    background: #F2F2F2;
+  }
+}

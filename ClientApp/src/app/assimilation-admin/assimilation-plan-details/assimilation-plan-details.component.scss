@@ -1,0 +1,723 @@
+.assimilation-plan-details-container {
+  height: 52.375rem;
+
+  .star {
+    color: red;
+  }
+
+  .form-control-feedback {
+    color: red;
+    font-family: Gellix;
+    font-style: normal;
+    font-weight: 300;
+  }
+
+  .p-multiselect {
+    width: 25.25rem;
+    height: 2.5rem;
+    background-color: #f2f2f2;
+
+    .p-multiselect-label {
+      padding: 0.69rem 0.83rem;
+      color: #000048;
+      font-family: Gellix;
+      font-size: 0.9375rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+
+  .div-headertitle {
+    /* width: 85.375rem; */
+    width: 100%;
+    height: 3.72269rem;
+
+    .lblheadertitle {
+      position: absolute;
+      margin-left: 1.84rem;
+      margin-top: 1rem;
+      color: #000048;
+      font-family: Gellix;
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 600;
+    }
+  }
+
+  .div-viewmode {
+    margin-left: 1.84rem;
+
+    .backassm {
+      margin-left: 3px;
+      color: #2f78c4;
+      font-family: Gellix;
+      font-size: 0.9375rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-decoration: none;
+    }
+
+    .planviewtext {
+      color: var(--base-color-primary-color, #000048);
+      font-family: Gellix;
+      font-size: 0.9375rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    .div-bell {
+      margin-right: 1.25rem !important;
+      position: relative;
+      top: -2.5rem;
+
+      .anc-qualtrics {
+        color: #2f78c4;
+        font-family: Gellix;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-decoration: none;
+        margin-right: 0.625rem;
+      }
+
+      .bell {
+        margin-left: 0.625rem;
+        margin-right: 1.25rem !important;
+      }
+    }
+  }
+
+  .div-defaultcontent {
+    margin-top: 1.17rem;
+    margin-left: 1.84rem;
+    width: 81.625rem;
+
+    .div-defaultheader {
+      /* width: 81.625rem;    */
+      height: 5.9375rem;
+      border-radius: 0.5rem 0.5rem 0rem 0rem;
+      //background-image: url("/assets/images/plan-header.svg");
+
+      .defaultimg {
+        color: #fff;
+        font-family: Gellix;
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-left: 1.5rem;
+
+        .dimg {
+          width: 3rem;
+          height: 3rem;
+          margin-right: 0.62rem;
+        }
+
+        span.status {
+          margin-left: 0.62rem;
+          font-weight: 600;
+          text-align: right;
+          font-family: Gellix;
+          font-size: 0.75rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 0.75rem; /* 100% */
+          border-radius: 1.5625rem;
+          background: rgba(0, 0, 72, 0.3);
+          padding: 0.12rem 0.5rem 0.2rem;
+
+          .dot {
+            font-size: 1rem;
+            margin: 0 0.25rem 0 0;
+          }
+        }
+
+        .green {
+          color: #2db81f;
+        }
+
+        .gold {
+          color: #e9c71d;
+        }
+      }
+
+      .default-assm {
+        color: #fff;
+        text-align: center;
+        font-family: Gellix;
+        font-size: 1.6875rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.1875rem;
+      }
+
+      .lbl-plan-assoc {
+        color: #fff;
+        font-family: Gellix;
+        font-size: 0.9375rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 0.69rem;
+      }
+
+      .btnEdit {
+        width: 4.5625rem;
+        height: 2.5rem;
+        border-radius: 3.125rem;
+        border-width: 0px;
+        background: #26efe9;
+        margin-right: 5.1rem;
+      }
+
+      .btnSave {
+        width: 6.5rem;
+        height: 2.5rem;
+        border-radius: 3.125rem;
+        border-width: 0px;
+        background: #26efe9;
+        margin-right: 5.1rem;
+      }
+
+      .imgdown {
+        width: 1rem;
+        height: 1rem;
+        position: absolute;
+        margin-left: 4px;
+      }
+
+      .overlaypopup {
+        display: block;
+        position: absolute;
+        margin-top: 7rem;
+        // margin-top: 10.938rem;
+        margin-right: 20rem;
+        // margin-right: 23.063rem;
+        z-index: 1000;
+        background-color: white;
+        width: 21.125rem;
+        // height: 8.3125rem;
+
+        .overlaycircle {
+          background-color: #000048;
+          // background-color: black;
+          width: 2rem;
+          height: 2rem;
+          margin: 1rem 1rem 1rem 1.5rem;
+          border-radius: 50%;
+          text-align: center;
+        }
+
+        .overlayimg {
+          width: 1rem;
+          height: 1rem;
+          margin-top: 0.5rem;
+          margin-left: 0.5rem;
+        }
+
+        .lblsave {
+          color: #000048;
+          /* Body 1 */
+          font-family: Gellix;
+          font-size: 0.9375rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1.125rem; /* 120% */
+        }
+
+        .lblsavedesc {
+          color: #77777b;
+          /* Body 2 */
+          font-family: Gellix;
+          font-size: 0.75rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 0.9375rem; /* 125% */
+        }
+      }
+
+      .imgcrossicon {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 1.3rem;
+      }
+    }
+
+    .div-plansteps {
+      /* width: 81.55169rem; */
+      /* height: 33.69025rem;        */
+      margin-top: 0px;
+      background-color: #ffffff;
+      height: 9.75rem;
+
+      .div-divide {
+        float: left;
+        width: 10%;
+        height: 01px;
+        background-color: black;
+        margin-top: 1.438rem;
+      }
+
+      .lblplan {
+        color: black;
+        font-family: Gellix;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-top: 0.7rem;
+        margin-left: -0.5rem;
+        position: absolute;
+        cursor: pointer;
+      }
+
+      .divder:after {
+        content: "";
+        /* width: 7.2%; */
+        /* width: 98px;           */
+        width: 6rem;
+        /* height: 2px;    */
+        height: 0.06183rem;
+        background: #000048;
+        position: absolute;
+        /* margin-top: -15px; */
+        margin-top: -0.938rem;
+        /* margin-left: 23px ;       */
+        margin-left: 1.438rem;
+      }
+
+      .cards {
+        text-align: center;
+        margin-top: 1.98rem;
+        margin-left: 20.25rem;
+        width: 41.125rem;
+      }
+
+      .ul {
+        list-style-type: none;
+      }
+
+      .cards ul li {
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+      }
+
+      .liactive {
+        background-color: #2f78c4;
+        border-color: #2f78c4;
+        color: white;
+
+        .div-circle {
+          background-color: #2f78c4;
+          border-color: #2f78c4;
+          color: white;
+        }
+
+        .div-planlabel {
+          color: #2f78c4;
+        }
+      }
+
+      .div-circle {
+        width: 100px;
+        background-color: white;
+        color: #000048;
+        border-radius: 50%;
+        border-width: 0.0625rem;
+        // border-width: 2px;
+        border-style: solid;
+        // border-style: ridge;
+        border-color: #000048;
+        padding: 1rem 1rem;
+        width: 3rem;
+        height: 3rem;
+        cursor: pointer;
+
+        span {
+          // color: #FFF;
+          position: relative;
+          top: -0.25rem;
+          right: 0.25rem;
+          text-align: center;
+          font-family: Gellix;
+          font-size: 1.25rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+      }
+
+      .div-planlabel {
+        color: #000048;
+        text-align: center;
+        font-family: Gellix;
+        font-size: 0.9375rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        width: 7.25rem;
+        height: 2.10213rem;
+        margin-top: 0.625rem;
+        margin-left: -1.875rem;
+      }
+    }
+
+    .assign-plan {
+      background-color: white;
+    }
+
+    .welcome-email {
+      background-color: white;
+    }
+
+    .milestone-task {
+      background-color: white;
+    }
+
+    .induction-self {
+      background-color: white;
+    }
+
+    .manager-tasks {
+      background-color: white;
+    }
+  }
+
+  .ptConfirmPopup {
+    width: 34.75rem;
+
+    .p-dialog-header {
+      height: 3.125rem;
+      background: #000048;
+      padding: 1.25rem 0.88rem;
+
+      .title {
+        color: #fff;
+        font-family: Gellix;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.21875rem; /* 97.5% */
+        margin-left: 2rem;
+
+        img {
+          filter: invert(1) brightness(100);
+          margin-left: -1.75rem;
+          position: absolute;
+          margin-top: -0.125rem;
+        }
+      }
+
+      .p-dialog-header-icon {
+        color: #fff;
+      }
+    }
+
+    .p-dialog-content {
+      padding: 0 1.5rem 1.87rem 1.5rem;
+
+      p {
+        color: #000048;
+        font-family: Gellix;
+        font-size: 0.9375rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.21875rem; /* 130% */
+      }
+    }
+
+    .p-dialog-footer {
+      padding: 0.88rem;
+      background: #f2f2f2;
+    }
+  }
+
+  #assmDialog {
+    .p-dialog,
+    .p-dialog-mask.p-component-overlay {
+      background-color: #000;
+    }
+
+    .p-confirmdialog,
+    .p-confirmdialog-mask.p-component-overlay {
+      background-color: rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .p-dialog .p-dialog-header .p-dialog-header-icon:last-child {
+      color: white;
+    }
+
+    .p-dialog .p-dialog-header {
+      background: #2e308e;
+      color: white;
+      height: 50px;
+      border-radius: 0.5rem 0.5rem 0rem 0rem;
+      background: #000048;
+    }
+
+    .p-dialog .p-dialog-header .p-dialog-title {
+      color: #fff;
+      font-family: Gellix;
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.21875rem; /* 97.5% */
+    }
+
+    .p-dialog .p-dialog-footer {
+      background-color: #f1f1f1;
+    }
+
+    .lbltitle {
+      color: #53565a;
+      font-family: Gellix;
+      font-size: 0.9375rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 0.5rem;
+    }
+
+    .txtplanname {
+      width: 39.75rem;
+      height: 2.5rem;
+      flex-shrink: 0;
+      fill: #f7f7f5;
+      filter: drop-shadow(0px 0.5px 1px #d0d0ce);
+      color: #000048;
+      font-family: Gellix;
+      font-size: 0.9375rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      border-width: 0px;
+    }
+
+    .lbldesc {
+      color: #53565a;
+      font-family: Gellix;
+      font-size: 0.9375rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 0.5rem;
+    }
+
+    .txtplanDescription {
+      width: 39.75rem;
+      height: 6.25rem;
+      flex-shrink: 0;
+      background-color: #f7f7f5;
+      filter: drop-shadow(0px 0.5px 1px #d0d0ce);
+      color: #000048;
+      font-family: Gellix;
+      font-size: 0.9375rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      resize: none;
+      border-width: 0px;
+      padding: 0.5rem;
+    }
+
+    .p-inputtext {
+      height: 2rem;
+      background-color: #f1f1f1;
+    }
+
+    #plandesc {
+      .p-inputtext {
+        height: 6rem !important;
+      }
+    }
+
+    .btncancel {
+      width: 5.875rem;
+      height: 2.5rem;
+      border-radius: 3.125rem;
+      background-color: #f1f1f1;
+      border-width: 2px;
+      border: 1px solid #000048;
+    }
+
+    .btncancel:hover {
+      background-color: #2e308e;
+      color: white;
+    }
+
+    .btnsave {
+      width: 5rem;
+      height: 2.5rem;
+      border-radius: 3.125rem;
+      border-width: 0px;
+      background: #26efe9;
+    }
+
+    .btnsave:hover {
+      background-color: #06c7cc;
+    }
+  }
+
+  .clearAll {
+    color: #2f78c4;
+    text-align: right;
+    font-family: Gellix;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    cursor: pointer;
+    margin-top: 0.625rem;
+    position: absolute;
+  }
+}
+
+.publishConfirmPopup {
+  width: 585px;
+  height: 200px;
+
+  .p-dialog-header {
+    margin-top: -45px;
+    background-color: #000048;
+    height: 50px;
+    color: white;
+
+    .p-icon {
+      color: white !important;
+    }
+
+    .title {
+      font-family: Gellix;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 22.3px;
+      text-align: left;
+      color: white;
+    }
+  }
+
+  .p-dialog-content {
+    overflow-y: hidden;
+  }
+
+  .p-dialog-footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+
+  .div-activationncontent {
+    margin-top: 21px;
+    .div-quest {
+      font-family: Gellix;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 19.5px;
+      text-align: left;
+      margin-top: 12px;
+    }
+
+    .div-descr {
+      font-family: Gellix;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 19.5px;
+      text-align: left;
+      margin-top: 20px;
+    }
+  }
+}
+
+.discardConfirmPopup {
+  width: 556px;
+  height: 150px;
+
+  .p-dialog-header {
+    margin-top: -100px;
+    background-color: #000048;
+    height: 50px;
+    color: white;
+
+    .p-icon {
+      color: white !important;
+    }
+
+    .title {
+      font-family: Gellix;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 22.3px;
+      text-align: left;
+      color: white;
+    }
+  }
+
+  .p-dialog-content {
+    overflow-y: hidden;
+  }
+
+  .p-dialog-footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+
+  .div-activationncontent {
+    .div-quest {
+      font-family: Gellix;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 19.5px;
+      text-align: left;
+      margin-top: 2rem;
+    }
+
+    .div-descr {
+      font-family: Gellix;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 19.5px;
+      text-align: left;
+      margin-top: 21px;
+    }
+  }
+}
+
+.custom-toast {
+  width: 36rem;
+  height: 16px !important;
+  top: 4.7rem !important;
+
+  .p-element {
+    .p-toast-message {
+      border-radius: 0;
+      border-width: 0px !important;
+      // height: 48px;
+
+      .p-toast-message-content {
+        //padding: 0.75rem 2rem 0.75rem 0.75rem;
+        margin: 0;
+        border: none;
+        border-width: 0px !important;
+        background-color: #abe3a5;
+        font-family: Gellix;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 13.38px;
+        text-align: left;
+        color: #000048;
+
+        .p-toast-icon-close {
+          color: #000048;
+          position: relative;
+          //left: 24.2rem;
+          top: -5px;
+          //margin-right: 10px;
+        }
+      }
+    }
+  }
+}

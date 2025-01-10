@@ -1,0 +1,2540 @@
+<!-- <p>assimilation-admin works!</p> -->
+
+<div class="assimilation-admin-container">
+  <div class="title-div flex flex-row justify-content-between">
+    <div>
+      <label class="hdr-lbl">{{lblheader}}</label>
+    </div>
+    <div style="margin-right:1rem;">
+      <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcognizantsurvey.qualtrics.com%2Fportals%2Fui%2Fmanager-assist%2Fapp%2Fmanager-assist%23%2Fhome&data=05%7C02%7CAyush.Agarwal5%40cognizant.com%7C3fac392095024c7b186a08dc1d942fe6%7Cde08c40719b9427d9fe8edf254300ca7%7C0%7C0%7C638417769496580404%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=kitl09kapSLQSnDIUldkEf890b7vbl4survKxjgXM6k%3D&reserved=0"
+         target="_blank" class="qualtrics">Go to Qualtrics</a>
+      <label style="margin-right:1.15rem;">|</label>
+      <img src="./assets/images/bell-icon.svg" style="margin-right:1.50rem;" />
+    </div>
+  </div>
+  <div class="main-tabs">
+    <p-tabView id="tv" [(activeIndex)]="activeMainTabIndex" (onChange)="mainTabChanged()">
+
+      <p-tabPanel header="New hire associates">
+        <ng-template pTemplate="header">
+          <img src="./assets/images/newhire.svg" class="pr-2" />
+          <span>New hire associates</span>
+        </ng-template>
+        <div class="div-assimilation">
+          <p-tabView id="tab2" [(activeIndex)]="activeSubTabIndex" (onChange)="subTabChanged()">
+
+            <p-tabPanel header="Assimilation in progress">
+              <div class="card">
+                <div class="flex justify-content-end">
+                  <!-- <img src="./assets/images/refresh.svg" class="refresh" (click)="getAssimilationInProgressList()" /> -->
+                  <img src="./assets/images/refresh.svg" class="refresh"
+                       (click)="showFilter = false;selected_processAssimilations = []; clearItems('progress')" />
+                </div>
+                <div class="filter-div flex justify-conte nt-start flex-wrap card-container">
+                  <div class="filter flex-none" id="btnfilter" [ngClass]="{ 'filter-options-open': showFilter }">
+                    <p-button (click)="viewfilter()">
+                      <img src="./assets/images/filter.svg" style="width: 0.75rem; height: 0.375rem" />
+                      <span style="margin-left:3px;">Filter</span>
+                    </p-button>
+                  </div>
+                  <div class="search flex-none">
+                    <span class="p-input-icon-right">
+                      <!-- <input type="text" pInputText [(ngModel)]="searchvalue" /> -->
+                      <input #searchBox type="text" pInputText placeholder="Search"
+                             (input)="dt1.filterGlobal(searchBox.value, 'contains')" />
+                      <i class="pi pi-search"></i>
+                    </span>
+                  </div>
+                  <div class="flex-grow-1"></div>
+                  <div class="configure-div flex">
+                    <div class="selection-info flex mr-4" *ngIf="selected_processAssimilations.length > 0">
+                      <label>
+                        {{ selected_processAssimilations.length }} associates selected<span (click)="selected_processAssimilations = []">X</span>
+                      </label>
+                    </div>
+                    <button class="round-btn" [disabled]="selected_processAssimilations.length == 0"
+                            [ngClass]="{'disabled-btn': selected_processAssimilations.length == 0 }" [hidden]="!isAdminLogin" *ngIf="isAdminLogin" (click)="showAssigntoAdminPopup()" style="margin-right: 5px; float: right;">
+                      Assign To
+                    </button>
+
+                    <a class="download" (click)="downloadReport()" title="download">
+                      Download
+                      <img src="./assets/images/download.svg" class="download-img" />
+                    </a>
+                    <!-- <button class="btncorporate" (click)="showConfigureMailDialog()">Set corporate induction </button> -->
+                    <!-- <img src="./assets/images/config.svg" class="imgconfigure"> -->
+                    <!-- <button class="btnconfigure" (click)="showConfigureMailDialog()">Configure the Settings</button> -->
+                    <!-- teamsNavigate() -->
+                    <!-- [ngClass]="{'disabled-btn': selected_processAssimilations.length == 0}" -->
+
+                    <button class="round-btn" style="margin-right:5px;"
+                            [disabled]="selected_processAssimilations.length == 0 || checkEmployeeCorpIndction()"
+                            [ngClass]="{'disabled-btn': selected_processAssimilations.length == 0 || checkEmployeeCorpIndction()}"
+                            (click)="showSetCorpInductionPopup();">
+                      Book Session
+                    </button>
+
+                    <button class="btnUploadAttendance" (click)="showUploadAttendancePopup();">
+                      Upload
+                      attendance
+                    </button>
+
+                    <button class="btnUploadAttendance" (click)="showUploadTaskStatusPopup();">
+                      Upload
+                      Task Status
+                    </button>
+
+                    <div class="div-sideovermiddle">
+                      <ng-container>
+                        <div [hidden]="!isAdminLogin" *ngIf="isAdminLogin" class="flex flex-row div-row">
+                          <div class="div-fields" style=" margin-top: 10px;">
+                            <label class="btnAssigntoAdmin">Assigned to Me</label>
+                          </div>
+                          <div class="div-switch">
+                            <p-inputSwitch [(ngModel)]="isAdmin" (onChange)="getToggleAdminAssignedList()"></p-inputSwitch>
+                          </div>
+                        </div>
+                        <hr style="border-color: #F2F2F2;border-width:0px;border-bottom-width:0.5px;" />
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="showFilter" class="filters">
+                <div class="div-gradeService flex justify-content-between mb-4">
+                  <div class="div-grade flex flex-column">
+                    <label class="mb-1">Grade</label>
+                    <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                   [style.zIndex]="1" [ngClass]="{ 'empty-fill': selectedAIPFilters.grade.length == 0 }"
+                                   [options]="masterList.grades" [(ngModel)]="selectedAIPFilters.grade" optionLabel="gradeDesc"
+                                   appendTo="body">
+                    </p-multiSelect>
+                  </div>
+                  <div class="div-ServiceLine flex flex-column">
+                    <label class="mb-1">Service line</label>
+                    <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                   [style.zIndex]="2" [ngClass]="{'empty-fill': selectedAIPFilters.serviceLine.length == 0}"
+                                   [options]="masterList.serviceLines" [(ngModel)]="selectedAIPFilters.serviceLine"
+                                   optionLabel="serviceLineDesc" appendTo="body">
+                    </p-multiSelect>
+                  </div>
+                  <div class="div-Geography flex flex-column">
+                    <label class="mb-1">Geography</label>
+                    <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                   [style.zIndex]="3" [ngClass]="{'empty-fill': selectedAIPFilters.country.length == 0}"
+                                   [options]="masterList.countries" [(ngModel)]="selectedAIPFilters.country"
+                                   optionLabel="countryDesc" appendTo="body">
+                    </p-multiSelect>
+                  </div>
+                </div>
+
+                <div class="div-gradeService flex justify-content-between">
+                  <div class="div-loj flex flex-column" id="div-loj">
+                    <label class="mb-1">Location of joining</label>
+                    <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                   [style.zIndex]="4" [ngClass]="{ 'empty-fill': selectedAIPFilters.city.length == 0 }"
+                                   [options]="masterList.cities" [(ngModel)]="selectedAIPFilters.city" optionLabel="cityDesc"
+                                   appendTo="body"></p-multiSelect>
+                  </div>
+                  <div class="flex flex-column" id="div-vertical">
+                    <label class="mb-1">Vertical</label>
+                    <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                   [style.zIndex]="4" [ngClass]="{ 'empty-fill': selectedAIPFilters.vertical.length == 0 }"
+                                   [options]="masterList.verticals" [(ngModel)]="selectedAIPFilters.vertical"
+                                   optionLabel="verticalDesc" appendTo="body"></p-multiSelect>
+                  </div>
+
+                  <div class="div-doj flex flex-column" id="dvDojRange">
+                    <label class="mb-1">Date of joining (range)</label>
+                    <p-calendar [(ngModel)]="selectedAIPFilters.dojRange" selectionMode="range" dateFormat="dd-mm-y"
+                                [readonlyInput]="true" [ngClass]="{ 'empty-fill': selectedAIPFilters.dojRange == undefined }"
+                                appendTo="body" class="contains-values-fill" [showIcon]="true" [showClear]="true"></p-calendar>
+                    <!--<img class="calendar-icon" src="./assets/images/calendar_month.svg" />-->
+                  </div>
+                  <div class="div-daysrem flex flex-column" id="dvdaysrem">
+                    <label class="mb-1">Ageing</label>
+                    <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                   [style.zIndex]="6" [ngClass]="{'empty-fill': selectedAIPFilters.ageing.length == 0}"
+                                   [options]="masterList.ageing" [(ngModel)]="selectedAIPFilters.ageing" optionLabel="days"
+                                   appendTo="body">
+                    </p-multiSelect>
+                  </div>
+                  <div class="div-applyfilter flex flex-column">
+                    <button class="filter-btn" [ngClass]="{
+                        'disabled-btn':
+                          selectedAIPFilters.grade.length == 0 &&
+                          selectedAIPFilters.country.length == 0 &&
+                          selectedAIPFilters.dojRange == undefined &&
+                          selectedAIPFilters.ageing.length == 0 &&
+                          selectedAIPFilters.city.length == 0 &&
+                          selectedAIPFilters.vertical.length == 0 &&
+                          selectedAIPFilters.serviceLine.length == 0
+                      }" (click)="showFilteredList=true;showFilter=false;getAssimilationInProgressList()">
+                      Apply filter
+                    </button>
+                  </div>
+                </div>
+                <!-- Filter chips -->
+                <div class="divider mt-4 mt-4 mb-4" *ngIf="
+                     selectedAIPFilters.grade.length>
+                  0 ||
+                  selectedAIPFilters.serviceLine.length > 0 ||
+                  selectedAIPFilters.country.length > 0 ||
+                  selectedAIPFilters.city.length ||
+                  selectedAIPFilters.dojRange != undefined ||
+                  selectedAIPFilters.ageing.length > 0
+                  ">
+                </div>
+                <div class="flex flex-row flex-wrap filter-chips-inside">
+                  <ng-container *ngFor="let grd of selectedAIPFilters.grade">
+                    <button class="btnitems flex flex-row" (click)="removeCategoryItem(false, 'Grade', grd.gradeDesc)">
+                      <label>{{ grd.gradeDesc }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngFor="let grd of selectedAIPFilters.serviceLine">
+                    <button class="btnitems flex flex-row"
+                            (click)="removeCategoryItem(false, 'ServiceLine', grd.serviceLineDesc)">
+                      <label>{{ grd.serviceLineDesc }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngFor="let grd of selectedAIPFilters.country">
+                    <button class="btnitems flex flex-row"
+                            (click)="removeCategoryItem(false, 'Geography', grd.countryDesc)">
+                      <label>{{ grd.countryDesc }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngFor="let grd of selectedAIPFilters.city">
+                    <button class="btnitems flex flex-row"
+                            (click)="removeCategoryItem(false, 'LocationOfJoining', grd.cityDesc)">
+                      <label>{{ grd.cityDesc }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngFor="let grd of selectedAIPFilters.vertical">
+                    <button class="btnitems flex flex-row"
+                            (click)="removeCategoryItem(false, 'Vertical', grd.verticalDesc)">
+                      <label>{{ grd.verticalDesc }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngFor="let grd of selectedAIPFilters.ageing">
+                    <button class="btnitems flex flex-row" (click)="removeCategoryItem(false, 'Ageing', grd.days)">
+                      <label>{{ grd.days }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container>
+                    <button class="btnitems flex flex-row" *ngIf="selectedAIPFilters.dojRange != undefined"
+                            (click)="removeCategoryItem(false, 'Date_Range', selectedAIPFilters.dojRange)">
+                      <label>
+                        {{ selectedAIPFilters.dojRange[0] | date : "dd-MM-yy" }} to
+                        {{ selectedAIPFilters.dojRange[1] | date : "dd-MM-yy" }}
+                      </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <div *ngIf="selectedAIPFilters.grade.length >
+                    0 || selectedAIPFilters.serviceLine.length > 0 ||
+                    selectedAIPFilters.country.length > 0 || selectedAIPFilters.city.length || selectedAIPFilters.vertical.length ||
+                    selectedAIPFilters.dojRange != undefined || selectedAIPFilters.ageing.length > 0"
+                    class="align-items-center flex">
+                    <a class="clear-all" (click)="clearItems('progress')">Clear All</a>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="showFilteredList" class="filteredlist">
+                <div class="flex flex-row flex-wrap filter-chips-inside">
+                  <ng-container *ngFor="let grd of selectedAIPFilters.grade">
+                    <button class="btnitems flex flex-row" (click)="removeCategoryItem(true, 'Grade', grd.gradeDesc)">
+                      <label>{{ grd.gradeDesc }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngFor="let grd of selectedAIPFilters.serviceLine">
+                    <button class="btnitems flex flex-row"
+                            (click)="removeCategoryItem(true, 'ServiceLine', grd.serviceLineDesc)">
+                      <label>{{ grd.serviceLineDesc }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngFor="let grd of selectedAIPFilters.country">
+                    <button class="btnitems flex flex-row"
+                            (click)="removeCategoryItem(true, 'Geography', grd.countryDesc)">
+                      <label>{{ grd.countryDesc }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngFor="let grd of selectedAIPFilters.city">
+                    <button class="btnitems flex flex-row"
+                            (click)="removeCategoryItem(true, 'LocationOfJoining', grd.cityDesc)">
+                      <label>{{ grd.cityDesc }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngFor="let grd of selectedAIPFilters.vertical">
+                    <button class="btnitems flex flex-row"
+                            (click)="removeCategoryItem(false, 'Vertical', grd.verticalDesc)">
+                      <label>{{ grd.verticalDesc }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngFor="let grd of selectedAIPFilters.ageing">
+                    <button class="btnitems flex flex-row" (click)="removeCategoryItem(true, 'Ageing', grd.days)">
+                      <label>{{ grd.days }} </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <ng-container>
+                    <button class="btnitems flex flex-row" *ngIf="selectedAIPFilters.dojRange != undefined"
+                            (click)="removeCategoryItem(true, 'Date_Range', selectedAIPFilters.dojRange)">
+                      <label>
+                        {{ selectedAIPFilters.dojRange[0] | date : "dd-MM-yy" }} to
+                        {{ selectedAIPFilters.dojRange[1] | date : "dd-MM-yy" }}
+                      </label>
+                      <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                    </button>
+                  </ng-container>
+                  <div *ngIf="selectedAIPFilters.grade.length >
+                    0 || selectedAIPFilters.serviceLine.length > 0 ||
+                    selectedAIPFilters.country.length > 0 || selectedAIPFilters.city.length || selectedAIPFilters.vertical.length ||
+                    selectedAIPFilters.dojRange != undefined || selectedAIPFilters.ageing.length > 0"
+                    class="align-items-center flex">
+                    <a class="clear-all" (click)="clearItems('progress')">Clear All</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <p-table #dt1 [scrollable]="true" scrollHeight="900px" [value]="processAssimilations"
+                         [(selection)]="selected_processAssimilations" (onPage)="paginate1($event)" [paginator]="true"
+                         [rowHover]="false" [rows]="5" [showCurrentPageReport]="true" [showPageLinks]="true" [pageLinks]="1"
+                         currentPageReportTemplate="Showing {last} of {totalRecords}" [rowsPerPageOptions]="[5, 10, 15]"
+                         [globalFilterFields]="[
+                    'employeeId',
+                    'associateName',
+                    'grade',
+                    'country',
+                    'city',
+                    'serviceLine',
+                    'dateOfJoining',
+                    'dateOfJoiningText',
+                    'monthOfJoiningText',
+                    'assignedPlan',
+                    'projectName',
+                    'accountName',
+                    'ongoingMilestones',
+                    'ageing',
+                    'ageingText',
+                    'vertical',
+                    'inductionDate',
+                    'corp_induction',
+                    'welcomeMailStatus',
+                    'facilitatorId',
+                    'managerConnectStatus',
+                    'hireType',
+                    'adminPoC',
+                    'adminPoCName'
+                  ]">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th pFrozenColumn style="min-width: 40px;text-align: center; padding-top: 0.4375rem;">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                      </th>
+                      <th [hidden]="!colstoggle[0].isSelected" style="min-width:85px;">
+                        Emp.ID
+                        <p-columnFilter field="employeeId" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="empID" [options]="columnFilterOptions.employeeId"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('employeeId',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'empID'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['employeeId'][filterOption.empID]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.empID }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+
+                      <th [hidden]="!colstoggle[1].isSelected" pSortableColumn="associateName" style="min-width:93px;">
+                        Name
+                        <p-columnFilter field="associateName" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="assname" [options]="columnFilterOptions.associateName"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('associateName',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'assname'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['associateName'][filterOption.assname]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.assname }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+
+                        <p-sortIcon field="associateName"></p-sortIcon>
+                      </th>
+                      <th [hidden]="!colstoggle[2].isSelected" style="min-width:82px;">
+                        Grade
+                        <p-columnFilter field="grade" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="gradeDesc" [options]="masterList.grades" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="toggleCurrentColFilterValue('grade', value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'gradeDesc'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class=" flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['grade'][filterOption.gradeDesc]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.gradeDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th [hidden]="!colstoggle[3].isSelected" style="min-width:100px;">
+                        Geo
+                        <p-columnFilter field="country" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="countryDesc" [options]="masterList.countries" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="
+                                toggleCurrentColFilterValue('country', value)
+                              " (onChange)="
+                                filter(utilMapPropertyToArray($event.value, 'countryDesc'))
+                              ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['country'][filterOption.countryDesc]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.countryDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th [hidden]="!colstoggle[4].isSelected" style="min-width:{{locationWidth}}">
+                        Location<p-columnFilter field="city" matchMode="in" display="menu" [showMatchModes]="false"
+                                                [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+
+                            <p-listbox optionLabel="cityDesc" [options]="
+                                masterList.cities
+                              " [multiple]="true" [metaKeySelection]="false" (click)="
+                                toggleCurrentColFilterValue(
+                                  'city',
+                                  value
+                                )
+                              " (onChange)="
+                                filter(utilMapPropertyToArray($event.value, 'cityDesc'))
+                              ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="
+                                      columnFilterSelectedOptions[
+                                        'city'
+                                      ][filterOption.cityDesc]
+                                    " [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.cityDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                            <!-- <p-listbox optionLabel="name" [options]="columnFilterOptions.location_of_joining"
+                              [ngModel]="value" [multiple]="true" [metaKeySelection]="false"
+                              (click)="toggleCurrentColFilterValue('location_of_joining', value)"
+                              (onChange)="filter($event.value)">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox
+                                    [(ngModel)]="getFilterOptionsModel('location_of_joining', filterOption.name)['selected']"
+                                    [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox> -->
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th [hidden]="!colstoggle[5].isSelected" style="min-width:200px;">
+                        Svc. line<p-columnFilter field="serviceLine" matchMode="in" display="menu"
+                                                 [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="serviceLineDesc" [options]="masterList.serviceLines"
+                                       [multiple]="true" [metaKeySelection]="false" (click)="
+                                toggleCurrentColFilterValue(
+                                  'serviceLine',
+                                  value
+                                )
+                              " (onChange)="
+                                filter(utilMapPropertyToArray($event.value, 'serviceLineDesc'))
+                              ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['serviceLine'][filterOption.serviceLineDesc]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.serviceLineDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th [hidden]="!colstoggle[6].isSelected" pSortableColumn="dateOfJoining" style="min-width:80px;">
+                        DOJ
+                        <p-columnFilter field="dateOfJoiningText" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="doj" [options]="columnFilterOptions.dateOfJoiningText"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('dateOfJoiningText',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'doj'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['dateOfJoiningText'][filterOption.doj]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.doj }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+
+                        <p-sortIcon field="dateOfJoining"></p-sortIcon>
+                      </th>
+                      <th [hidden]="!colstoggle[21].isSelected" pSortableColumn="monthOfJoining" style="min-width:80px;">
+                        MOJ
+                        <p-columnFilter field="monthOfJoining" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.monthOfJoiningText"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('monthOfJoiningText',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'monthofjoining'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['monthOfJoiningText'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+
+                        <p-sortIcon field="dateOfJoining"></p-sortIcon>
+                      </th>
+                      <th [hidden]="!colstoggle[7].isSelected" style="min-width:105px;">
+                        Plan
+                        <p-columnFilter field="assignedPlan" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="assPlan" [options]="columnFilterOptions.assignedPlan"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('assignedPlan',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'assPlan'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['assignedPlan'][filterOption.assPlan]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.assPlan }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+
+
+                      </th>
+                      <th [hidden]="!colstoggle[8].isSelected" style="min-width:{{projectnameWidth}}">
+                        Project name
+                        <p-columnFilter field="projectName" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.projectName" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="toggleCurrentColFilterValue('projectName',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['projectName'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th [hidden]="!colstoggle[9].isSelected" style="min-width:135px;">
+                        AccountName
+                        <p-columnFilter field="accountName" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="accname" [options]="columnFilterOptions.accountName"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('accountName',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'accname'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['accountName'][filterOption.accname]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.accname }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+
+                      </th>
+                      <th [hidden]="!colstoggle[10].isSelected" style="min-width:97px;">
+                        Milestone
+                        <p-columnFilter field="ongoingMilestones" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.ongoingMilestones"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('ongoingMilestones',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['ongoingMilestones'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+
+                      </th>
+                      <th [hidden]="!colstoggle[11].isSelected" pSortableColumn="ageing" style="min-width:96px;">
+                        Ageing
+
+                        <p-columnFilter field="ageing" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.ageing"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('ageing',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['ageing'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                        <p-sortIcon field="ageing"></p-sortIcon>
+                      </th>
+
+                      <th [hidden]="!colstoggle[12].isSelected" style="min-width:95px;">
+                        Vertical
+                        <p-columnFilter field="vertical" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="verticalDesc" [options]="masterList.verticals" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="toggleCurrentColFilterValue('vertical', value)
+                              " (onChange)="filter(utilMapPropertyToArray($event.value, 'verticalDesc'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['vertical'][filterOption.verticalDesc]
+                                    " [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.verticalDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th [hidden]="!colstoggle[13].isSelected" style="min-width:150px;">
+                        Induction date
+                        <p-columnFilter field="inductionDate" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="inddate" [options]="columnFilterOptions.inductionDate"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('inductionDate',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'inddate'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['inductionDate'][filterOption.inddate]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.inddate }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+
+
+                      <th [hidden]="!colstoggle[14].isSelected" style="min-width:{{welcomeEmailWidth}}">
+                        Welcome mail
+                        <p-columnFilter field="welcomeMailStatus" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.welcomeMailStatus"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('welcomeMailStatus',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['welcomeMailStatus'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+
+                      <th style="min-width:{{corpInductionWidth}}" [hidden]="!colstoggle[15].isSelected">
+                        Corp.induction<p-columnFilter field="corp_induction" matchMode="in" display="menu"
+                                                      [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.corp_induction"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('corp_induction',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['corp_induction'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+
+                      <th [hidden]="!colstoggle[16].isSelected" style="min-width:120px;">
+                        Facilitator Id
+
+                        <p-columnFilter field="facilitatorId" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.facilitatorId"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('facilitatorId',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['facilitatorId'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+
+                      <th [hidden]="!colstoggle[17].isSelected" style="min-width:160px;">
+                        Manager connect
+                        <p-columnFilter field="managerConnectStatus" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.managerConnectStatus"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('managerConnectStatus',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['managerConnectStatus'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+
+                      <th [hidden]="!colstoggle[18].isSelected" style="min-width:140px;">
+                        Hire Type
+                        <p-columnFilter field="hireType" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.hireType"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('hireType',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['hireType'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+
+                      <th [hidden]="!colstoggle[19].isSelected" pSortableColumn="adminPoC" style="min-width:65px;">
+                        Admin POC <!--<p-sortIcon field="adminPoC"></p-sortIcon>-->
+                        <p-columnFilter field="adminPoC" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.adminPoC"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('adminPoC',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['adminPoC'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+
+                      <th [hidden]="!colstoggle[20].isSelected" pSortableColumn="adminPoCName" style="min-width:65px;">
+                        Admin POC Name <!--<p-sortIcon field="adminPoC"></p-sortIcon>-->
+                        <p-columnFilter field="adminPoCName" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.adminPoCName"
+                                       [multiple]="true" [metaKeySelection]="false"
+                                       (click)="toggleCurrentColFilterValue('adminPoCName',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['adminPoCName'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th pFrozenColumn alignFrozen="right" style="background-color: #26EFE9; padding: 10px;">
+                        <img src="assets/images/colEnable.png" (click)="opsideover.toggle($event);setColumn()" />
+                      </th>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="body" let-processAssimilation>
+                    <tr [pSelectableRow]="processAssimilation" style="cursor:pointer;">
+                      <td pFrozenColumn style="text-align: center; padding-top: 0.4375rem">
+                        <p-tableCheckbox id="chkAssl" [value]="processAssimilation"></p-tableCheckbox>
+                      </td>
+                      <td [hidden]="!colstoggle[0].isSelected" (click)="
+                          selectedAssociate = processAssimilation;
+                          showAssociateAssimilationDialog()
+                        ">
+                        {{ processAssimilation.employeeId }}
+                      </td>
+                      <td [hidden]="!colstoggle[1].isSelected" (click)="
+                          selectedAssociate = processAssimilation;
+                          showAssociateAssimilationDialog()" title="{{processAssimilation.associateName}}">
+                        {{ processAssimilation.associateName.substring(0,9) }}
+                      </td>
+                      <td [hidden]="!colstoggle[2].isSelected" (click)="
+                          selectedAssociate = processAssimilation;
+                          showAssociateAssimilationDialog()
+                        ">
+                        {{ processAssimilation.grade }}
+                      </td>
+                      <td [hidden]="!colstoggle[3].isSelected" (click)="
+                          selectedAssociate = processAssimilation;
+                          showAssociateAssimilationDialog()
+                        ">
+                        {{ processAssimilation.country }}
+                      </td>
+                      <td [hidden]="!colstoggle[4].isSelected" (click)="
+                          selectedAssociate = processAssimilation;
+                          showAssociateAssimilationDialog()
+                        ">
+                        {{ processAssimilation.city }}
+                      </td>
+                      <td [hidden]="!colstoggle[5].isSelected" (click)="
+                          selectedAssociate = processAssimilation;
+                          showAssociateAssimilationDialog()
+                        ">
+                        {{ processAssimilation.serviceLine }}
+                      </td>
+                      <td [hidden]="!colstoggle[6].isSelected" (click)="
+                          selectedAssociate = processAssimilation;
+                          showAssociateAssimilationDialog()
+                        ">
+                        {{ processAssimilation.dateOfJoining | date: 'dd MMM yy' }}
+                      </td>
+                      <td [hidden]="!colstoggle[21].isSelected" (click)="
+           selectedAssociate = processAssimilation;
+           showAssociateAssimilationDialog()
+         ">
+                        {{ processAssimilation.monthofjoining }}
+                      </td>
+                      <td [hidden]="!colstoggle[7].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()"
+                          [ngStyle]="{color: getPlanColor(processAssimilation.assignedPlan)}">
+                        {{ processAssimilation.assignedPlan }}
+                      </td>
+                      <td [hidden]="!colstoggle[8].isSelected" title="{{processAssimilation.projectName}}"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        {{ processAssimilation.projectName.substring(0,12) }}
+                      </td>
+                      <td [hidden]="!colstoggle[9].isSelected" (click)="
+                          selectedAssociate = processAssimilation;
+                          showAssociateAssimilationDialog()
+                        ">
+                        {{ processAssimilation.accountName }}
+                      </td>
+                      <td [hidden]="!colstoggle[10].isSelected" (click)="
+                         selectedAssociate = processAssimilation;
+                         showAssociateAssimilationDialog()
+                       ">
+                        {{ processAssimilation.ongoingMilestones }}
+                      </td>
+                      <td [hidden]="!colstoggle[11].isSelected" (click)="
+                          selectedAssociate = processAssimilation;
+                          showAssociateAssimilationDialog()
+                        ">
+                        {{ processAssimilation.ageing }} Day(s)
+                      </td>
+
+                      <td [hidden]="!colstoggle[12].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        {{ processAssimilation.vertical }}
+                      </td>
+                      <td [hidden]="!colstoggle[13].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        {{ processAssimilation.inductionDate }}
+                      </td>
+
+                      <td [hidden]="!colstoggle[14].isSelected" *ngIf="processAssimilation.welcomeMailStatus == 'Sent'"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        <img src="assets/images/set.svg" />
+                        {{ processAssimilation.welcomeMailStatus }}
+                      </td>
+
+                      <td [hidden]="!colstoggle[14].isSelected"
+                          *ngIf="processAssimilation.welcomeMailStatus == 'Not Sent'"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        <img src="assets/images/notset-red.svg" />
+                        {{ processAssimilation.welcomeMailStatus }}
+                      </td>
+
+                      <td [hidden]="!colstoggle[15].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()"
+                          *ngIf="(processAssimilation.isCorpInduction != 'Set' && processAssimilation.corp_induction != 'Attended') && processAssimilation.ageing > 3"
+                          style="color: #b81f2d">
+                        <img src="assets/images/notset-red.svg" />{{processAssimilation.corp_induction}}
+                      </td>
+                      <td [hidden]="!colstoggle[15].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()"
+                          *ngIf="(processAssimilation.corp_induction == 'Attended')"
+                          style="color: #274e13">
+                        <img src="assets/images/set.svg" />{{processAssimilation.corp_induction}}
+                      </td>
+                      <td [hidden]="!colstoggle[15].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()"
+                          *ngIf="(processAssimilation.corp_induction != 'Set' &&   (processAssimilation.ageing == 2 ||  processAssimilation.ageing == 3))"
+                          style="color: #d1b214">
+                        <img src="assets/images/notset-gold.svg" />{{ processAssimilation.corp_induction}}
+                      </td>
+                      <td [hidden]="!colstoggle[15].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()"
+                          *ngIf="(processAssimilation.corp_induction == 'Set')">
+                        <img src="assets/images/set.svg" />{{ processAssimilation.corp_induction }}
+                      </td>
+
+                      <td [hidden]="!colstoggle[15].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()"
+                          *ngIf="processAssimilation.corp_induction != 'Set' && processAssimilation.ageing == 1">
+                        <img src="assets/images/notset.svg" />{{ processAssimilation.corp_induction }}
+                      </td>
+
+                      <td [hidden]="!colstoggle[16].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        {{ processAssimilation.facilitatorId }}
+                      </td>
+                      <td [hidden]="!colstoggle[17].isSelected"
+                          *ngIf="processAssimilation.managerConnectStatus == 'Completed'"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        <img src="assets/images/set.svg" />
+                        {{ processAssimilation.managerConnectStatus }}
+                      </td>
+
+                      <td [hidden]="!colstoggle[17].isSelected"
+                          *ngIf="processAssimilation.managerConnectStatus != 'Completed'"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        <img src="assets/images/notset-red.svg" />
+                        {{ processAssimilation.managerConnectStatus }}
+                      </td>
+
+                      <td [hidden]="!colstoggle[18].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        <!--<img src="assets/images/notset-red.svg" />-->
+                        {{ processAssimilation.hireType }}
+                      </td>
+                      <td [hidden]="!colstoggle[19].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        <!--<img src="assets/images/notset-red.svg" />-->
+                        {{ processAssimilation.adminPoC }}
+                      </td>
+                      <td [hidden]="!colstoggle[20].isSelected"
+                          (click)="selectedAssociate = processAssimilation;showAssociateAssimilationDialog()">
+                        <!--<img src="assets/images/notset-red.svg" />-->
+                        {{ processAssimilation.adminPoCName }}
+                      </td>
+                      <td [hidden]="isAdminAssignplanLogin" *ngIf="processAssimilation.assignedPlan == 'Default Plan'">
+                        <a href="javascript:void(0)" style="text-decoration: unset;font-size:25px;vertical-align:top;"
+                           (click)="oproleover.toggle($event)">...</a>
+                        <p-overlayPanel #oproleover styleClass="oproleover">
+                          <div class="div-roleover">
+
+                            <div class="div-superadmin" (click)="changeAssignplan('N2C IOA')">
+                              Assign IOA plan
+                            </div>
+                            <div class="div-removeuser" (click)="changeAssignplan('N2C Tech')">
+                              Assign N2C Tech Plan
+                            </div>
+                          </div>
+                          <div *ngIf="showReAssignPlanValidationMsg"
+                               style="margin-top: 6px; font-family: Gellix; font-size: 15px; font-weight: 400;">
+                            <label style="color:red;">{{showReAssignPlanValidationMsg}}</label>
+                          </div>
+                        </p-overlayPanel>
+                      </td>
+                      <td pFrozenColumn alignFrozen="right"></td>
+                    </tr>
+                  </ng-template>
+                  <!-- <ng-template pTemplate="paginatorright">
+                    of {{processAssimilations.length / 5}}
+                  </ng-template> -->
+                </p-table>
+              </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="Pending assimilation">
+              <!-- <img src="./assets/images/refresh.svg" class="refresh"> -->
+              <div class="card">
+                <div class="flex justify-content-end">
+                  <!-- <img src="./assets/images/refresh.svg" class="refresh" (click)="getPendingAssimilationList()" /> -->
+                  <img src="./assets/images/refresh.svg" class="refresh"
+                       (click)="showPAFilter = false; clearItems('pending')" />
+                </div>
+                <div class="filter-div flex justify-content-start flex-wrap card-container">
+                  <div class="filter flex-none" id="btnfilter" [ngClass]="{ 'filter-options-open': showPAFilter }">
+                    <p-button (click)="viewPAfilter()">
+                      <img src="./assets/images/filter.svg" style="width: 0.75rem; height: 0.375rem" />
+                      <span style="margin-left:3px;">Filter</span>
+                    </p-button>
+                  </div>
+                  <div class="search flex-none">
+                    <span class="p-input-icon-right">
+                      <input #searchBox2 type="text" pInputText placeholder="Search"
+                             (input)="dt2.filterGlobal(searchBox2.value, 'contains')" />
+                      <i class="pi pi-search"></i>
+                    </span>
+                  </div>
+                  <div class="flex-grow-1"></div>
+                </div>
+                <div *ngIf="showPAFilter" class="filters">
+                  <div class="div-gradeService flex justify-content-between mb-4">
+                    <div class="div-grade flex flex-column">
+                      <label class="mb-1">Grade</label>
+                      <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                     [style.zIndex]="6" [ngClass]="{ 'empty-fill': selectedPAFilters.grade.length == 0 }"
+                                     [options]="masterList.grades" [(ngModel)]="selectedPAFilters.grade" optionLabel="gradeDesc"
+                                     appendTo="body">
+                      </p-multiSelect>
+                    </div>
+                    <div class="div-ServiceLine flex flex-column">
+                      <label class="mb-1">Service line</label>
+                      <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                     [style.zIndex]="5" [ngClass]="{'empty-fill': selectedPAFilters.serviceLine.length == 0}"
+                                     [options]="masterList.serviceLines" [(ngModel)]="selectedPAFilters.serviceLine"
+                                     optionLabel="serviceLineDesc" appendTo="body">
+                      </p-multiSelect>
+                    </div>
+                    <div class="div-Geography flex flex-column">
+                      <label class="mb-1">Geography</label>
+                      <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                     [style.zIndex]="4" [ngClass]="{'empty-fill': selectedPAFilters.country.length == 0}"
+                                     [options]="masterList.countries" [(ngModel)]="selectedPAFilters.country"
+                                     optionLabel="countryDesc" appendTo="body">
+                      </p-multiSelect>
+                    </div>
+                  </div>
+
+                  <div class="div-gradeService flex justify-content-between">
+                    <div class="div-loj flex flex-column">
+                      <label class="mb-1">Location of joining</label>
+                      <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                     [style.zIndex]="3" [ngClass]="{ 'empty-fill': selectedPAFilters.city.length == 0 }"
+                                     [options]="masterList.cities" [(ngModel)]="selectedPAFilters.city" optionLabel="cityDesc"
+                                     appendTo="body"></p-multiSelect>
+                    </div>
+                    <div class="div-doj flex flex-column" id="dvDojRange">
+                      <label class="mb-1">Date of joining (range)</label>
+                      <p-calendar [(ngModel)]="selectedPAFilters.dojRange" selectionMode="range" dateFormat="dd-mm-y"
+                                  [readonlyInput]="true" [ngClass]="{ 'empty-fill': selectedPAFilters.dojRange == undefined }"
+                                  appendTo="body" class="contains-values-fill" [showIcon]="true" [showClear]="true"></p-calendar>
+                      <!--<img class="calendar-icon" src="./assets/images/calendar_month.svg" />-->
+                    </div>
+                    <div class="div-daysrem flex flex-column" id="dvdaysrem">
+                      <label class="mb-1">Days remaining</label>
+                      <p-multiSelect placeholder="Select" dropdownIcon="pi pi-caret-down" class="contains-values-fill"
+                                     [style.zIndex]="1" [ngClass]="{'empty-fill': selectedPAFilters.ageing.length == 0}"
+                                     [options]="masterList.ageing" [(ngModel)]="selectedPAFilters.ageing" optionLabel="days"
+                                     appendTo="body">
+                      </p-multiSelect>
+                    </div>
+                    <div class="div-applyfilter flex flex-column">
+                      <button class="filter-btn" [ngClass]="{
+                          'disabled-btn':
+                            selectedPAFilters.grade.length == 0 &&
+                            selectedPAFilters.country.length == 0 &&
+                            selectedPAFilters.dojRange == undefined &&
+                            selectedPAFilters.ageing.length == 0 &&
+                            selectedPAFilters.city.length == 0 &&
+                            selectedPAFilters.serviceLine.length == 0
+                        }" (click)="showPAFilter=false;showPAFilterList=true;getPendingAssimilationList()">
+                        Apply filter
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Filter chips -->
+                  <div class="divider mt-4 mb-4" *ngIf="
+                       selectedPAFilters.grade.length>
+                    0 ||
+                    selectedPAFilters.serviceLine.length > 0 ||
+                    selectedPAFilters.country.length > 0 ||
+                    selectedPAFilters.city.length ||
+                    selectedPAFilters.dojRange != undefined ||
+                    selectedPAFilters.ageing.length > 0
+                    ">
+                  </div>
+                  <div class="flex flex-row flex-wrap filter-chips-inside">
+                    <ng-container *ngFor="let grd of selectedPAFilters.grade">
+                      <button class="btnitems flex flex-row"
+                              (click)="removePendingCategoryItem(false, 'Grade', grd.gradeDesc)">
+                        <label>{{ grd.gradeDesc }} </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <ng-container *ngFor="let grd of selectedPAFilters.serviceLine">
+                      <button class="btnitems flex flex-row"
+                              (click)="removePendingCategoryItem(false, 'ServiceLine', grd.serviceLineDesc)">
+                        <label>{{ grd.serviceLineDesc }} </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <ng-container *ngFor="let grd of selectedPAFilters.country">
+                      <button class="btnitems flex flex-row"
+                              (click)="removePendingCategoryItem(false, 'Geography', grd.countryDesc)">
+                        <label>{{ grd.countryDesc }} </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <ng-container *ngFor="let grd of selectedPAFilters.city">
+                      <button class="btnitems flex flex-row" (click)="
+                          removePendingCategoryItem(false, 'LocationOfJoining', grd.cityDesc)
+                        ">
+                        <label>{{ grd.cityDesc }} </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <ng-container *ngFor="let grd of selectedPAFilters.ageing">
+                      <button class="btnitems flex flex-row"
+                              (click)="removePendingCategoryItem(false, 'Ageing', grd.days)">
+                        <label>{{ grd.days }} </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <ng-container>
+                      <button class="btnitems flex flex-row" *ngIf="selectedPAFilters.dojRange != undefined"
+                              (click)="removePendingCategoryItem(false, 'Date_Range', selectedPAFilters.dojRange)">
+                        <label>
+                          {{ selectedPAFilters.dojRange[0] | date : "dd-MM-yy" }} to
+                          {{ selectedPAFilters.dojRange[1] | date : "dd-MM-yy" }}
+                        </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <div *ngIf="selectedPAFilters.grade.length >
+                      0 ||
+                      selectedPAFilters.serviceLine.length > 0 ||
+                      selectedPAFilters.country.length > 0 ||
+                      selectedPAFilters.city.length ||
+                      selectedPAFilters.dojRange != undefined ||
+                      selectedPAFilters.ageing.length > 0" class="align-items-center flex">
+                      <a class="clear-all" (click)="clearItems('pending')">Clear All</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="showPAFilterList" class="filteredlist">
+                  <div class="flex flex-row flex-wrap filter-chips-inside">
+                    <ng-container *ngFor="let grd of selectedPAFilters.grade">
+                      <button class="btnitems flex flex-row"
+                              (click)="removePendingCategoryItem(true, 'Grade', grd.gradeDesc)">
+                        <label>{{ grd.gradeDesc }} </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <ng-container *ngFor="let grd of selectedPAFilters.serviceLine">
+                      <button class="btnitems flex flex-row"
+                              (click)="removePendingCategoryItem(true, 'ServiceLine', grd.serviceLineDesc)">
+                        <label>{{ grd.serviceLineDesc }} </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <ng-container *ngFor="let grd of selectedPAFilters.country">
+                      <button class="btnitems flex flex-row"
+                              (click)="removePendingCategoryItem(true, 'Geography', grd.countryDesc)">
+                        <label>{{ grd.countryDesc }} </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <ng-container *ngFor="let grd of selectedPAFilters.city">
+                      <button class="btnitems flex flex-row"
+                              (click)="removePendingCategoryItem(true, 'LocationOfJoining', grd.cityDesc)">
+                        <label>{{ grd.cityDesc }} </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <ng-container *ngFor="let grd of selectedPAFilters.ageing">
+                      <button class="btnitems flex flex-row"
+                              (click)="removePendingCategoryItem(true, 'Ageing', grd.days)">
+                        <label>{{ grd.days }} </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <ng-container>
+                      <button class="btnitems flex flex-row" *ngIf="selectedPAFilters.dojRange != undefined"
+                              (click)="removePendingCategoryItem(true, 'Date_Range', selectedPAFilters.dojRange)">
+                        <label>
+                          {{ selectedPAFilters.dojRange[0] | date : "dd-MM-yy" }} to
+                          {{ selectedPAFilters.dojRange[1] | date : "dd-MM-yy" }}
+                        </label>
+                        <label><img src="./assets/images/cross-icon.svg" class="btnItemClose" /></label>
+                      </button>
+                    </ng-container>
+                    <div *ngIf="selectedPAFilters.grade.length >
+                      0 ||
+                      selectedPAFilters.serviceLine.length > 0 ||
+                      selectedPAFilters.country.length > 0 ||
+                      selectedPAFilters.city.length ||
+                      selectedPAFilters.dojRange != undefined ||
+                      selectedPAFilters.ageing.length > 0" class="align-items-center flex">
+                      <a class="clear-all" (click)="clearItems('pending')">Clear All</a>
+                    </div>
+                  </div>
+                </div>
+
+                <p-table #dt2 [value]="pendingAssimilations" selectionMode="single"
+                         [(selection)]="selected_pendingAssimilations" [paginator]="true" [rowHover]="true" [rows]="5"
+                         [showCurrentPageReport]="true" [showPageLinks]="true" [pageLinks]="1" (onPage)="paginate2($event)"
+                         currentPageReportTemplate="Showing {last} of {totalRecords}" [rowsPerPageOptions]="[5, 10, 15]"
+                         [globalFilterFields]="[
+                    'candidateId',
+                    'associateName',
+                    'grade',
+                    'remaining',
+                    'remainingText',
+                    'dateOfJoining',
+                    'dateOfJoiningText',
+                    'countrry',
+                    'city',
+                    'serviceLine'
+                  ]">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="width: 3%"></th>
+                      <th>
+                        Cand.ID
+                        <p-columnFilter field="candidateId" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="caid" [options]="pendingColumnFilterOptions.candidateId" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="
+                                pendingtoggleCurrentColFilterValue(
+                                  'candidateId',
+                                  value,
+                                  pendingAssiColumnFilterSelectedOptions
+                                )
+                              " (onChange)="
+                                filter(utilMapPropertyToArray($event.value, 'caid'))
+                              ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="
+                                      pendingAssiColumnFilterSelectedOptions[
+                                        'candidateId'
+                                      ][filterOption.caid]
+                                    " [binary]="true" inputId="binary" (ngModelChange)="pendingfilterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.caid }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th pSortableColumn="associateName">
+                        Name
+                        <p-columnFilter field="associateName" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="assName" [options]="pendingColumnFilterOptions.associateName" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="
+        pendingtoggleCurrentColFilterValue(
+          'associateName',
+          value,
+          pendingAssiColumnFilterSelectedOptions
+        )
+      " (onChange)="
+        filter(utilMapPropertyToArray($event.value, 'assName'))
+      ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="
+              pendingAssiColumnFilterSelectedOptions[
+                'associateName'
+              ][filterOption.assName]
+            " [binary]="true" inputId="binary" (ngModelChange)="pendingfilterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.assName }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+
+                        <p-sortIcon field="associateName"></p-sortIcon>
+                      </th>
+                      <th>
+                        Grade<p-columnFilter field="grade" matchMode="in" display="menu" [showMatchModes]="false"
+                                             [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="gradeDesc" [options]="masterList.grades" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="
+                                toggleCurrentColFilterValue(
+                                  'grade',
+                                  value,
+                                  pendingAssiColumnFilterSelectedOptions
+                                )
+                              " (onChange)="
+                                filter(utilMapPropertyToArray($event.value, 'gradeDesc'))
+                              ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="
+                                      pendingAssiColumnFilterSelectedOptions[
+                                        'grade'
+                                      ][filterOption.gradeDesc]
+                                    " [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.gradeDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th pSortableColumn="remaining">
+                        Remaining
+                        <p-columnFilter field="remainingText" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="rmtext" [options]="pendingColumnFilterOptions.remainingText" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="
+        pendingtoggleCurrentColFilterValue(
+          'remainingText',
+          value,
+          pendingAssiColumnFilterSelectedOptions
+        )
+      " (onChange)="
+        filter(utilMapPropertyToArray($event.value, 'rmtext'))
+      ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="
+              pendingAssiColumnFilterSelectedOptions[
+                'remainingText'
+              ][filterOption.rmtext]
+            " [binary]="true" inputId="binary" (ngModelChange)="pendingfilterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.rmtext }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                        <p-sortIcon field="remaining"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="dateOfJoiningText">
+                        DOJ
+                        <p-columnFilter field="dateOfJoiningText" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="doj" [options]="pendingColumnFilterOptions.dateOfJoiningText" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="
+  pendingtoggleCurrentColFilterValue(
+    'dateOfJoiningText',
+    value,
+    pendingAssiColumnFilterSelectedOptions
+  )
+" (onChange)="
+  filter(utilMapPropertyToArray($event.value, 'doj'))
+">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="
+        pendingAssiColumnFilterSelectedOptions[
+          'dateOfJoiningText'
+        ][filterOption.doj]
+      " [binary]="true" inputId="binary" (ngModelChange)="pendingfilterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.doj }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                        <p-sortIcon field="dateOfJoiningText"></p-sortIcon>
+                      </th>
+                      <th>
+                        Geography
+                        <p-columnFilter field="country" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="countryDesc" [options]="masterList.countries" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="
+                                toggleCurrentColFilterValue(
+                                  'country',
+                                  value,
+                                  pendingAssiColumnFilterSelectedOptions
+                                )
+                              " (onChange)="
+                                filter(utilMapPropertyToArray($event.value, 'countryDesc'))
+                              ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="
+                                      pendingAssiColumnFilterSelectedOptions[
+                                        'country'
+                                      ][filterOption.countryDesc]
+                                    " [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.countryDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th>
+                        Location
+                        <p-columnFilter field="city" matchMode="in" display="menu" [showMatchModes]="false"
+                                        [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="cityDesc" [options]="
+                                masterList.cities
+                              " [multiple]="true" [metaKeySelection]="false" (click)="
+                                toggleCurrentColFilterValue(
+                                  'city',
+                                  value,
+                                  pendingAssiColumnFilterSelectedOptions
+                                )
+                              " (onChange)="
+                                filter(utilMapPropertyToArray($event.value, 'cityDesc'))
+                              ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="
+                                      pendingAssiColumnFilterSelectedOptions[
+                                        'city'
+                                      ][filterOption.cityDesc]
+                                    " [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.cityDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th>
+                        Svc. line
+                        <p-columnFilter field="serviceLine" matchMode="in" display="menu"
+                                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="serviceLineDesc" [options]="masterList.serviceLines"
+                                       [multiple]="true" [metaKeySelection]="false" (click)="
+                                toggleCurrentColFilterValue(
+                                  'serviceLine',
+                                  value,
+                                  pendingAssiColumnFilterSelectedOptions
+                                )
+                              " (onChange)="
+                                filter(utilMapPropertyToArray($event.value, 'serviceLineDesc'))
+                              ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="pendingAssiColumnFilterSelectedOptions['serviceLine'][filterOption.serviceLineDesc]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.serviceLineDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-pendingAssimilation>
+                    <tr [pSelectableRow]="pendingAssimilation" style="cursor:pointer;">
+                      <td></td>
+                      <td>{{ pendingAssimilation.candidateId }}</td>
+                      <td>{{ pendingAssimilation.associateName }}</td>
+                      <td>{{ pendingAssimilation.grade }}</td>
+                      <td>{{ pendingAssimilation.remaining }} Day(s)</td>
+                      <td>{{ pendingAssimilation.dateOfJoining | date: 'dd MMM yy'}}</td>
+                      <td>{{ pendingAssimilation.country }}</td>
+                      <td>{{ pendingAssimilation.city }}</td>
+                      <td>{{ pendingAssimilation.serviceLine }}</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </p-tabPanel>
+
+          </p-tabView>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Assimilation plan templates">
+        <ng-template pTemplate="header" (click)="getAPTemplates()">
+          <img src="./assets/images/assimilation_plan.svg" class="pr-2" />
+          <span>Assimilation plan templates</span>
+        </ng-template>
+        <div class="div-planTemplate">
+          <div class="div-searchTemplate flex justify-content-between">
+            <div class="div-search2" id="div-search2">
+              <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" pInputText placeholder="Search" (keyup)="searachTemplates($event)"
+                       [(ngModel)]="searchTemplate" />
+              </span>
+            </div>
+            <!--<div class="div-CreateTemplate">
+              <button class="round-btn" (click)="newAssimilationRedirect()">
+                <span class="mr-2">+</span>Create New Template
+              </button>
+            </div>-->
+          </div>
+
+          <div class="div-Templates flex flex-wrap align-items-center row-gap-4 column-gap-4 mt-4">
+            <ng-container *ngFor="let pt of plantemplates">
+              <div class="div-eachTeamplate flex align-items-center justify-content-start"
+                   [ngClass]="{'default-template': pt.isDefault}" (click)="planredirect(pt.planTitle, pt.planId)">
+                <div class="tag" [ngClass]="{'default': pt.isDefault, 'draft': pt.isDraft}"
+                     *ngIf="pt.isDefault || pt.isDraft">
+                  {{
+                  pt.isDefault?'Default':
+                  pt.isDraft?'Draft':''
+                  }}
+                </div>
+                <div class="flex flex-row" #cardImg>
+                  <img *ngIf="pt.isDefault" src="./assets/images/default-icon.svg"
+                       style="width: 3rem; height: 3rem; margin: 1rem" />
+                  <img *ngIf="!pt.isDefault" src="./assets/images/ioa-plan.svg"
+                       style="width: 3rem; height: 3rem; margin: 1rem" />
+                </div>
+                <div class="flex flex-column mr-3">
+                  <label class="kebab" *ngIf="pt.isDraft">
+                    <i class="pi pi-ellipsis-v" style="color: #2F78C4"
+                       (click)="adpt.toggle($event, cardImg); $event.stopImmediatePropagation();selectedPlanTemplate = pt"></i>
+                  </label>
+                  <label class="lblplanname">{{ pt.planTitle }}</label>
+                  <label class="lbldescription my-1">{{ pt.planDescription }}</label>
+                  <label class="lbl-eff-date">
+                    Effective date
+                    <span class="date">{{ pt.planEffDate | date:'dd/MM/y' }}</span>
+                    <span class="status" [ngClass]="{'green': pt.tag == 'Active', ' gold': pt.tag != 'Active'}">
+                      <span class="dot">•</span>{{ pt.tag }}
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Assimilation settings" [disabled]="!isSuperAdmin">
+        <ng-template pTemplate="header">
+          <img src="./assets/images/assimilation_settings.svg" class="pr-2" />
+          <span>Settings</span>
+        </ng-template>
+        <div class="div-settings">
+          <p-tabView id="tab2" [(activeIndex)]="activeSettingsSubTabIndex" (onChange)="settingsSubTabChanged()">
+            <p-tabPanel header="Associate key documents">
+              <div class="div-description flex flex-row justify-content-between">
+                <div>
+                  <label class="lbl-description">
+                    Key documents currently available on CognizantOn employee portal
+                  </label>
+                </div>
+                <div>
+                  <button class="round-btn" (click)="showUploadNewResourcePopup=true">
+                    + Upload key documents
+                  </button>
+                </div>
+              </div>
+
+              <div class="div-resourceGrid">
+
+                <p-table #dt3 [scrollable]="true" scrollHeight="400px" styleClass="mt-3" [value]="associateDocuments"
+                         [(selection)]="selected_associateDocuments" (onPage)="paginate3($event)" [paginator]="true"
+                         [rowHover]="false" [rows]="5" [showCurrentPageReport]="true" [showPageLinks]="true" [pageLinks]="1"
+                         currentPageReportTemplate="Showing {last} of {totalRecords}" [rowsPerPageOptions]="[5, 10, 15]">
+
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="width:35%;padding-left:25px;">Document name</th>
+                      <th style="width:20%;" pSortableColumn="uploadedDate">
+                        Uploaded on<p-sortIcon field="uploadedDate"></p-sortIcon>
+                      </th>
+                      <th style="width:20%;">Uploaded by</th>
+                      <th style="width:20%;">
+                        For Service line<p-columnFilter field="serviceLine" matchMode="in"
+                                                        display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="serviceLineDesc" [options]="columnFilterOptions.serviceLineType"
+                                       [multiple]="true" [metaKeySelection]="false" (click)="
+                            toggleCurrentColFilterValue(
+                              'serviceLine',
+                              value
+                            )
+                          " (onChange)="
+                            filter(utilMapPropertyToArray($event.value, 'serviceLineDesc'))
+                          ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['serviceLine'][filterOption.serviceLineDesc]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.serviceLineDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th style="width:5%;"></th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-document>
+                    <tr [pSelectableRow]="document">
+                      <td style="padding-left: 25px;">
+                        {{ document.docName }}
+                      </td>
+                      <td>
+                        {{ document.uploadedDate | date: 'dd MMM yy' }} {{document?'at':''}} {{
+ document.uploadedDate |
+                        date: 'h:mm a'
+                        }}
+                      </td>
+                      <td>
+                        {{ document.firstName + ' ' + document.lastName }}
+                      </td>
+                      <!-- {{ document.uploadedBy }} -->
+                      <td>
+
+                        {{ document.serviceLine }}
+                      </td>
+                      <td>
+                        <img src="./assets/images/delete.svg" title="Delete resource" style="cursor:pointer;"
+                             (click)="showAssociateResourceDialog=true; documentToDelete = document" />
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+
+              </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="User management">
+              <div class="div-userdescription flex flex-row justify-content-between">
+                <div class="search flex-none">
+                  <span class="p-input-icon-right">
+                    <input #searchBox4 type="text" pInputText placeholder="Search"
+                           (input)="dt4.filterGlobal(searchBox4.value, 'contains')" />
+                    <i class="pi pi-search"></i>
+                  </span>
+                </div>
+
+                <div>
+                  <button class="round-btn" (click)="viewAddUser()">
+                    + Add user
+                  </button>
+                </div>
+              </div>
+
+              <div class="div-usersGrid">
+
+                <p-table #dt4 [scrollable]="true" scrollHeight="400px" styleClass="mt-3" [value]="users"
+                         [(selection)]="selected_users" (onPage)="paginate4($event)" [paginator]="true" [rowHover]="false"
+                         [rows]="5" [showCurrentPageReport]="true" [showPageLinks]="true" [pageLinks]="1"
+                         currentPageReportTemplate="Showing {last} of {totalRecords}" [rowsPerPageOptions]="[5, 10, 15]"
+                         [globalFilterFields]="[
+                  'associatename',
+                  'emailID',
+                  'role',
+                  'serviceline'
+                ]">
+
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="width: 20%; padding-left: 1.5rem;" pSortableColumn="associatename">
+                        Name<p-sortIcon field="associatename"></p-sortIcon>
+                      </th>
+                      <th style="width:35%;">Email ID</th>
+                      <th style="width:20%;">
+                        Role<p-columnFilter field="role" matchMode="in" display="menu"
+                                            [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="name" [options]="columnFilterOptions.role" [multiple]="true"
+                                       [metaKeySelection]="false" (click)="toggleCurrentColFilterValue('role',value)"
+                                       (onChange)="filter(utilMapPropertyToArray($event.value, 'name'))">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['role'][filterOption.name]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.name }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th style="width:20%;">
+                        Service line<p-columnFilter field="serviceline" matchMode="in"
+                                                    display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-listbox optionLabel="serviceLineDesc" [options]="masterList.serviceLines"
+                                       [multiple]="true" [metaKeySelection]="false" (click)="
+                              toggleCurrentColFilterValue(
+                                'serviceLine',
+                                value
+                              )
+                            " (onChange)="
+                              filter(utilMapPropertyToArray($event.value, 'serviceLineDesc'))
+                            ">
+                              <ng-template let-filterOption pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                  <p-checkbox [(ngModel)]="columnFilterSelectedOptions['serviceLine'][filterOption.serviceLineDesc]"
+                                              [binary]="true" inputId="binary" (ngModelChange)="filterChange($event)">
+                                  </p-checkbox>
+                                  <div>{{ filterOption.serviceLineDesc }}</div>
+                                </div>
+                              </ng-template>
+                            </p-listbox>
+                          </ng-template>
+                        </p-columnFilter>
+                      </th>
+                      <th style="width:5%;"></th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-user>
+                    <tr [pSelectableRow]="user">
+                      <td style="padding-left: 25px;">
+                        {{ user.associatename }}
+                      </td>
+                      <td>
+                        {{ user.emailID }}
+                      </td>
+                      <td>
+                        {{ user.role }}
+                      </td>
+                      <td>
+                        {{ user.serviceline }}
+                      </td>
+                      <td>
+                        <a href="javascript:void(0)" style="text-decoration: unset;font-size:25px;vertical-align:top;"
+                           (click)="oproleover.toggle($event);showMakeAdminRoleType=false">...</a>
+
+                        <p-overlayPanel #oproleover styleClass="oproleover">
+                          <div class="div-roleover">
+                            <div class="div-makeadmin" *ngIf="user.role == 'Super admin'"
+                                 (click)="showMakeAdminRoleType=true">Make admin</div>
+
+                            <div class="div-makeadminroletype" *ngIf="showMakeAdminRoleType">
+                              <div style="margin-left:3rem;" class="flex flex-row">
+                                <label class="lbl-line">Choose service line<span style="color:red;">*</span></label>
+                              </div>
+                              <div class="flex flex-column" style="margin-top: 0.5rem; margin-left: 1rem;">
+                                <div class="flex flex-row" style="margin-left:1.5rem;">
+                                  <div>
+                                    <input type="radio" id="rbtn2cioa" class="rbtn2cinfo" name="radion2c">
+                                  </div>
+                                  <div>
+                                    <label class="lbl-n2c">N2C IOA</label>
+                                  </div>
+                                </div>
+                                <div class="flex flex-row" style="margin-left:1.5rem;margin-top:0.5rem;">
+                                  <div>
+                                    <input type="radio" id="rbtn2ctech" class="rbtn2cinfo" name="radion2c">
+                                  </div>
+                                  <div>
+                                    <label class="lbl-n2c">N2C Tech</label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="div-anchor">
+                                <div style="margin-top:1rem;padding-bottom:15px;">
+                                  <a href="javascript:void(0)" class="anc-cancel"
+                                     (click)="showMakeAdminRoleType=false">Cancel</a>
+                                  <a href="javascript:void(0)" class="anc-apply"
+                                     (click)="showMakeAdminRoleType=false">Apply</a>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="div-superadmin" *ngIf="user.role == 'Admin'"
+                                 (click)="selectedUser = user; showMakeSuperAdmin = true">
+                              Make super admin
+                            </div>
+                            <div class="div-superadmin" *ngIf="user.role == 'Super Admin'"
+                                 (click)="selectedUser = user; updateUserRole('Admin')">
+                              Make admin
+                            </div>
+                            <div class="div-removeuser" (click)="showRemoveUser=true; selectedUser = user">
+                              Remove user
+                            </div>
+                          </div>
+                        </p-overlayPanel>
+
+                      </td>
+                    </tr>
+                  </ng-template>
+
+                </p-table>
+
+              </div>
+
+
+            </p-tabPanel>
+
+
+            <!--<p-tabPanel header="Assign to Admin">
+
+            <ng-template pTemplate="header">
+              <span class="title">Assign to Admin</span>
+            </ng-template>
+
+            <div class="div-uploadcontent">
+              <div class="flex flex-row justify-content-between div-info">
+                <label class="lbl-info">Assign to Admin for attached New Hires ID .<span style="color:red;">*</span></label>
+                <a href="./assets/images/NewHireAssignToAdmin.xlsx" class="anc-download">Download template</a>
+              </div>
+              <div class="uploads">
+                <form enctype="multipart/form-data" style="margin-left: 59px; margin-bottom: 15px;">
+                  <div class="uploadtype" draggable="true" (dragover)="onDragOver($event)" (drop)="dropagn($event, 'id')"
+                       (dragleave)="onDragLeave($event)">
+                    <span (click)="FileUpload('id')" class="browse"><b><u>select file</u></b></span>
+                  </div>
+                  <div class="div-filesizeinfo flex flex-column">
+                    <label> * Upload files only in the required template</label>
+                  </div>
+                </form>
+
+                <input type="file" id="id-file" style="display: none" (change)="onFileChangedagn($event, 'id')" accept=".xlsx"
+                       [multiple]="false" />
+
+                <div *ngIf="assigntoadminfilename != ''" class="contentFilename flex flex-row justify-content-between">
+                  <div>
+                    <input type="text" id="txtfilename" pInputText [(ngModel)]="assigntoadminfilename" />
+                  </div>-->
+            <!--<div>
+              <img src="./assets/images/cross.svg" (click)="deleteFileAsgn()">
+            </div>-->
+            <!--</div>
+
+                <div *ngIf="showAssigntoAdminValidationMsg"
+                     style="margin-top: 6px; font-family: Gellix; font-size: 15px; font-weight: 400;">
+                  <label style="color:red;">{{showAssigntoAdminValidationMsg}}</label>
+                </div>
+
+              </div>
+            </div>-->
+            <!--<ng-template pTemplate="footer">-->
+            <!--<button class="normal-round-btn " (click)="showAssigntoAdmin = false">
+              Cancel
+            </button>-->
+            <!--<button class="round-btn" (click)="assigntoadmin();">
+                AssigntoAdmin
+              </button>
+            </ng-template>-->
+            <!--</p-dialog>-->
+            <!--</p-tabPanel>
+                </p-tabView>
+              </div>
+            </p-tabPanel>-->
+
+            <p-tabPanel header="Assign to Admin">
+
+              <ng-template pTemplate="header">
+                <span class="title">Assign to Admin</span>
+              </ng-template>
+
+              <div class="div-uploadcontent">
+                <div class="flex flex-row justify-content-between div-info">
+                  <label class="lbl-info">Assign to Admin for attached New Hires ID .<span style="color:red;">*</span></label>
+                  <a href="./assets/images/NewHireAssignToAdmin.xlsx" class="anc-download">Download template</a>
+                </div>
+                <div class="uploads">
+                  <form enctype="multipart/form-data" style="margin-left: 59px; margin-bottom: 15px;">
+                    <div class="uploadtype" draggable="true" (dragover)="onDragOver($event)" (drop)="dropagn($event, 'id')"
+                         (dragleave)="onDragLeave($event)">
+                      Drag and drop file here.
+                      <span (click)="FileUploadagn('id')" class="browse"><b><u>select file</u></b></span>
+                    </div>
+                    <div class="div-filesizeinfo flex flex-column">
+                      <label> * Upload files only in the required template</label>
+                    </div>
+                  </form>
+
+                  <input type="file" id="id-file1" style="display: none" (change)="onFileChangedagn($event, 'id')" accept=".xlsx"
+                         [multiple]="false" />
+
+                  <div *ngIf="assigntoadminfilename != ''" class="contentFilename flex flex-row justify-content-between">
+                    <div>
+                      <input type="text" id="txtfilename" pInputText [(ngModel)]="assigntoadminfilename" />
+                    </div>
+                  </div>
+
+                  <div *ngIf="showAssigntoAdminValidationMsg"
+                       style="margin-top: 6px; font-family: Gellix; font-size: 15px; font-weight: 400;">
+                    <label style="color:red;">{{showAssigntoAdminValidationMsg}}</label>
+                  </div>
+
+                </div>
+              </div>
+              <ng-template pTemplate="footer">
+                <button class="round-btn" (click)="assigntoadmin();">
+                  AssigntoAdmin
+                </button>
+
+              </ng-template>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+      </p-tabPanel>
+
+
+
+    </p-tabView>
+  </div>
+</div>
+
+<div *ngIf="showAssociateAssimilationPopup">
+  <app-associate-assimilation [displayAssociateAssimilationPopup]="showAssociateAssimilationPopup"
+                              [associateInfo]="selectedAssociate" (closeAssociateAssimilationPopup)="closeAssociateAssimilationPopup()">
+  </app-associate-assimilation>
+</div>
+
+<div *ngIf="showUploadNewResourcePopup">
+  <app-upload-newresource [displayUploadNewResourcePopup]="showUploadNewResourcePopup"
+                          (closeUploadNewResourcePopup)="closeUploadNewResourcePopup()">
+  </app-upload-newresource>
+</div>
+
+<div class="loadWrapper" *ngIf="showLoader">
+  <div class="loader">
+  </div>
+</div>
+<!-- <div *ngIf="showConfigureMailPopup">
+  <app-configure-mail [displayConfigureMailPopup]="showConfigureMailPopup"
+    (closeConfigureMailPopup)="closeConfigureMailPopup()">
+  </app-configure-mail>
+</div> -->
+<!-- Admin draft plan templates meny items -->
+
+<p-overlayPanel #adpt styleClass="adpt-op">
+  <div class="menu-items">
+    <div class="item" (click)="deleteAssimilationPlanTemplate(); adpt.toggle($event)">Delete draft</div>
+  </div>
+</p-overlayPanel>
+
+<p-overlayPanel #opsideover styleClass="op-sideover">
+  <div class="div-sideover">
+
+    <div class="div-sideovertop">
+      <div>
+        <label class="lblheader">Customize table view</label>
+      </div>
+      <div>
+        <label class="lbldesc">Toggle visibility & adjust the order of columns </label>
+      </div>
+      <div class="searchcolumn">
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText placeholder="Search" (keyup)="searchColumns($event)"
+                 [(ngModel)]="searchColumn" />
+        </span>
+      </div>
+
+      <div class="div-showall">
+        <label class="lblshowall" (click)="showAllColumn()">Show all</label>
+        <hr style="border-color:#97999B;" />
+      </div>
+    </div>
+
+    <div class="div-sideovermiddle">
+      <ng-container *ngFor="let pt of tempcolstoggle">
+        <div class="flex flex-row div-row">
+          <div class="div-colon">
+            <label>::</label>
+          </div>
+          <div class="div-fields">
+            <label class="lbl-fields">{{pt.header}}</label>
+          </div>
+          <div class="div-switch">
+            <p-inputSwitch [(ngModel)]="pt.isSelected"
+                           (onChange)="getColumnPosition(pt.isSelected,pt.header)"></p-inputSwitch>
+          </div>
+        </div>
+        <hr style="border-color: #F2F2F2;border-width:0px;border-bottom-width:0.5px;" />
+      </ng-container>
+    </div>
+
+    <div class="div-sideoverbottom">
+      <button type="button" class="reset-btn" (click)="restoreColumn()">Reset to default</button>
+    </div>
+
+  </div>
+</p-overlayPanel>
+
+
+<p-dialog header="Header" [(visible)]="showSetCorpIndConf" styleClass="scConfirmPopup"
+          [draggable]="false" [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <span class="title">
+      <img src="./assets/images/bell_ringing.svg" />
+      <label>Alert</label>
+    </span>
+  </ng-template>
+
+  <div class="div-corpcontent">
+    <div class="para">
+      You will be redirected to Microsoft Teams to schedule the meeting for corporate induction.
+      <br /><br />
+      On clicking proceed, the status of all the newly hired associates selected will be changed to ‘set’.
+    </div>
+  </div>
+
+  <div class="session-div" style="margin-top: 15px;">
+    <label class="mb-1 labelTxt" style="margin-right: 20px">Select from session</label>
+    <p-dropdown id="lstsessionId" [options]="sessiontaskNames" [(ngModel)]="selectedsessiontask" optionLabel="taskName"></p-dropdown>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="showSetCorpIndConf = false">
+      Back
+    </button>
+    <button class="round-btn" (click)="setCorporationInduction(); teamsNavigate(); showSetCorpIndConf = false">
+      Proceed
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!--<p-dialog header="Header" [(visible)]="showSetCorpIndConf" styleClass="scConfirmPopup" [draggable]="false"
+  [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <span class="title">Corporate induction setting</span>
+  </ng-template>
+
+  <div class="div-corpcontent">
+    <div class="para">
+      On clicking proceed, Meeting invite will be sent to all selected associates <br /> and status of those associates
+      marked as "set".
+    </div>
+
+    <div class="div-subject flex flex-column">
+      <label class="lblSubject">Subject</label>
+      <input type="text" class="txtSubject" pInputText [(ngModel)]="corpSubject" />
+    </div>
+
+    <div class="div-times flex flex-row">
+      <div class="div-calendar flex flex-column">
+        <label class="lbldate">Date</label>
+        <p-calendar [(ngModel)]="corpdate" dateFormat="yy-mm-dd" placeholder="YYYY-MM-DD" [readonlyInput]="true"
+          appendTo="body" [minDate]="corpmindate" [showIcon]="true" [showClear]="false"></p-calendar>
+      </div>
+
+      <div class="div-starttime flex flex-column">
+        <label class="lblstarttime">Start Time</label>
+        <p-calendar [(ngModel)]="starttimeValue" [timeOnly]="true" placeholder="00:00" [showTime]="true"
+          [showIcon]="true" icon="pi pi-clock" [readonlyInput]="true" hourFormat="24" (onSelect)="onStartSelect($event)"
+          appendTo="body">
+        </p-calendar>
+      </div>
+
+      <div class="div-endtime flex flex-column">
+        <label class="lblendtime">End Time</label>
+        <p-calendar [(ngModel)]="endtimeValue" [timeOnly]="true" placeholder="00:00" [showTime]="true" [showIcon]="true"
+          icon="pi pi-clock" [readonlyInput]="true" hourFormat="24" (onSelect)="onEndSelect($event)"
+          appendTo="body"></p-calendar>
+      </div>
+    </div>
+
+    <div *ngIf="corpvalidationMsg!=''" style="margin-top:16px;">
+      <label style="color: red; font-size: 15px; font-family: Gellix; font-weight: 400;">{{corpvalidationMsg}}</label>
+    </div>
+
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="showSetCorpIndConf = false">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="setCorporationInduction();">
+      Proceed
+    </button>
+  </ng-template>
+</p-dialog>-->
+
+<p-dialog header="Header" [(visible)]="showUploadAttendance" styleClass="uploadAttendanceConfirmPopup"
+          [draggable]="false" [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <span class="title">Upload induction session attendance</span>
+  </ng-template>
+
+  <div class="div-uploadcontent">
+    <div class="flex flex-row justify-content-between div-info">
+      <label class="lbl-info">Add your attendance files here.<span style="color:red;">*</span></label>
+      <a href="./assets/images/SessionAttendanceTemplate.xlsx" class="anc-download">Download template</a>
+    </div>
+    <div class="uploads">
+      <form enctype="multipart/form-data">
+        <div class="uploadtype" draggable="true" (dragover)="onDragOver($event)" (drop)="drop($event, 'id')"
+             (dragleave)="onDragLeave($event)">
+          Drag and drop file here or <span (click)="FileUpload('id')" class="browse">select file</span>
+        </div>
+        <div class="div-filesizeinfo flex flex-column">
+          <label>Upload files only in the required template</label>
+        </div>
+      </form>
+
+      <input type="file" id="id-file" style="display: none" (change)="onFileChanged($event, 'id')" accept=".xlsx"
+             [multiple]="false" />
+
+      <div *ngIf="attentancefilename != ''" class="contentFilename flex flex-row justify-content-between">
+        <div>
+          <input type="text" id="txtfilename" pInputText [(ngModel)]="attentancefilename" />
+        </div>
+        <div>
+          <img src="./assets/images/cross.svg" (click)="deleteFile()">
+        </div>
+      </div>
+
+      <div *ngIf="showUploadAttendanceValidationMsg"
+           style="margin-top: 6px; font-family: Gellix; font-size: 15px; font-weight: 400;">
+        <label style="color:red;">{{showUploadAttendanceValidationMsg}}</label>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="showUploadAttendance = false">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="uploadAttentance();">
+      Upload attendance
+    </button>
+    <!--<button class="round-btn" (click)="AssigntoAdmin();">
+      Assign to Admin
+    </button>-->
+  </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Header" [(visible)]="showUploadtaskstatus" styleClass="uploadAttendanceConfirmPopup"
+          [draggable]="false" [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <span class="title">Upload Task Status</span>
+  </ng-template>
+
+  <div class="div-uploadcontent">
+    <div class="flex flex-row justify-content-between div-info">
+      <label class="lbl-info">Add your Task status files here.<span style="color:red;">*</span></label>
+      <a href="./assets/images/LRNMediassistTaskSatusTemplate.xlsx" class="anc-download">Download template</a>
+    </div>
+    <div class="uploads">
+      <form enctype="multipart/form-data">
+        <div class="uploadtype" draggable="true" (dragover)="onDragOver($event)" (drop)="droptaskstatus($event, 'id')"
+             (dragleave)="onDragLeave($event)">
+          Drag and drop file here or <span (click)="FileUploadtaskStatus('id')" class="browse">select file</span>
+        </div>
+        <div class="div-filesizeinfo flex flex-column">
+          <label>Upload files only in the required template</label>
+        </div>
+      </form>
+
+      <input type="file" id="id-file2" style="display: none" (change)="onFileChangedtask($event, 'id')" accept=".xlsx"
+             [multiple]="false" />
+
+      <div *ngIf="taskstatusfilename != ''" class="contentFilename flex flex-row justify-content-between">
+        <div>
+          <input type="text" id="txtfilename" pInputText [(ngModel)]="taskstatusfilename" />
+        </div>
+        <div>
+          <img src="./assets/images/cross.svg" (click)="deletetaskstatusFile()">
+        </div>
+      </div>
+
+      <div *ngIf="showUploadtaskstatusValidationMsg"
+           style="margin-top: 6px; font-family: Gellix; font-size: 15px; font-weight: 400;">
+        <label style="color:red;">{{showUploadtaskstatusValidationMsg}}</label>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="showUploadtaskstatus = false">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="uploadTaskStatus();">
+      Upload Task Status
+    </button>
+  </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Header" [(visible)]="showSetAssgntoAdmin" styleClass="uploadAttendanceConfirmPopup"
+          [draggable]="false" [resizable]="false" [modal]="true" (visibleChange)="selectedAssignAdminRst()">
+  <ng-template pTemplate="header">
+    <span class="title">Add Assign Option</span>
+  </ng-template>
+
+  <div class="div-assigncontent">
+    <div class="flex flex-row" style="margin-top:0.5rem;">
+      <div class="flex flex-row" style="margin-left:1.5rem;">
+        <div>
+          <!--<input type="radio" id="rbtn3asn2me" class="rbtn3cinfo" name="assign" [checked]="true"
+          (click)="selectedAssign = 'Assign to Me'">-->
+          <input type="radio" id="rbtn3asn2me" class="rbtn3cinfo" name="assign" [checked]="true"
+                 (click)="selectedAssign = 'Assign to Me'">
+        </div>
+        <div>
+          <label class="lbl-asg2me">Assign to Me</label>
+        </div>
+      </div>
+      <div class="flex flex-row" style="margin-left:1.5rem;">
+        <div>
+          <!--<input type="radio" id="rbtn3asn2othr" class="rbtn3cinfo" value="radio2" [(ngModel)]="selectedAdmin"  (ngModelChange)="onSelectAssigntoother($event)"/>-->
+          <input type="radio" id="rbtn3asn2othr" class="rbtn3cinfo" name="assign"
+                 (click)="selectedAssign = 'Assign to Other'">
+        </div>
+        <div>
+          <label class="lbl-asg2me">Assign to Other</label>
+        </div>
+      </div>
+    </div>
+    <!--<div style="margin-top: 10px;">
+        <input type="text" [value]="adminID_value | number: '.0' : 'en-US'"
+    (input)="onInput($event)"  [hidden]="!selectedAssign" *ngIf="selectedAssign != 'Assign to Me'"  pInputText placeholder="Enter ID" />
+      </div>-->
+    <div style="margin-top: 10px;">
+      <input type="text" [value]="adminID_value" (keypress)="numberOnly($event)"
+             (input)="onInput($event)" [hidden]="!selectedAssign" *ngIf="selectedAssign != 'Assign to Me'" pInputText placeholder="Enter ID" />
+    </div>
+    <div *ngIf="showSetAssgntoAdminValidationMsg"
+         style="margin-top: 6px; font-family: Gellix; font-size: 15px; font-weight: 400;">
+      <label style="color:red;">{{showSetAssgntoAdminValidationMsg}}</label>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="showSetAssgntoAdmin = false; selectedAssignAdminRst()">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="showSetAssgntoAdmin = false; selectedAssignAdmin();">
+      Assign
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!--<p-dialog header="Header" [(visible)]="showAssigntoAdmin" styleClass="uploadAttendanceConfirmPopup"
+          [draggable]="false" [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <span class="title">Assign to Admin</span>
+  </ng-template>
+
+  <div class="div-uploadcontent">
+<div class="flex flex-row justify-content-between div-info">
+  <label class="lbl-info">Assign to Admin for attached New Hires ID .<span style="color:red;">*</span></label>
+  <a href="./assets/images/InductionAttendanceTemplate.xlsx" class="anc-download">Download template</a>
+</div>
+<div class="uploads">
+    <form enctype="multipart/form-data">
+      <div class="uploadtype" draggable="true" (dragover)="onDragOver($event)" (drop)="dropagn($event, 'id')"
+           (dragleave)="onDragLeave($event)">
+        Drag and drop file here or <span (click)="FileUpload('id')" class="browse">select file</span>
+      </div>
+      <div class="div-filesizeinfo flex flex-column">
+        <label>Upload files only in the required template</label>
+      </div>
+    </form>
+
+    <input type="file" id="id-file" style="display: none" (change)="onFileChangedagn($event, 'id')" accept=".xlsx"
+           [multiple]="false" />
+
+    <div *ngIf="assigntoadminfilename != ''" class="contentFilename flex flex-row justify-content-between">
+      <div>
+        <input type="text" id="txtfilename" pInputText [(ngModel)]="assigntoadminfilename" />
+      </div>
+      <div>
+        <img src="./assets/images/cross.svg" (click)="deleteFileAsgn()">
+      </div>
+    </div>
+
+    <div *ngIf="showAssigntoAdminValidationMsg"
+         style="margin-top: 6px; font-family: Gellix; font-size: 15px; font-weight: 400;">
+      <label style="color:red;">{{showAssigntoAdminValidationMsg}}</label>
+    </div>
+
+  </div>
+</div>
+
+<ng-template pTemplate="footer">
+  <button class="normal-round-btn " (click)="showAssigntoAdmin = false">
+    Cancel
+  </button>
+  <button class="round-btn" (click)="assigntoadmin();">
+    AssigntoAdmin
+  </button>
+<button class="round-btn" (click)="AssigntoAdmin();">
+  Assign to Admin
+</button>
+</ng-template>
+</p-dialog>-->
+
+
+
+
+<p-dialog header="Header" [(visible)]="showAssociateResourceDialog" styleClass="deleteAssociateResourceConfirmPopup"
+          [draggable]="false" [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <div class="flex flex-row">
+      <img src="./assets/images/redwarning.png" />
+      <label class="title" style="margin-left:10px;">Warning : Delete associate resource?</label>
+    </div>
+    ="
+  </ng-template>
+
+  ="
+
+  <div class="div-deleteUserContent">
+    <div class="div-quest">
+      Are you sure you want to delete this resource?
+    </div>
+    <div class="div-deleteinfo">
+      Associates’ can NOT view this resource in their portals anymore if you delete.
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="showAssociateResourceDialog = false">
+      Cancel
+    </button>
+    <button class="round-btn"
+            (click)="showAssociateResourceDialog = false; deleteAssociateKeyDocument(documentToDelete.ocmContentId)">
+      Delete resource
+    </button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog header="Header" [(visible)]="showAddUser" styleClass="adduserConfirmPopup" [draggable]="false"
+          [resizable]="false" [modal]="true">
+
+  <ng-template pTemplate="header">
+    <span class="title">Add user</span>
+  </ng-template>
+
+  <div class="div-addusercontent">
+
+    <div class="div-user">
+      <div>
+        <label class="lbl-user">Add user(s)<span style="color:red;">*</span></label>
+      </div>
+      <div>
+        <input type="text" pInputText class="txt-user" placeholder="Type comma separated IDs"
+               oninput="this.value = this.value.replace(/[^0-9,]/g, '');" [(ngModel)]="userIDs" />
+        <label class="lbl-verify" (click)="userIDs != '' && getVerifiedUsers()"
+               [style.color]="userIDs != ''? '#000048': ''" [style.cursor]="userIDs != ''? 'pointer': ''">Verify</label>
+      </div>
+      <div class="mt-3 flex flex-row flex-wrap">
+        <label *ngFor="let user of verifiedUserIDs" class="verified-user">
+          {{user}}<span (click)="removeVerifiedUser(user)">X</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="div-userrole">
+      <div style="margin-top:1rem;">
+        <label class="lbl-userrole">User role<span style="color:red;">*</span></label>
+      </div>
+
+      <div class="flex flex-row" style="margin-top:0.5rem;">
+        <div class="flex flex-row">
+          <div>
+            <input type="radio" id="rbtadmin" class="rbtinfo" name="radioadmin" [checked]="true"
+                   (click)="newRoleType = 'Admin'">
+          </div>
+          <div>
+            <label class="lbl-admin">Admin</label>
+          </div>
+        </div>
+        <div class="flex flex-row" style="margin-left:1.5rem;">
+          <div>
+            <input type="radio" id="rbtsuperadmin" class="rbtinfo" name="radioadmin"
+                   (click)="newRoleType = 'Super Admin'">
+          </div>
+          <div>
+            <label class="lbl-superadmin">Super admin</label>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="showAddUser = false">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="showAddUser = false; addUsers()" [disabled]="verifiedUserIDs.length == 0"
+            [ngClass]="{'disabled-btn': verifiedUserIDs.length == 0}">
+      Add
+    </button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog header="Header" [(visible)]="showMakeSuperAdmin" styleClass="makeSuperAdminConfirmPopup" [draggable]="false"
+          [resizable]="false" [modal]="true">
+  <ng-template pTemplate="header">
+    <span class="title">Confirmation : Make super admin?</span>
+  </ng-template>
+
+  <div class="div-superadmincontent">
+    <div class="div-quest">
+      Are you sure you want to make this user super admin?
+    </div>
+    <div class="div-descr">
+      This user will have access to settings for managing, adding & removing <br /> other users as admins and super
+      admins.
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="showMakeSuperAdmin=false">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="showMakeSuperAdmin=false; updateUserRole('Super Admin')">
+      Proceed
+    </button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog header="Header" [(visible)]="showRemoveUser" styleClass="removeUserConfirmPopup" [draggable]="false"
+          [resizable]="false" [modal]="true">
+
+  <ng-template pTemplate="header">
+    <div class="flex flex-row">
+      <img src="./assets/images/redwarning.png" />
+      <label class="title" style="margin-left:10px;">Warning : Remove user?</label>
+    </div>
+  </ng-template>
+
+  <div class="div-removeusercontent">
+    <div class="div-quest">
+      Are you sure you want to remove this user?
+    </div>
+
+    <div class="div-descr">
+      The user will no longer have access to this portal. In case the user requires <br />
+      access again, a super admin will need to add them through manage user <br /> settings.
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="normal-round-btn " (click)="showRemoveUser=false">
+      Cancel
+    </button>
+    <button class="round-btn" (click)="showRemoveUser=false; deleteUser()">
+      Remove
+    </button>
+  </ng-template>
+
+</p-dialog>
+
+
+<p-toast position="top-center" styleClass="custom-toast"
+         [ngStyle]="{'background-color': (messsageResult=='success') ? '#ABE3A5' : '#F1D2D5'}" [life]="6000">
+  <ng-template let-message pTemplate="message">
+    <div class="flex flex-row">
+      {{message.detail}}
+    </div>
+  </ng-template>
+</p-toast>

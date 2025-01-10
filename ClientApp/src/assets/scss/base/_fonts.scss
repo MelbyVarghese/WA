@@ -1,0 +1,15 @@
+
+@mixin font-face($font-family, $filename, $folder) {
+    @font-face {
+        font-family: '#{$font-family}';
+        src: url('#{$folder}/#{$filename}.woff');
+        src: url('#{$folder}/#{$filename}.woff') format('woff'), url('#{$folder}/#{$filename}.ttf') format('truetype');
+
+    }
+}
+
+@include font-face(Gellix-SemiBold, Gellix-SemiBold, $folder);
+@include font-face(Gellix-RegularItalic, Gellix-RegularItalic, $folder);
+@include font-face(Gellix-Light, Gellix-Light, $folder);
+@include font-face(Gellix-Regular, Gellix-Regular, $folder);
+@include font-face(Gellix, Gellix-Regular, $folder);
